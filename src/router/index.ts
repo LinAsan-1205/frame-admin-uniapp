@@ -2,8 +2,8 @@ import pagesJson from '@/pages.json';
 
 // 路径常量
 export const HOME_PATH = '/pages/tab/home/index';
-export const LOGIN_PATH = '/pages/common/login/index';
-export const ERROR404_PATH = '/pages/common/404/index';
+export const LOGIN_PATH = HOME_PATH;
+export const ERROR404_PATH = HOME_PATH;
 
 /**
  * 解析路由地址
@@ -81,9 +81,9 @@ export function isPathExists(path = '') {
  */
 export function isTabBarPath(path = '') {
   const cleanPath = removeQueryString(path);
-  return (
-    pagesJson.tabBar?.list?.some(
-      item => `/${item.pagePath}` === cleanPath,
-    ) === true
-  );
+  const tabBarList = (pagesJson as any).tabBar?.list;
+  if (!Array.isArray(tabBarList)) {
+    return false;
+  }
+  return tabBarList.some((item: any) => `/${item.pagePath}` === cleanPath);
 }

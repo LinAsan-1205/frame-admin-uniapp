@@ -1,214 +1,296 @@
 <template>
-  <u-popup :show="modelValue" round="20" @close="closeAgreePrivacy">
-    <view class="p-30rpx">
-      <view class="text-lg text-black font-bold">
-        <span>{{ initTitle }}</span>
+  <view
+    v-if="modelValue"
+    class="privacy-mask"
+    @touchmove.stop.prevent
+  >
+    <view class="privacy-card">
+      <view class="privacy-header">
+        <view>
+          <text class="privacy-title">
+            {{ initTitle }}
+          </text>
+          <text class="privacy-subtitle">
+            {{ initSubTitle }}
+          </text>
+        </view>
+        <button class="privacy-close" @click="closeAgreePrivacy">
+          ✕
+        </button>
       </view>
 
-      <view class="flex flex-col">
-        <span class="pt-30rpx text-black font-bold">{{ initSubTitle }}</span>
-        <span class="pt-30rpx text-sm text-black">1.为向您提供基本的服务，我们会遵循正当、合法、必要的原则收集和使用必要的信息。</span>
-        <span class="pt-30rpx text-sm text-black">2.基于您的授权我们可能会收集和使用您的相关信息，您有权拒绝或取消授权。</span>
-        <span class="pt-30rpx text-sm text-black">3.未经您的授权同意，我们不会将您的信息共享给第三方或用于您未授权的其他用途。</span>
-        <span class="pt-30rpx text-sm text-black">4.详细信息请您完整阅读<text class="text-decoration" @click="openPrivacyContract">{{
-          initPrivacyContractName
-        }}</text></span>
-      </view>
+      <scroll-view class="privacy-content" scroll-y>
+        <view
+          v-for="(item, index) in policyBullets"
+          :key="index"
+          class="privacy-paragraph"
+        >
+          <text>{{ item }}</text>
+        </view>
+        <view class="privacy-paragraph">
+          <text>
+            <text>查看完整条款可访问 </text>
+            <text class="privacy-link" @click="openPrivacyContract">
+              {{ initPrivacyContractName }}
+            </text>
+          </text>
+        </view>
+      </scroll-view>
 
-      <view class="mt-30rpx flex items-center justify-around pt-10rpx">
-        <view class="min-w-100px">
-          <button class="button button-default" @click="disagree">
-            拒绝
-          </button>
-        </view>
-        <view class="min-w-100px">
-          <button
-            :id="agreePrivacyId"
-            class="button button-primary"
-            open-type="agreePrivacyAuthorization"
-            @agreeprivacyauthorization="agree"
-          >
-            同意
-          </button>
-        </view>
+      <view class="privacy-actions">
+        <button class="privacy-button secondary" @click="disagree">
+          {{ cancelText }}
+        </button>
+        <button
+          :id="agreePrivacyId"
+          class="privacy-button primary"
+          open-type="agreePrivacyAuthorization"
+          @agreeprivacyauthorization="agree"
+        >
+          {{ confirmText }}
+        </button>
       </view>
     </view>
-  </u-popup>
+  </view>
 </template>
 
 <script setup lang="ts">
-interface AgreePrivacyProps {
-  modelValue: boolean;
-  // 标题
-  title: string;
-  // 副标题
-  subTitle: string;
-  // 禁止自动检测隐私
-  disableCheckPrivacy: boolean;
-  // 按钮id 必填项不填写时授权按钮id必须为agree-btn
-  agreePrivacyId: string;
-}
+import { computed, onMounted, ref, watch } from 'vue';
 
 const props = withDefaults(defineProps<AgreePrivacyProps>(), {
   modelValue: false,
-  title: '',
+  title: '隐私政策概要',
   subTitle: '',
   disableCheckPrivacy: true,
   agreePrivacyId: 'agree-btn',
+  confirmText: '同意并继续',
+  cancelText: '暂不使用',
 });
 
 const emit = defineEmits(['update:modelValue', 'needPrivacyAuthorization', 'agree', 'disagree']);
-// 初始化的标题
-const initTitle = ref<string>('隐私政策概要');
-// 初始化的副标题
-const initSubTitle = ref<string>('');
-// 隐私政策
-const initPrivacyContractName = ref<string>('隐私政策');
 
-// 打开隐私
-function openAgreePrivacy() {
-  emit('update:modelValue', true);
+declare const wx: any;
+
+interface AgreePrivacyProps {
+  modelValue: boolean;
+  title?: string;
+  subTitle?: string;
+  disableCheckPrivacy?: boolean;
+  agreePrivacyId?: string;
+  confirmText?: string;
+  cancelText?: string;
 }
 
-// 关闭隐私
+const initTitle = ref(props.title);
+const initSubTitle = ref('');
+const initPrivacyContractName = ref('隐私政策');
+
+const cancelText = computed(() => props.cancelText);
+const confirmText = computed(() => props.confirmText);
+
+const policyBullets = computed(() => [
+  '1. 为向您提供基础服务，我们会遵循合法、正当、必要的原则收集必要信息。',
+  '2. 未经您的授权同意，我们不会将信息共享给第三方或用于未经授权的用途。',
+  '3. 您可随时撤回授权或再次查看完整隐私条款。',
+]);
+
 function closeAgreePrivacy() {
   emit('update:modelValue', false);
 }
 
-// 需要初始化的数据
-function initData() {
-  initTitle.value = props.title || initTitle.value;
-  initSubTitle.value
-    = props.subTitle
-      || `亲爱的用户，感谢您一直以来的支持!为了更好地保护您的权益，同时遵守相关监管要求，请认真阅读${initPrivacyContractName.value}，特向您说明如下:`;
+function buildDefaultSubTitle() {
+  return `亲爱的用户，为确保服务可用并保护您的权益，请认真阅读${initPrivacyContractName.value}，重点了解我们如何收集、使用和存储信息。`;
 }
 
-// 检测是否授权
+function syncTitle(value?: string) {
+  initTitle.value = value || props.title || '隐私政策概要';
+}
+
+function syncSubTitle(value?: string) {
+  initSubTitle.value = value || props.subTitle || buildDefaultSubTitle();
+}
+
+function initData() {
+  syncTitle(props.title);
+  syncSubTitle(props.subTitle);
+}
+
+watch(() => props.title, (value) => {
+  syncTitle(value);
+});
+
+watch(() => props.subTitle, (value) => {
+  syncSubTitle(value);
+});
+
 function checkPrivacySetting() {
+  if (typeof wx === 'undefined' || typeof wx.getPrivacySetting !== 'function') {
+    return;
+  }
   wx.getPrivacySetting({
     success: (res: any) => {
-      // 未授权弹框
       if (res.needAuthorization) {
-        initPrivacyContractName.value = res.privacyContractName;
+        initPrivacyContractName.value = res.privacyContractName || initPrivacyContractName.value;
         initData();
-        // 是否禁用 自动检测隐私并弹框
         if (!props.disableCheckPrivacy) {
-          // 需要弹出隐私协议
-          openAgreePrivacy();
+          emit('update:modelValue', true);
         }
       }
-      else {
-        // 用户已经同意过隐私协议，所以不需要再弹出隐私协议，也能调用已声明过的隐私接口
-        // wx.getUserProfile()
-      }
     },
     fail: (e: any) => {
-      console.log(e);
+      console.error('getPrivacySetting fail:', e);
     },
-  });
-}
-// 打开隐私政策
-function openPrivacyContract() {
-  wx.openPrivacyContract({
-    success: () => {}, // 打开成功
-    fail: (e: any) => {
-      uni.$u.toast(`打开失败:${e}`);
-    }, // 打开失败
   });
 }
 
-// 同意
+function bindNeedPrivacyAuthorization() {
+  if (typeof wx === 'undefined' || typeof wx.onNeedPrivacyAuthorization !== 'function') {
+    return;
+  }
+  wx.onNeedPrivacyAuthorization((resolve: any, eventInfo: any) => {
+    emit('update:modelValue', true);
+    emit('needPrivacyAuthorization', resolve, eventInfo);
+  });
+}
+
+function openPrivacyContract() {
+  if (typeof wx !== 'undefined' && typeof wx.openPrivacyContract === 'function') {
+    wx.openPrivacyContract({
+      success: () => {},
+      fail: (e: any) => {
+        uni.showToast({
+          title: `打开失败: ${e.errMsg || e}`,
+          icon: 'none',
+        });
+      },
+    });
+    return;
+  }
+
+  uni.showToast({
+    title: '当前平台不支持直接查看，请在小程序中打开',
+    icon: 'none',
+  });
+}
+
 function agree(e: any) {
-  const buttonId = e.target.id || 'agree-btn';
+  const buttonId = e?.target?.id || 'agree-btn';
   emit('agree', buttonId);
   emit('update:modelValue', false);
 }
 
-// 拒绝
 function disagree() {
   emit('disagree');
   closeAgreePrivacy();
 }
 
 onMounted(() => {
-  // 检测是否授权
+  initData();
   checkPrivacySetting();
-
-  // // 监听授权
-  // wx.onNeedPrivacyAuthorization((resolve, eventInfo) => {
-  //   emit('update:modelValue', true);
-  //   // 回调
-  //   emit('needPrivacyAuthorization', resolve, eventInfo);
-  // });
+  bindNeedPrivacyAuthorization();
 });
 </script>
 
 <style scoped lang="scss">
-.button {
-  position: relative;
-  box-sizing: border-box;
+.privacy-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
-  //height: 80rpx;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.5;
-  color: #fff;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 18rpx;
-  //border-width: 1px;
-  //border-style: solid;
+  padding: 32rpx;
+  background-color: rgba(15, 23, 42, 0.55);
 }
 
-.button-lg {
-  position: relative;
-  box-sizing: border-box;
+.privacy-card {
+  width: 100%;
+  max-width: 640rpx;
+  border-radius: 32rpx;
+  background-color: #fff;
+  padding: 48rpx 36rpx;
+  box-shadow: 0 24rpx 80rpx rgba(15, 23, 42, 0.2);
+}
+
+.privacy-header {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  //height: 80rpx;
-  padding: 12px 22px;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.5;
-  color: #fff;
-  text-align: center;
-  text-decoration: none;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24rpx;
+}
+
+.privacy-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.privacy-subtitle {
+  display: block;
+  margin-top: 16rpx;
+  font-size: 26rpx;
+  line-height: 1.6;
+  color: #475569;
+}
+
+.privacy-close {
+  width: 64rpx;
+  height: 64rpx;
+  border: none;
   border-radius: 20rpx;
-  //border-width: 1px;
-  //border-style: solid;
+  font-size: 32rpx;
+  background-color: #f1f5f9;
+  color: #1e293b;
 }
 
-.button-default {
-  color: #07c160;
-  background-color: rgb(0 0 0 / 5%);
+.privacy-close::after {
+  display: none;
 }
 
-.button-primary {
-  color: #fff;
-  background-color: #07c160;
+.privacy-content {
+  max-height: 520rpx;
+  margin-top: 36rpx;
+  padding-right: 12rpx;
 }
 
-button {
-  padding: 0;
-  margin: 0;
-  line-height: inherit;
-  background-color: transparent;
-  border-radius: 0;
-  outline: none;
+.privacy-paragraph {
+  margin-bottom: 20rpx;
+  font-size: 26rpx;
+  line-height: 1.6;
+  color: #475569;
 }
 
-button::after {
+.privacy-link {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.privacy-actions {
+  margin-top: 32rpx;
+  display: flex;
+  gap: 24rpx;
+}
+
+.privacy-button {
+  flex: 1;
+  height: 92rpx;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  font-weight: 500;
   border: none;
 }
 
-.text-decoration {
-  color: #07c160;
-  text-decoration: underline;
+.privacy-button::after {
+  display: none;
+}
+
+.privacy-button.secondary {
+  background-color: #f1f5f9;
+  color: #1e293b;
+}
+
+.privacy-button.primary {
+  background: linear-gradient(120deg, #22c55e, #16a34a);
+  color: #fff;
 }
 </style>

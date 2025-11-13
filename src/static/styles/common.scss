@@ -1,5 +1,27 @@
 page {
-  font-size: $u-font-base;
-  color: $u-main-color;
-  background-color: $u-bg-color;
+  /* stylelint-disable-next-line declaration-property-value-no-unknown */
+  font-size: 28rpx;
+  color: #1f2937;
+  background-color: #f5f6f8;
 }
+
+/* #ifdef H5 */
+body {
+  margin: 0;
+  background-color: #e5e7eb;
+}
+
+#app {
+  display: block;
+  width: min(430px, 100%);
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+/* stylelint-disable-next-line selector-type-no-unknown */
+uni-app {
+  display: block;
+  min-height: inherit;
+}
+
+/* #endif */
