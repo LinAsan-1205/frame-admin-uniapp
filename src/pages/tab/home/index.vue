@@ -221,14 +221,14 @@ function handleDisagree() {
 /* 页面容器 */
 .home-page {
   min-height: 100vh;
-  background: var(--theme-bg-color);
+  background: var(--fui-color-bg-primary);
 }
 
 /* 顶部栏 */
 .home-header {
   padding: 48rpx 32rpx 32rpx;
-  background: var(--theme-surface-color);
-  border-bottom: 1rpx solid var(--theme-border-color);
+  background: var(--fui-color-surface);
+  border-bottom: 1rpx solid var(--fui-color-border);
 }
 
 .home-header__content {
@@ -247,14 +247,14 @@ function handleDisagree() {
   display: block;
   font-size: 32rpx;
   font-weight: 700;
-  color: var(--theme-main-color);
+  color: var(--fui-color-text-primary);
   margin-bottom: 8rpx;
 }
 
 .home-header__subtitle {
   display: block;
   font-size: 24rpx;
-  color: var(--theme-content-color);
+  color: var(--fui-color-text-secondary);
   line-height: 1.5;
 }
 
@@ -267,8 +267,8 @@ function handleDisagree() {
   width: 72rpx;
   height: 72rpx;
   border-radius: 50%;
-  background: var(--theme-surface-muted);
-  border: 2rpx solid var(--theme-border-color);
+  background: var(--fui-color-surface-muted);
+  border: 2rpx solid var(--fui-color-border);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -278,7 +278,7 @@ function handleDisagree() {
 
 .theme-switch:active {
   transform: scale(0.95);
-  background: var(--theme-bg-color-secondary);
+  background: var(--fui-color-bg-secondary);
 }
 
 .theme-switch__icon {
@@ -298,14 +298,14 @@ function handleDisagree() {
   display: block;
   font-size: 28rpx;
   font-weight: 700;
-  color: var(--theme-main-color);
+  color: var(--fui-color-text-primary);
   margin-bottom: 8rpx;
 }
 
 .section-subtitle {
   display: block;
   font-size: 24rpx;
-  color: var(--theme-tips-color);
+  color: var(--fui-color-text-tertiary);
 }
 
 /* 组件网格 */
@@ -319,8 +319,8 @@ function handleDisagree() {
 .component-item {
   padding: 24rpx;
   border-radius: 20rpx;
-  background: var(--theme-surface-color);
-  border: 1rpx solid var(--theme-border-color);
+  background: var(--fui-color-surface);
+  border: 1rpx solid var(--fui-color-border);
   transition: all 250ms ease;
   cursor: pointer;
 }
@@ -328,7 +328,7 @@ function handleDisagree() {
 .component-item:active {
   transform: translateY(-2rpx);
   box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.08);
-  border-color: var(--theme-primary);
+  border-color: var(--fui-color-primary);
 }
 
 .component-item__header {

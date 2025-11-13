@@ -215,7 +215,7 @@ function handleAgreePrivacyAuthorization(event: any) {
   font-size: 28rpx;
   font-weight: 600;
   line-height: 1.4;
-  color: var(--theme-main-color);
+  color: var(--fui-color-text-primary);
   background-color: $fui-surface-muted;
   transition: all $fui-transition;
   box-shadow: $fui-shadow-soft;
