@@ -10,7 +10,6 @@ import { AutoImportDeps } from './autoImport';
 // import { ReplaceUrlPlugin } from './replaceUrl';
 import { AutoRegistryComponents } from './component';
 import { ConfigUnoCSSPlugin } from './unocss';
-import { MCPPlugin } from './mcp';
 
 export default function createVitePlugins(isBuild: boolean) {
   const vitePlugins: (PluginOption | PluginOption[])[] = [
@@ -26,8 +25,6 @@ export default function createVitePlugins(isBuild: boolean) {
       // 通过这个插件，在修改vite.config.js文件则不需要重新运行也生效配置
       restart: ['vite.config.ts'],
     }),
-    // 为项目开启 MCP Server
-    MCPPlugin()
   ];
 
   if (isBuild) {

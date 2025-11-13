@@ -115,7 +115,6 @@
     "vite-plugin-clean-build": "^1.4.1",
     "vite-plugin-replace-image-url": "^1.4.1",
     "vite-plugin-restart": "^1.0.0",
-    "vite-plugin-vue-mcp": "^0.3.2",
     "vue-tsc": "^2.2.12"
   },
   "pnpm": {
