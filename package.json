@@ -1,8 +1,8 @@
 {
-  "name": "uniapp-vue3-project",
+  "name": "frame-admin-uni-app",
   "type": "module",
   "version": "1.5.0",
-  "description": "uniapp 团队协作开发实践模板(Vue3)",
+  "description": "frame-admin-uni-app",
   "author": {
     "name": "江阳小道",
     "email": "oyjt001@gmail.com",
