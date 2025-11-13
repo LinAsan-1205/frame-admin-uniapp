@@ -27,7 +27,7 @@ export default function createVitePlugins(isBuild: boolean) {
       restart: ['vite.config.ts'],
     }),
     // 为项目开启 MCP Server
-    MCPPlugin()
+    MCPPlugin(),
   ];
 
   if (isBuild) {

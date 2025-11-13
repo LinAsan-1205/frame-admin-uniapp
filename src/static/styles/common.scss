@@ -1,5 +1,66 @@
+$mobile-max-width: 750rpx;
+
 page {
-  font-size: $u-font-base;
-  color: $u-main-color;
-  background-color: $u-bg-color;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: $mobile-max-width;
+  margin: 0 auto;
+  /* stylelint-disable-next-line declaration-property-value-no-unknown */
+  font-size: 28rpx;
+  color: #1f2937;
+  background-color: #f5f6f8;
 }
+
+/* #ifdef H5 */
+body {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #e5e7eb;
+}
+
+#app {
+  display: block;
+  width: 100%;
+  max-width: $mobile-max-width;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+/* stylelint-disable-next-line selector-type-no-unknown */
+uni-app {
+  display: block;
+  width: 100%;
+  max-width: $mobile-max-width;
+  min-height: inherit;
+  margin: 0 auto;
+}
+
+.uni-page,
+.uni-page-wrapper,
+.uni-page-body,
+.uni-page-refresh,
+.uni-page-scroll-view {
+  width: 100%;
+  max-width: $mobile-max-width;
+  margin: 0 auto;
+}
+
+.uni-page-head {
+  right: auto !important;
+  left: 50% !important;
+  width: 100%;
+  max-width: $mobile-max-width;
+  overflow: hidden;
+  /* stylelint-disable-next-line declaration-property-value-no-unknown */
+  border-bottom-right-radius: 16rpx;
+  /* stylelint-disable-next-line declaration-property-value-no-unknown */
+  border-bottom-left-radius: 16rpx;
+  /* stylelint-disable-next-line declaration-property-value-no-unknown */
+  box-shadow: 0 20rpx 50rpx rgb(15 23 42 / 8%);
+  transform: translateX(-50%);
+}
+
+/* #endif */

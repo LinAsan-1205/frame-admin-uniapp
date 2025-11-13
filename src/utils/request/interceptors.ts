@@ -4,20 +4,29 @@ import type {
   HttpRequestConfig,
   HttpResponse,
 } from 'uview-plus/libs/luch-request/index';
-import { useUserStore } from '@/store';
-import { getToken } from '@/utils/auth';
+import { clearToken, getToken } from '@/utils/auth';
 import storage from '@/utils/storage';
 import { showMessage } from './status';
 
-// 重试队列，每一项将是一个待执行的函数形式
-let requestQueue: (() => void)[] = [];
+const TOAST_DURATION = 2500;
+
+const safeToast = (message: string) => {
+  if (!message) {
+    return;
+  }
+  uni.showToast({
+    title: message,
+    icon: 'none',
+    duration: TOAST_DURATION,
+  });
+};
 
 // 防止重复提交
 const repeatSubmit = (config: HttpRequestConfig) => {
   const requestObj = {
     url: config.url,
     data: typeof config.data === 'object' ? JSON.stringify(config.data) : config.data,
-    time: new Date().getTime(),
+    time: Date.now(),
   };
   const sessionObj = storage.getJSON('sessionObj');
   if (!sessionObj) {
@@ -39,34 +48,6 @@ const repeatSubmit = (config: HttpRequestConfig) => {
   }
 };
 
-// 是否正在刷新token的标记
-let isRefreshing: boolean = false;
-
-// 刷新token
-const refreshToken = async (http: HttpRequestAbstract, config: HttpRequestConfig) => {
-  // 是否在获取token中,防止重复获取
-  if (!isRefreshing) {
-    // 修改登录状态为true
-    isRefreshing = true;
-    // 等待登录完成
-    await useUserStore().authLogin();
-    // 登录完成之后，开始执行队列请求
-    requestQueue.forEach(cb => cb());
-    // 重试完了清空这个队列
-    requestQueue = [];
-    isRefreshing = false;
-    // 重新执行本次请求
-    return http.request(config);
-  }
-
-  return new Promise<HttpResponse<any>>((resolve) => {
-    // 将resolve放进队列，用一个函数形式来保存，等登录后直接执行
-    requestQueue.push(() => {
-      resolve(http.request(config));
-    });
-  });
-};
-
 function requestInterceptors(http: HttpRequestAbstract) {
   /**
    * 请求拦截
@@ -74,20 +55,14 @@ function requestInterceptors(http: HttpRequestAbstract) {
    */
   http.interceptors.request.use(
     (config: HttpRequestConfig) => {
-      // 可使用async await 做异步操作
-      // 初始化请求拦截器时，会执行此方法，此时data为undefined，赋予默认{}
       config.data = config.data || {};
-      // 自定义参数
       const custom = config?.custom;
 
-      // 是否需要设置 token
-      const isToken = custom?.auth === false;
-      if (getToken() && !isToken && config.header) {
-        // token设置
+      const isTokenDisabled = custom?.auth === false;
+      if (getToken() && !isTokenDisabled && config.header) {
         config.header.token = getToken();
       }
 
-      // 是否显示 loading
       if (custom?.loading) {
         uni.showLoading({
           title: '加载中',
@@ -95,65 +70,53 @@ function requestInterceptors(http: HttpRequestAbstract) {
         });
       }
 
-      // 是否需要防止数据重复提交
-      const isRepeatSubmit = custom?.repeatSubmit === false;
-      if (!isRepeatSubmit && (config.method === 'POST' || config.method === 'UPLOAD')) {
+      const isRepeatSubmitDisabled = custom?.repeatSubmit === false;
+      if (!isRepeatSubmitDisabled && (config.method === 'POST' || config.method === 'UPLOAD')) {
         repeatSubmit(config);
       }
       return config;
     },
-    (config: any) => // 可使用async await 做异步操作
-      Promise.reject(config),
+    (config: any) => Promise.reject(config),
   );
 }
+
 function responseInterceptors(http: HttpRequestAbstract) {
-  /**
-   * 响应拦截
-   * @param {object} http
-   */
   http.interceptors.response.use((response: HttpResponse) => {
-    /* 对响应成功做点什么 可使用async await 做异步操作 */
     const data = response.data;
-    // 配置参数
     const config = response.config;
-    // 自定义参数
     const custom = config?.custom;
 
-    // 登录状态失效，重新登录
     if (data.code === 401) {
-      return refreshToken(http, config);
+      clearToken();
+      if (custom?.toast !== false) {
+        safeToast('登录状态失效，请重新授权');
+      }
+      return Promise.reject(data);
     }
 
-    // 隐藏loading
     if (custom?.loading) {
       uni.hideLoading();
     }
 
-    // 请求成功则返回结果
     if (data.code === 200) {
       return response || {};
     }
 
-    // 如果没有显式定义custom的toast参数为false的话，默认对报错进行toast弹出提示
     if (custom?.toast !== false) {
-      uni.$u.toast(data.message);
+      safeToast(data.message || '请求失败');
     }
 
-    // 请求失败则抛出错误
     return Promise.reject(data);
   }, (response: HttpError) => {
-    // 自定义参数
     const custom = response.config?.custom;
 
-    // 隐藏loading
     if (custom?.loading !== false) {
       uni.hideLoading();
     }
 
-    // 如果没有显式定义custom的toast参数为false的话，默认对报错进行toast弹出提示
     if (custom?.toast !== false) {
       const message = response.statusCode ? showMessage(response.statusCode) : '网络连接异常,请稍后再试!';
-      uni.$u.toast(message);
+      safeToast(message);
     }
 
     return Promise.reject(response);
