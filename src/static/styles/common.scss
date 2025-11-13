@@ -7,8 +7,8 @@ page {
   margin: 0 auto;
   /* stylelint-disable-next-line declaration-property-value-no-unknown */
   font-size: 28rpx;
-  color: #1f2937;
-  background-color: #f5f6f8;
+  color: var(--theme-main-color);
+  background-color: var(--theme-bg-color);
 }
 
 /* #ifdef H5 */
@@ -18,7 +18,12 @@ body {
   width: 100%;
   min-height: 100vh;
   margin: 0;
-  background-color: #e5e7eb;
+  color: var(--theme-main-color);
+  background-color: var(--theme-bg-color-secondary);
+}
+
+body[data-theme='dark'] {
+  background-color: var(--theme-bg-color);
 }
 
 #app {
@@ -54,12 +59,6 @@ uni-app {
   width: 100%;
   max-width: $mobile-max-width;
   overflow: hidden;
-  /* stylelint-disable-next-line declaration-property-value-no-unknown */
-  border-bottom-right-radius: 16rpx;
-  /* stylelint-disable-next-line declaration-property-value-no-unknown */
-  border-bottom-left-radius: 16rpx;
-  /* stylelint-disable-next-line declaration-property-value-no-unknown */
-  box-shadow: 0 20rpx 50rpx rgb(15 23 42 / 8%);
   transform: translateX(-50%);
 }
 

@@ -23,13 +23,40 @@ function resolveInitialTheme(): ThemeMode {
 
 const themeState = ref<ThemeMode>(resolveInitialTheme());
 
+// 应用主题到页面
+function applyTheme(mode: ThemeMode) {
+  // 保存到本地存储
+  uni.setStorageSync(THEME_STORAGE_KEY, mode);
+
+  // Web 环境：设置 document 属性
+  if (typeof document !== 'undefined') {
+    document.documentElement.dataset.theme = mode;
+    document.documentElement.classList.toggle('theme-dark', mode === 'dark');
+    document.documentElement.classList.toggle('theme-light', mode === 'light');
+    document.body?.setAttribute('data-theme', mode);
+  }
+
+  // uni-app 环境：通过设置全局类名
+  // #ifdef H5
+  const pages = getCurrentPages();
+  if (pages.length > 0) {
+    const currentPage = pages[pages.length - 1];
+    if (currentPage?.$vm?.$el) {
+      currentPage.$vm.$el.setAttribute('data-theme', mode);
+    }
+  }
+  // #endif
+
+  // 小程序环境：触发全局事件
+  // #ifndef H5
+  uni.$emit('theme-change', mode);
+  // #endif
+}
+
 watch(
   themeState,
   (mode) => {
-    uni.setStorageSync(THEME_STORAGE_KEY, mode);
-    if (typeof document !== 'undefined') {
-      document.documentElement.dataset.theme = mode;
-    }
+    applyTheme(mode);
   },
   { immediate: true },
 );

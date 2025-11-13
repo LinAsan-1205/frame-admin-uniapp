@@ -1,0 +1,31 @@
+$fui-transition: 180ms cubic-bezier(0.2, 0, 0, 1);
+$fui-shadow-soft: var(--theme-shadow-soft, 0 12rpx 28rpx rgba(15, 23, 42, 0.08));
+$fui-surface-muted: var(--theme-surface-muted, rgba(15, 23, 42, 0.04));
+
+$fui-color-map: (
+  'default': (
+    bg: rgba(15, 23, 42, 0.04),
+    text: var(--theme-main-color),
+    border: rgba(15, 23, 42, 0.12),
+  ),
+  'primary': (
+    bg: var(--theme-primary),
+    text: #ffffff,
+    border: var(--theme-primary),
+  ),
+  'success': (
+    bg: var(--theme-success),
+    text: #062c16,
+    border: var(--theme-success),
+  ),
+  'warning': (
+    bg: var(--theme-warning),
+    text: #422006,
+    border: var(--theme-warning),
+  ),
+  'danger': (
+    bg: var(--theme-error),
+    text: #fff,
+    border: var(--theme-error),
+  ),
+);
