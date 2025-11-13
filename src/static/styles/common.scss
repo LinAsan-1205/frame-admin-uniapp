@@ -32,7 +32,6 @@ body[data-theme='dark'] {
   max-width: $mobile-max-width;
   min-height: 100vh;
   margin: 0 auto;
-  background-color: transparent;
 }
 
 /* stylelint-disable-next-line selector-type-no-unknown */
@@ -42,7 +41,6 @@ uni-app {
   max-width: $mobile-max-width;
   min-height: inherit;
   margin: 0 auto;
-  background-color: transparent;
 }
 
 .uni-page,
@@ -61,12 +59,6 @@ uni-app {
   width: 100%;
   max-width: $mobile-max-width;
   overflow: hidden;
-  /* stylelint-disable-next-line declaration-property-value-no-unknown */
-  border-bottom-right-radius: 16rpx;
-  /* stylelint-disable-next-line declaration-property-value-no-unknown */
-  border-bottom-left-radius: 16rpx;
-  /* stylelint-disable-next-line declaration-property-value-no-unknown */
-  box-shadow: 0 20rpx 50rpx rgb(15 23 42 / 8%);
   transform: translateX(-50%);
 }
 

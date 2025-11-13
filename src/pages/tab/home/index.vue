@@ -1,91 +1,40 @@
 <template>
-  <view class="home">
-    <view class="home__hero">
-      <view class="home__badge">
-        {{ t('home.library.badge') }}
-      </view>
-      <text class="home__name">
-        frame-uniapp-ui
-      </text>
-      <text class="home__title">
-        {{ t('home.library.title') }}
-      </text>
-      <text class="home__subtitle">
-        {{ t('home.library.description') }}
-      </text>
-
-      <view class="home__theme-toggle">
-        <text class="home__theme-label">
-          {{ t('home.themeToggle.label') }}
-        </text>
-        <FrameButton
-          variant="ghost"
-          :theme="isDark ? 'warning' : 'primary'"
-          size="small"
-          @click="toggleTheme"
-        >
-          {{ isDark ? t('home.themeToggle.light') : t('home.themeToggle.dark') }}
-        </FrameButton>
-      </view>
-
-      <view class="home__actions">
-        <FrameButton
-          v-for="action in primaryActions"
-          :key="action.key"
-          variant="solid"
-          :theme="action.theme"
-          size="large"
-          @click="handleAction(action)"
-        >
-          {{ action.label }}
-        </FrameButton>
-      </view>
-
-      <view class="home__highlight-grid">
-        <view
-          v-for="highlight in libraryHighlights"
-          :key="highlight.key"
-          class="highlight-card"
-        >
-          <text class="highlight-card__title">
-            {{ highlight.title }}
-          </text>
-          <text class="highlight-card__desc">
-            {{ highlight.desc }}
-          </text>
+  <view class="home-page">
+    <!-- 顶部栏 -->
+    <view class="home-header">
+      <view class="home-header__content">
+        <view class="home-header__info">
+          <text class="home-header__title">frame-uniapp-ui</text>
+          <text class="home-header__subtitle">{{ t('home.library.description') }}</text>
+        </view>
+        <view class="home-header__actions">
+          <view class="theme-switch" @click="toggleTheme">
+            <text class="theme-switch__icon">{{ isDark ? '🌙' : '☀️' }}</text>
+          </view>
         </view>
       </view>
     </view>
 
-    <view class="home__panel">
-      <view class="home__panel-header">
-        <text class="home__panel-title">
-          {{ t('home.components.title') }}
-        </text>
-        <text class="home__panel-desc">
-          {{ t('home.components.subtitle') }}
-        </text>
+    <!-- 基础组件 -->
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">基础组件</text>
+        <text class="section-subtitle">常用的基础UI组件</text>
       </view>
       <view class="component-grid">
         <view
-          v-for="card in componentCards"
+          v-for="card in basicComponents"
           :key="card.key"
-          class="component-card"
+          class="component-item"
           @click="goComponent(card)"
         >
-          <view class="component-card__header">
-            <text class="component-card__name">
-              {{ card.name }}
-            </text>
-            <text class="component-card__badge">
-              {{ card.badge }}
-            </text>
+          <view class="component-item__header">
+            <text class="component-item__name">{{ card.name }}</text>
+            <text v-if="card.badge" class="component-item__badge">{{ card.badge }}</text>
           </view>
-          <text class="component-card__desc">
-            {{ card.desc }}
-          </text>
-          <view class="component-card__preview">
-            <FrameButton v-bind="card.preview">
+          <text class="component-item__desc">{{ card.desc }}</text>
+          <view class="component-item__preview">
+            <FrameButton v-bind="card.preview" size="small">
               {{ card.previewText }}
             </FrameButton>
           </view>
@@ -93,27 +42,88 @@
       </view>
     </view>
 
-    <view class="home__links">
-      <view
-        v-for="action in secondaryActions"
-        :key="action.key"
-        class="link-card"
-        @click="handleAction(action)"
-      >
-        <view class="link-card__meta">
-          <text class="link-card__label">
-            {{ action.label }}
-          </text>
-          <text class="link-card__tag">
-            {{ action.meta }}
-          </text>
+    <!-- 表单组件 -->
+    <view v-if="formComponents.length > 0" class="section">
+      <view class="section-header">
+        <text class="section-title">表单组件</text>
+        <text class="section-subtitle">用于数据录入和表单交互</text>
+      </view>
+      <view class="component-grid">
+        <view
+          v-for="card in formComponents"
+          :key="card.key"
+          class="component-item"
+          @click="goComponent(card)"
+        >
+          <view class="component-item__header">
+            <text class="component-item__name">{{ card.name }}</text>
+            <text v-if="card.badge" class="component-item__badge">{{ card.badge }}</text>
+          </view>
+          <text class="component-item__desc">{{ card.desc }}</text>
+          <view class="component-item__preview">
+            <FrameButton v-bind="card.preview" size="small">
+              {{ card.previewText }}
+            </FrameButton>
+          </view>
         </view>
-        <text class="link-card__cta">
-          {{ t('home.actions.open') }}
-        </text>
       </view>
     </view>
 
+    <!-- 反馈组件 -->
+    <view v-if="feedbackComponents.length > 0" class="section">
+      <view class="section-header">
+        <text class="section-title">反馈组件</text>
+        <text class="section-subtitle">用于向用户展示反馈信息</text>
+      </view>
+      <view class="component-grid">
+        <view
+          v-for="card in feedbackComponents"
+          :key="card.key"
+          class="component-item"
+          @click="goComponent(card)"
+        >
+          <view class="component-item__header">
+            <text class="component-item__name">{{ card.name }}</text>
+            <text v-if="card.badge" class="component-item__badge">{{ card.badge }}</text>
+          </view>
+          <text class="component-item__desc">{{ card.desc }}</text>
+          <view class="component-item__preview">
+            <FrameButton v-bind="card.preview" size="small">
+              {{ card.previewText }}
+            </FrameButton>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 数据展示 -->
+    <view v-if="dataComponents.length > 0" class="section">
+      <view class="section-header">
+        <text class="section-title">数据展示</text>
+        <text class="section-subtitle">用于数据展示和可视化</text>
+      </view>
+      <view class="component-grid">
+        <view
+          v-for="card in dataComponents"
+          :key="card.key"
+          class="component-item"
+          @click="goComponent(card)"
+        >
+          <view class="component-item__header">
+            <text class="component-item__name">{{ card.name }}</text>
+            <text v-if="card.badge" class="component-item__badge">{{ card.badge }}</text>
+          </view>
+          <text class="component-item__desc">{{ card.desc }}</text>
+          <view class="component-item__preview">
+            <FrameButton v-bind="card.preview" size="small">
+              {{ card.previewText }}
+            </FrameButton>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 隐私协议弹窗 -->
     <AgreePrivacy
       v-model="showPrivacy"
       :title="privacyTitle"
@@ -131,75 +141,26 @@ import type { FrameButtonProps } from '@/uni_modules/frame-uniapp-ui';
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import AgreePrivacy from '@/components/agree-privacy/index.vue';
-import { useClipboard, useTheme } from '@/hooks';
+import { useTheme } from '@/hooks';
 import { FrameButton } from '@/uni_modules/frame-uniapp-ui';
-
-type ActionType = 'link' | 'privacy';
-type ActionKey = 'docs' | 'repo' | 'privacy';
-interface ActionItem {
-  key: ActionKey;
-  label: string;
-  type: ActionType;
-  url?: string;
-  theme: 'primary' | 'success' | 'default';
-  meta: string;
-}
 
 interface ComponentCardItem {
   key: string;
   name: string;
   desc: string;
-  badge: string;
+  badge?: string;
   path: string;
   previewText: string;
   preview: FrameButtonProps;
+  category: 'basic' | 'form' | 'feedback' | 'data';
 }
 
 const showPrivacy = ref(false);
-const { setClipboardData } = useClipboard();
 const { t } = useI18n();
 const { isDark, toggleTheme } = useTheme();
 
-const highlightKeys = ['design', 'theme', 'quality'] as const;
-
-const libraryHighlights = computed(() =>
-  highlightKeys.map(key => ({
-    key,
-    title: t(`home.library.highlights.titles.${key}`),
-    desc: t(`home.library.highlights.${key}`),
-  })),
-);
-
-const actions = computed<ActionItem[]>(() => [
-  {
-    key: 'docs',
-    label: t('home.actions.docs'),
-    type: 'link',
-    url: 'https://uniapp.dcloud.net.cn/',
-    theme: 'primary',
-    meta: 'uni-app',
-  },
-  {
-    key: 'repo',
-    label: t('home.actions.repo'),
-    type: 'link',
-    url: 'https://github.com/oyjt/uniapp-vue3-template',
-    theme: 'success',
-    meta: 'GitHub',
-  },
-  {
-    key: 'privacy',
-    label: t('home.actions.privacy'),
-    type: 'privacy',
-    theme: 'default',
-    meta: 'Modal',
-  },
-]);
-
-const primaryActions = computed(() => actions.value.filter(action => action.type === 'link'));
-const secondaryActions = computed(() => actions.value);
-
-const componentCards = computed<ComponentCardItem[]>(() => [
+// 所有组件配置
+const allComponents = computed<ComponentCardItem[]>(() => [
   {
     key: 'button',
     name: t('home.components.button.name'),
@@ -209,42 +170,33 @@ const componentCards = computed<ComponentCardItem[]>(() => [
     previewText: t('home.components.button.name'),
     preview: {
       theme: 'primary',
-      variant: 'solid',
-      size: 'medium',
+      variant: 'base',
       shape: 'pill',
     },
+    category: 'basic',
   },
+  // 未来可以在这里添加更多组件
 ]);
+
+// 按分类筛选组件
+const basicComponents = computed(() =>
+  allComponents.value.filter(c => c.category === 'basic'),
+);
+
+const formComponents = computed(() =>
+  allComponents.value.filter(c => c.category === 'form'),
+);
+
+const feedbackComponents = computed(() =>
+  allComponents.value.filter(c => c.category === 'feedback'),
+);
+
+const dataComponents = computed(() =>
+  allComponents.value.filter(c => c.category === 'data'),
+);
 
 const privacyTitle = computed(() => t('home.privacy.title'));
 const privacySubTitle = computed(() => t('home.privacy.subtitle'));
-
-async function openLink(url?: string) {
-  if (!url) {
-    return;
-  }
-
-  if (typeof window !== 'undefined' && typeof window.open === 'function') {
-    window.open(url, '_blank');
-    return;
-  }
-
-  await setClipboardData({ data: url });
-  uni.showToast({
-    title: t('home.actions.copyTip'),
-    icon: 'none',
-  });
-}
-
-function handleAction(action: ActionItem) {
-  if (action.type === 'privacy') {
-    showPrivacy.value = true;
-    return;
-  }
-  if (action.type === 'link') {
-    openLink(action.url);
-  }
-}
 
 function goComponent(card: { path: string }) {
   uni.navigateTo({ url: card.path });
@@ -265,226 +217,163 @@ function handleDisagree() {
 }
 </script>
 
-<style scoped lang="scss">
-.home {
+<style scoped>
+/* 页面容器 */
+.home-page {
   min-height: 100vh;
-  padding: 64rpx 32rpx 120rpx;
-  background: radial-gradient(circle at 20% 20%, rgba(79, 70, 229, 0.12), transparent 60%),
-    radial-gradient(circle at 80% 0%, rgba(59, 130, 246, 0.16), transparent 50%),
-    var(--theme-bg-color);
+  background: var(--theme-bg-color);
+}
+
+/* 顶部栏 */
+.home-header {
+  padding: 48rpx 32rpx 32rpx;
+  background: var(--theme-surface-color);
+  border-bottom: 1rpx solid var(--theme-border-color);
+}
+
+.home-header__content {
   display: flex;
-  flex-direction: column;
-  gap: 40rpx;
-}
-
-.home__hero {
-  display: flex;
-  flex-direction: column;
-  gap: 24rpx;
-  padding: 48rpx 36rpx;
-  border-radius: 40rpx;
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(15, 118, 110, 0.9));
-  color: #fff;
-  box-shadow: var(--theme-shadow-soft);
-}
-
-.home__badge {
-  align-self: flex-start;
-  padding: 8rpx 22rpx;
-  border-radius: 999rpx;
-  background-color: rgba(255, 255, 255, 0.12);
-  font-size: 22rpx;
-  letter-spacing: 2rpx;
-  text-transform: uppercase;
-}
-
-.home__name {
-  font-size: 24rpx;
-  letter-spacing: 4rpx;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.home__title {
-  font-size: 44rpx;
-  font-weight: 700;
-}
-
-.home__subtitle {
-  font-size: 28rpx;
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.6;
-}
-
-.home__theme-toggle {
-  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 16rpx;
-}
-
-.home__theme-label {
-  font-size: 24rpx;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.home__actions {
-  display: flex;
-  flex-direction: column;
-  gap: 16rpx;
-}
-
-.home__highlight-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180rpx, 1fr));
-  gap: 20rpx;
-}
-
-.highlight-card {
-  padding: 24rpx;
-  border-radius: 24rpx;
-  background-color: rgba(255, 255, 255, 0.12);
-}
-
-.highlight-card__title {
-  display: block;
-  font-size: 26rpx;
-  font-weight: 600;
-}
-
-.highlight-card__desc {
-  display: block;
-  margin-top: 10rpx;
-  font-size: 24rpx;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.home__panel {
-  padding: 40rpx 36rpx;
-  border-radius: 36rpx;
-  background-color: var(--theme-surface-color);
-  box-shadow: var(--theme-shadow-soft);
-  display: flex;
-  flex-direction: column;
   gap: 24rpx;
 }
 
-.home__panel-header {
-  display: flex;
-  flex-direction: column;
-  gap: 12rpx;
+.home-header__info {
+  flex: 1;
+  min-width: 0;
 }
 
-.home__panel-title {
-  font-size: 34rpx;
-  font-weight: 600;
+.home-header__title {
+  display: block;
+  font-size: 32rpx;
+  font-weight: 700;
   color: var(--theme-main-color);
+  margin-bottom: 8rpx;
 }
 
-.home__panel-desc {
-  font-size: 26rpx;
+.home-header__subtitle {
+  display: block;
+  font-size: 24rpx;
   color: var(--theme-content-color);
+  line-height: 1.5;
 }
 
-.component-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 24rpx;
+.home-header__actions {
+  flex-shrink: 0;
 }
 
-.component-card {
-  padding: 28rpx;
-  border-radius: 32rpx;
+/* 主题切换器 */
+.theme-switch {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
   background: var(--theme-surface-muted);
   border: 2rpx solid var(--theme-border-color);
   display: flex;
-  flex-direction: column;
-  gap: 18rpx;
-}
-
-.component-card__header {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 16rpx;
-}
-
-.component-card__name {
-  font-size: 32rpx;
-  font-weight: 600;
-  color: var(--theme-main-color);
-}
-
-.component-card__badge {
-  padding: 6rpx 18rpx;
-  border-radius: 999rpx;
-  font-size: 22rpx;
-  color: var(--theme-primary);
-  background-color: rgba(37, 99, 235, 0.16);
-}
-
-.component-card__desc {
-  font-size: 26rpx;
-  color: var(--theme-content-color);
-  line-height: 1.5;
-}
-
-.component-card__preview {
-  padding: 24rpx;
-  border-radius: 24rpx;
-  background-color: var(--theme-surface-color);
-  display: flex;
   justify-content: center;
+  transition: all 200ms ease;
+  cursor: pointer;
 }
 
-.home__links {
-  display: flex;
-  flex-direction: column;
+.theme-switch:active {
+  transform: scale(0.95);
+  background: var(--theme-bg-color-secondary);
+}
+
+.theme-switch__icon {
+  font-size: 32rpx;
+}
+
+/* 分区 */
+.section {
+  padding: 40rpx 32rpx;
+}
+
+.section-header {
+  margin-bottom: 24rpx;
+}
+
+.section-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: var(--theme-main-color);
+  margin-bottom: 8rpx;
+}
+
+.section-subtitle {
+  display: block;
+  font-size: 24rpx;
+  color: var(--theme-tips-color);
+}
+
+/* 组件网格 */
+.component-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300rpx, 1fr));
   gap: 20rpx;
 }
 
-.link-card {
-  padding: 28rpx 32rpx;
-  border-radius: 28rpx;
+/* 组件卡片 */
+.component-item {
+  padding: 24rpx;
+  border-radius: 20rpx;
   background: var(--theme-surface-color);
-  border: 2rpx solid var(--theme-border-color);
+  border: 1rpx solid var(--theme-border-color);
+  transition: all 250ms ease;
+  cursor: pointer;
+}
+
+.component-item:active {
+  transform: translateY(-2rpx);
+  box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.08);
+  border-color: var(--theme-primary);
+}
+
+.component-item__header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 12rpx;
+  margin-bottom: 12rpx;
 }
 
-.link-card__meta {
-  display: flex;
-  flex-direction: column;
-}
-
-.link-card__label {
-  font-size: 30rpx;
+.component-item__name {
+  font-size: 28rpx;
   font-weight: 600;
   color: var(--theme-main-color);
+  flex: 1;
+  min-width: 0;
 }
 
-.link-card__tag {
+.component-item__badge {
+  padding: 6rpx 16rpx;
+  border-radius: 999rpx;
+  font-size: 22rpx;
+  font-weight: 600;
+  color: #ffffff;
+  background: var(--theme-primary);
+  flex-shrink: 0;
+}
+
+.component-item__desc {
+  display: block;
   font-size: 24rpx;
   color: var(--theme-content-color);
+  line-height: 1.5;
+  margin-bottom: 16rpx;
 }
 
-.link-card__cta {
-  font-size: 24rpx;
-  color: var(--theme-primary);
+.component-item__preview {
+  display: flex;
+  justify-content: flex-end;
 }
 
-@media (min-width: 600px) {
-  .home__actions {
-    flex-direction: row;
-  }
-
+/* 响应式 */
+@media (max-width: 600px) {
   .component-grid {
-    flex-direction: row;
-  }
-
-  .component-card {
-    flex: 1;
+    grid-template-columns: 1fr;
   }
 }
 </style>

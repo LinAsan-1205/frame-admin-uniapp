@@ -1,82 +1,62 @@
 <template>
-  <view class="component-page">
-    <view class="component-hero">
-      <text class="component-hero__eyebrow">
-        frame-uniapp-ui
-      </text>
-      <text class="component-hero__title">
-        {{ heroTitle }}
-      </text>
-      <text class="component-hero__desc">
-        {{ heroDesc }}
-      </text>
-      <view class="component-hero__preview">
+  <view class="button-page">
+    <!-- 顶部栏 -->
+    <view class="page-header">
+      <text class="page-title">{{ heroTitle }}</text>
+      <text class="page-desc">{{ heroDesc }}</text>
+      <view class="page-preview">
         <FrameButton theme="primary" size="large">
           {{ heroTitle }}
         </FrameButton>
       </view>
     </view>
 
-    <view class="demo-group">
-      <text class="demo-group__title">
-        {{ t('components.button.sections.variants') }}
-      </text>
-      <view class="demo-row">
+    <!-- 变体展示 -->
+    <view class="section">
+      <text class="section-title">{{ t('components.button.sections.variants') }}</text>
+      <view class="demo-grid">
         <view v-for="item in variantDemos" :key="item.key" class="demo-card">
           <FrameButton v-bind="item.props">
             {{ item.label }}
           </FrameButton>
-          <text class="demo-card__label">
-            {{ item.label }}
-          </text>
+          <text class="demo-label">{{ item.label }}</text>
         </view>
       </view>
     </view>
 
-    <view class="demo-group">
-      <text class="demo-group__title">
-        {{ t('components.button.sections.states') }}
-      </text>
-      <view class="demo-row">
+    <!-- 状态展示 -->
+    <view class="section">
+      <text class="section-title">{{ t('components.button.sections.states') }}</text>
+      <view class="demo-grid">
         <view v-for="item in stateDemos" :key="item.key" class="demo-card">
           <FrameButton v-bind="item.props">
             {{ item.label }}
           </FrameButton>
-          <text class="demo-card__label">
-            {{ item.label }}
-          </text>
+          <text class="demo-label">{{ item.label }}</text>
         </view>
       </view>
     </view>
 
-    <view class="demo-group">
-      <text class="demo-group__title">
-        {{ t('components.button.sections.sizes') }}
-      </text>
-      <view class="demo-row">
+    <!-- 尺寸展示 -->
+    <view class="section">
+      <text class="section-title">{{ t('components.button.sections.sizes') }}</text>
+      <view class="demo-grid">
         <view v-for="item in sizeDemos" :key="item.key" class="demo-card">
           <FrameButton v-bind="item.props">
             {{ item.label }}
           </FrameButton>
-          <text class="demo-card__label">
-            {{ item.label }}
-          </text>
+          <text class="demo-label">{{ item.label }}</text>
         </view>
       </view>
     </view>
 
-    <view class="api-panel">
-      <text class="api-panel__title">
-        {{ t('components.button.sections.api') }}
-      </text>
+    <!-- API 文档 -->
+    <view class="section">
+      <text class="section-title">{{ t('components.button.sections.api') }}</text>
       <view class="api-list">
         <view v-for="item in apiItems" :key="item.key" class="api-card">
-          <text class="api-card__name">
-            {{ item.name }}
-          </text>
-          <text class="api-card__desc">
-            {{ item.desc }}
-          </text>
+          <text class="api-name">{{ item.name }}</text>
+          <text class="api-desc">{{ item.desc }}</text>
         </view>
       </view>
     </view>
@@ -101,10 +81,11 @@ const heroTitle = computed(() => t('components.button.title'));
 const heroDesc = computed(() => t('components.button.description'));
 
 const variantDemos = computed<ButtonDemo[]>(() => [
-  { key: 'solid', label: t('components.button.variants.solid'), props: { theme: 'primary', variant: 'solid' } },
+  { key: 'base', label: t('components.button.variants.base'), props: { theme: 'primary', variant: 'base' } },
   { key: 'outline', label: t('components.button.variants.outline'), props: { theme: 'primary', variant: 'outline' } },
-  { key: 'ghost', label: t('components.button.variants.ghost'), props: { theme: 'primary', variant: 'ghost' } },
+  { key: 'dashed', label: t('components.button.variants.dashed'), props: { theme: 'primary', variant: 'dashed' } },
   { key: 'text', label: t('components.button.variants.text'), props: { theme: 'primary', variant: 'text' } },
+  { key: 'ghost', label: t('components.button.variants.ghost'), props: { theme: 'primary', ghost: true } },
 ]);
 
 const stateDemos = computed<ButtonDemo[]>(() => [
@@ -129,122 +110,86 @@ const apiItems = computed(() => [
 ]);
 </script>
 
-<style scoped lang="scss">
-.component-page {
+<style scoped>
+.button-page {
   min-height: 100vh;
   padding: 48rpx 32rpx 120rpx;
-  background-color: var(--theme-bg-color);
   display: flex;
   flex-direction: column;
-  gap: 32rpx;
+  gap: 40rpx;
+  background: var(--theme-surface-color);
 }
 
-.component-hero {
-  padding: 40rpx 36rpx;
-  border-radius: 40rpx;
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(29, 78, 216, 0.92));
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  gap: 18rpx;
-  box-shadow: var(--theme-shadow-soft);
+.hero-preview {
+  margin-top: 20rpx;
 }
 
-.component-hero__eyebrow {
-  letter-spacing: 4rpx;
-  font-size: 22rpx;
-  opacity: 0.7;
-}
-
-.component-hero__title {
-  font-size: 40rpx;
-  font-weight: 700;
-}
-
-.component-hero__desc {
-  font-size: 26rpx;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.85);
-}
-
-.component-hero__preview {
-  margin-top: 16rpx;
-}
-
-.demo-group {
-  padding: 36rpx;
-  border-radius: 32rpx;
-  background-color: var(--theme-surface-color);
-  box-shadow: var(--theme-shadow-soft);
-  display: flex;
-  flex-direction: column;
-  gap: 20rpx;
-}
-
-.demo-group__title {
-  font-size: 30rpx;
-  font-weight: 600;
-  color: var(--theme-main-color);
-}
-
-.demo-row {
+.demo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200rpx, 1fr));
   gap: 24rpx;
+  margin-top: 24rpx;
 }
 
 .demo-card {
-  padding: 24rpx;
-  border-radius: 24rpx;
+  padding: 28rpx;
+  border-radius: 28rpx;
   border: 2rpx solid var(--theme-border-color);
-  background-color: var(--theme-surface-muted);
+  background: linear-gradient(135deg, var(--theme-surface-muted), rgba(255, 255, 255, 0.5));
   display: flex;
   flex-direction: column;
-  gap: 18rpx;
+  gap: 20rpx;
   align-items: center;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4rpx 12rpx rgba(15, 23, 42, 0.04);
 }
 
-.demo-card__label {
+.demo-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 8rpx 24rpx rgba(15, 23, 42, 0.08);
+}
+
+.demo-label {
   font-size: 24rpx;
   color: var(--theme-content-color);
-}
-
-.api-panel {
-  padding: 36rpx;
-  border-radius: 32rpx;
-  background-color: var(--theme-surface-color);
-  box-shadow: var(--theme-shadow-soft);
-}
-
-.api-panel__title {
-  font-size: 32rpx;
-  font-weight: 600;
-  color: var(--theme-main-color);
+  font-weight: 500;
 }
 
 .api-list {
-  margin-top: 24rpx;
   display: flex;
   flex-direction: column;
   gap: 16rpx;
+  margin-top: 28rpx;
 }
 
 .api-card {
-  padding: 20rpx 24rpx;
-  border-radius: 24rpx;
+  padding: 24rpx 28rpx;
+  border-radius: 28rpx;
   border: 2rpx solid var(--theme-border-color);
-  background-color: var(--theme-surface-muted);
+  background: linear-gradient(135deg, var(--theme-surface-muted), rgba(255, 255, 255, 0.5));
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2rpx 8rpx rgba(15, 23, 42, 0.04);
 }
 
-.api-card__name {
-  font-size: 26rpx;
-  font-weight: 600;
-  color: var(--theme-main-color);
+.api-card:active {
+  transform: translateX(4rpx);
+  box-shadow: 0 4rpx 16rpx rgba(15, 23, 42, 0.08);
+  border-color: var(--theme-primary);
 }
 
-.api-card__desc {
+.api-name {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: var(--theme-primary);
+  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+  margin-bottom: 8rpx;
+}
+
+.api-desc {
+  display: block;
   font-size: 24rpx;
   color: var(--theme-content-color);
-  margin-top: 6rpx;
+  line-height: 1.6;
 }
 </style>

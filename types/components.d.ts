@@ -9,7 +9,11 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AgreePrivacy: typeof import('./../src/components/agree-privacy/index.vue')['default']
+    CommonCard: typeof import('./../src/components/common-card/index.vue')['default']
+    DemoSection: typeof import('./../src/components/demo-section/index.vue')['default']
+    FeatureCard: typeof import('./../src/components/feature-card/index.vue')['default']
     LangSelect: typeof import('./../src/components/lang-select/index.vue')['default']
+    PageHero: typeof import('./../src/components/page-hero/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ThemePicker: typeof import('./../src/components/theme-picker/index.vue')['default']

@@ -1,4 +1,4 @@
-export { default as FrameButton } from './FrameButton.vue';
+export { default as FrameButton } from './frame-button.vue';
 export type {
   FrameButtonClickEvent,
   FrameButtonEmits,

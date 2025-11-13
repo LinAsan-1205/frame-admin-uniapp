@@ -55,7 +55,7 @@ export default {
   components: {
     button: {
       title: 'Frame Button',
-      description: '内置实心、描边、幽灵与文字样式，并提供 Loading、禁用等交互状态。',
+      description: '内置基础、描边、虚线、文字样式，支持幽灵按钮，并提供 Loading、禁用等交互状态。',
       sections: {
         variants: '风格',
         states: '状态',
@@ -63,10 +63,11 @@ export default {
         api: '属性',
       },
       variants: {
-        solid: '实心',
+        base: '基础',
         outline: '描边',
-        ghost: '幽灵',
+        dashed: '虚线',
         text: '文字',
+        ghost: '幽灵',
       },
       states: {
         loading: '加载中',
@@ -78,11 +79,12 @@ export default {
         large: '大型',
       },
       api: {
-        variant: 'solid | outline | ghost | text',
+        variant: 'base | outline | dashed | text',
         theme: 'default | primary | success | warning | danger',
         size: 'small | medium | large',
         shape: 'rounded | pill | square',
         block: '为 true 时按钮将占满整行。',
+        ghost: '幽灵按钮（镂空按钮）。',
         loading: '显示加载动画并禁止点击。',
         disabled: '禁用状态，屏蔽点击。',
       },

@@ -55,7 +55,7 @@ export default {
   components: {
     button: {
       title: 'Frame button',
-      description: 'The frame button adapts instantly to primary, outline, ghost, and text variants with built-in loading states.',
+      description: 'The frame button adapts instantly to base, outline, dashed, and text variants, supports ghost style with built-in loading states.',
       sections: {
         variants: 'Variants',
         states: 'States',
@@ -63,10 +63,11 @@ export default {
         api: 'Props',
       },
       variants: {
-        solid: 'Solid',
+        base: 'Base',
         outline: 'Outline',
-        ghost: 'Ghost',
+        dashed: 'Dashed',
         text: 'Text',
+        ghost: 'Ghost',
       },
       states: {
         loading: 'Loading',
@@ -78,11 +79,12 @@ export default {
         large: 'Large',
       },
       api: {
-        variant: 'solid | outline | ghost | text',
+        variant: 'base | outline | dashed | text',
         theme: 'default | primary | success | warning | danger',
         size: 'small | medium | large',
         shape: 'rounded | pill | square',
         block: 'Expands to full width when true.',
+        ghost: 'Ghost button (hollow button).',
         loading: 'Shows the spinner and blocks clicks.',
         disabled: 'Disables pointer events and styles.',
       },
