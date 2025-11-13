@@ -13,6 +13,8 @@
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",
     "navigationBarBackgroundColor": "#ffffff",
-    "backgroundColor": "#ffffff"
+    "backgroundColor": "#ffffff",
+    "rpxCalcBaseDeviceWidth": 750,
+    "rpxCalcMaxDeviceWidth": 430
   }
 }
