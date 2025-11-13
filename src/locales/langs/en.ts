@@ -5,52 +5,36 @@ export default {
     'zh-hans': 'Chinese',
   },
   home: {
-    title: 'A focused uni-app starter',
-    subtitle: 'Only the essentials remain so you can build features faster.',
-    localeLabel: 'Language',
-    localeToggle: 'Switch to {lang}',
-    badges: {
-      stable: 'Production ready basics',
-      modern: 'MCP dev server enabled',
+    title: 'frame-uniapp-ui',
+    subtitle: 'A clean UI kit built for this starter template.',
+    themeToggle: {
+      label: 'Theme',
+      light: 'Light',
+      dark: 'Dark',
     },
-    sections: {
-      features: 'Core highlights',
-      featuresSub: 'Each capability is summarized so demos stay on track.',
-      resources: 'Quick resources',
-      resourcesSub: 'Jump into docs or the repository whenever you need context.',
-      ctaTitle: 'Ship your next page faster',
-      ctaSubtitle: 'Extend this lean foundation instead of rebuilding common layers.',
-    },
-    stats: {
-      request: {
-        label: 'Request layer',
-        value: 'luch-request',
-        desc: 'Interceptors and feedback ready to go',
-      },
-      hooks: {
-        label: 'Utility hooks',
-        value: 'use* suite',
-        desc: 'Clipboard, storage, privacy helpers included',
-      },
-      i18n: {
-        label: 'Internationalization',
-        value: 'zh / en',
-        desc: 'Toggle locales in real time',
+    library: {
+      badge: 'Composable primitives',
+      title: 'Launch polished mini apps quickly',
+      description: 'Each component focuses on the most common admin workflows so you can stay productive on every platform.',
+      highlights: {
+        titles: {
+          design: 'Design system',
+          theme: 'Dark mode',
+          quality: 'Experience',
+        },
+        design: 'BEM class names and Sass variables keep the look consistent.',
+        theme: 'Native dark mode works out-of-the-box for every component.',
+        quality: 'Interactions are tuned to feel just like premium design systems.',
       },
     },
-    features: {
-      layout: 'Desktop previews mimic a mobile sized canvas automatically',
-      permission: 'Router helpers and permission guards are ready to use',
-      request: 'Request utilities include interceptors and loading states',
-      hooks: 'Clipboard, loading, location and sharing hooks are available',
-      i18n: 'Vue I18n is configured for instant locale toggling',
-    },
-    featureDescriptions: {
-      layout: 'H5 keeps a centered mobile canvas so reviews stay consistent.',
-      permission: 'Route constants and guards are scaffolded, just add business rules.',
-      request: 'Retry, duplicate submit protection, and loading indicators are demonstrated.',
-      hooks: 'Custom hooks cover storage, clipboard access, and privacy prompts already.',
-      i18n: 'Switch between English and Chinese to validate copy at any time.',
+    components: {
+      title: 'Component showcase',
+      subtitle: 'Browse the frame-uniapp-ui primitives. Tap a card to open its playground and usage notes.',
+      badgeNew: 'New',
+      button: {
+        name: 'Button',
+        desc: 'Gradient-ready button with variants, states, and slots.',
+      },
     },
     actions: {
       docs: 'Read the uni-app documentation',
@@ -59,11 +43,6 @@ export default {
       open: 'Open',
       copyTip: 'Link copied. Open it in your browser.',
     },
-    actionDescriptions: {
-      docs: 'Skim the guides, APIs, and publishing workflow.',
-      repo: 'Inspect the repo layout and conventions.',
-      privacy: 'Review how permissions are declared and explained.',
-    },
     privacy: {
       title: 'Privacy notice summary',
       subtitle: 'Please review how we request permissions and process data before continuing.',
@@ -71,6 +50,42 @@ export default {
       cancel: 'Maybe later',
       agreeTip: 'Thanks for confirming the privacy policy.',
       disagreeTip: 'You can reopen the privacy notice at any time.',
+    },
+  },
+  components: {
+    button: {
+      title: 'Frame button',
+      description: 'The frame button adapts instantly to primary, outline, ghost, and text variants with built-in loading states.',
+      sections: {
+        variants: 'Variants',
+        states: 'States',
+        sizes: 'Sizes',
+        api: 'Props',
+      },
+      variants: {
+        solid: 'Solid',
+        outline: 'Outline',
+        ghost: 'Ghost',
+        text: 'Text',
+      },
+      states: {
+        loading: 'Loading',
+        disabled: 'Disabled',
+      },
+      sizes: {
+        small: 'Compact',
+        medium: 'Default',
+        large: 'Large',
+      },
+      api: {
+        variant: 'solid | outline | ghost | text',
+        theme: 'default | primary | success | warning | danger',
+        size: 'small | medium | large',
+        shape: 'rounded | pill | square',
+        block: 'Expands to full width when true.',
+        loading: 'Shows the spinner and blocks clicks.',
+        disabled: 'Disables pointer events and styles.',
+      },
     },
   },
 };

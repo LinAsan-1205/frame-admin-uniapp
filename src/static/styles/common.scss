@@ -7,8 +7,8 @@ page {
   margin: 0 auto;
   /* stylelint-disable-next-line declaration-property-value-no-unknown */
   font-size: 28rpx;
-  color: #1f2937;
-  background-color: #f5f6f8;
+  color: var(--theme-main-color);
+  background-color: var(--theme-bg-color);
 }
 
 /* #ifdef H5 */
@@ -18,7 +18,12 @@ body {
   width: 100%;
   min-height: 100vh;
   margin: 0;
-  background-color: #e5e7eb;
+  color: var(--theme-main-color);
+  background-color: var(--theme-bg-color-secondary);
+}
+
+body[data-theme='dark'] {
+  background-color: var(--theme-bg-color);
 }
 
 #app {
@@ -27,6 +32,7 @@ body {
   max-width: $mobile-max-width;
   min-height: 100vh;
   margin: 0 auto;
+  background-color: transparent;
 }
 
 /* stylelint-disable-next-line selector-type-no-unknown */
@@ -36,6 +42,7 @@ uni-app {
   max-width: $mobile-max-width;
   min-height: inherit;
   margin: 0 auto;
+  background-color: transparent;
 }
 
 .uni-page,

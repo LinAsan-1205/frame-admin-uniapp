@@ -5,52 +5,36 @@ export default {
     'zh-hans': '中文',
   },
   home: {
-    title: '极简版 uni-app 启动模板',
-    subtitle: '保留核心能力，开箱即可继续搭建业务页面。',
-    localeLabel: '当前语言',
-    localeToggle: '切换为 {lang}',
-    badges: {
-      stable: '开箱即用的最佳实践',
-      modern: 'MCP 开发辅助已准备就绪',
+    title: 'frame-uniapp-ui',
+    subtitle: '为模板量身打造的 UI 组件集。',
+    themeToggle: {
+      label: '主题',
+      light: '浅色',
+      dark: '深色',
     },
-    sections: {
-      features: '核心亮点',
-      featuresSub: '重新排版后的能力卡片，方便在演示时快速说明。',
-      resources: '常用资源',
-      resourcesSub: '快速跳转到官方文档或模板仓库继续了解。',
-      ctaTitle: '继续构建你的业务',
-      ctaSubtitle: '保持这个轻量基座，直接在其上扩展页面或引入模块。',
-    },
-    stats: {
-      request: {
-        label: '请求封装',
-        value: 'luch-request',
-        desc: '拦截器与错误提示已内置',
-      },
-      hooks: {
-        label: '常用 Hooks',
-        value: 'use* 系列',
-        desc: '剪切板、主题、权限等开箱即用',
-      },
-      i18n: {
-        label: '国际化',
-        value: 'zh / en',
-        desc: '两种语言实时切换预览',
+    library: {
+      badge: '组合式原子组件',
+      title: '快速搭建精致的小程序与 H5',
+      description: '每个组件都围绕管理端和运营端常见场景设计，保持一致的体验与代码风格。',
+      highlights: {
+        titles: {
+          design: '设计规范',
+          theme: '暗黑模式',
+          quality: '交互体验',
+        },
+        design: 'BEM 命名与 Sass 变量统一规范，样式更易扩展。',
+        theme: '原生支持暗黑模式，切换即刻生效。',
+        quality: '交互动效与对齐间距参考成熟设计体系。',
       },
     },
-    features: {
-      layout: '桌面端也会按照手机宽度居中展示',
-      permission: '路由解析与权限拦截逻辑已经准备就绪',
-      request: '内置请求封装，含拦截器、Loading 和防重复提交',
-      hooks: '剪切板、定位、分享等常用 hooks 随取随用',
-      i18n: '内置 Vue I18n，可一键切换多语言',
-    },
-    featureDescriptions: {
-      layout: 'H5 自动限制在移动端尺寸，方便在桌面调试时保持一致观感。',
-      permission: '权限守卫、白名单、常用常量均已预置，直接补充业务规则即可。',
-      request: '拦截器、错误提示与 Loading 状态均有示例，避免重复封装。',
-      hooks: '存储、剪切板、隐私弹窗等自定义 hooks 与示例已经连接。',
-      i18n: '提供中英文文案示例，并支持在任意终端上动态切换。',
+    components: {
+      title: '组件一览',
+      subtitle: '浏览 frame-uniapp-ui 中的组件，点击卡片即可进入示例与使用说明。',
+      badgeNew: '上新',
+      button: {
+        name: '按钮 Button',
+        desc: '包含多种主题、状态与插槽预览。',
+      },
     },
     actions: {
       docs: '查看 uni-app 文档',
@@ -59,11 +43,6 @@ export default {
       open: '打开',
       copyTip: '链接已复制，可在浏览器中打开',
     },
-    actionDescriptions: {
-      docs: '查阅官方指南、API 与发布流程。',
-      repo: '浏览模板源码，了解目录约定。',
-      privacy: '查看当前应用的权限使用说明。',
-    },
     privacy: {
       title: '隐私政策概要',
       subtitle: '在继续使用前，请先阅读我们如何申请权限与处理数据。',
@@ -71,6 +50,42 @@ export default {
       cancel: '暂不使用',
       agreeTip: '感谢你的信任，已记录隐私授权。',
       disagreeTip: '已为你关闭弹窗，随时可在首页再次查看。',
+    },
+  },
+  components: {
+    button: {
+      title: 'Frame Button',
+      description: '内置实心、描边、幽灵与文字样式，并提供 Loading、禁用等交互状态。',
+      sections: {
+        variants: '风格',
+        states: '状态',
+        sizes: '尺寸',
+        api: '属性',
+      },
+      variants: {
+        solid: '实心',
+        outline: '描边',
+        ghost: '幽灵',
+        text: '文字',
+      },
+      states: {
+        loading: '加载中',
+        disabled: '禁用',
+      },
+      sizes: {
+        small: '紧凑',
+        medium: '默认',
+        large: '大型',
+      },
+      api: {
+        variant: 'solid | outline | ghost | text',
+        theme: 'default | primary | success | warning | danger',
+        size: 'small | medium | large',
+        shape: 'rounded | pill | square',
+        block: '为 true 时按钮将占满整行。',
+        loading: '显示加载动画并禁止点击。',
+        disabled: '禁用状态，屏蔽点击。',
+      },
     },
   },
 };

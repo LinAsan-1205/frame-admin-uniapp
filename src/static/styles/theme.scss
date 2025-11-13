@@ -1,44 +1,54 @@
 // 主题CSS变量
 :root,
-page {
+page,
+body {
   // 主色调
-  --theme-primary: #21d59d;
-  --theme-success: #3ed268;
-  --theme-warning: #fe9831;
-  --theme-error: #fa4e62;
+  --theme-primary: #2563eb;
+  --theme-success: #10b981;
+  --theme-warning: #f59e0b;
+  --theme-error: #ef4444;
 
   // 文字颜色
-  --theme-main-color: #1b233b;
-  --theme-content-color: #60687e;
-  --theme-tips-color: #7e869a;
-  --theme-light-color: #bdc3d2;
-  --theme-disabled-color: #dce0eb;
+  --theme-main-color: #0f172a;
+  --theme-content-color: #475467;
+  --theme-tips-color: #6b7280;
+  --theme-light-color: #9ca3af;
+  --theme-disabled-color: #d1d5db;
 
-  // 背景颜色
-  --theme-bg-color: #ffffff;
-  --theme-bg-color-secondary: #f8f9fa;
+  // 背景/表面
+  --theme-bg-color: #f5f6f8;
+  --theme-bg-color-secondary: #e5e7eb;
+  --theme-surface-color: #ffffff;
+  --theme-surface-muted: #f8fafc;
 
-  // 边框颜色
-  --theme-border-color: #e9ecef;
+  // 边框/阴影
+  --theme-border-color: #e2e8f0;
+  --theme-border-color-strong: #cbd5f5;
+  --theme-shadow-soft: 0 24rpx 60rpx rgba(15, 23, 42, 0.08);
 }
 
+:root[data-theme='dark'],
+body[data-theme='dark'],
 .theme-dark {
-  // 主色调
-  --theme-primary: #3c9cff;
-  --theme-success: #5ac725;
-  --theme-warning: #f9ae3d;
-  --theme-error: #f56c6c;
+  --theme-primary: #3b82f6;
+  --theme-success: #34d399;
+  --theme-warning: #fbbf24;
+  --theme-error: #f87171;
 
-  // 文字颜色
-  --theme-main-color: #ffffff;
-  --theme-content-color: #b0b8c1;
-  --theme-tips-color: #8a8f95;
-  --theme-light-color: #6c757d;
-  --theme-disabled-color: #495057;
+  --theme-main-color: #f3f4f6;
+  --theme-content-color: #d1d5db;
+  --theme-tips-color: #94a3b8;
+  --theme-light-color: #64748b;
+  --theme-disabled-color: #475569;
 
-  // 背景颜色
-  --theme-bg-color: #1a1a1a;
-  --theme-bg-color-secondary: #2d2d2d;
+  --theme-bg-color: #050a16;
+  --theme-bg-color-secondary: #0f172a;
+  --theme-surface-color: #111827;
+  --theme-surface-muted: #1f2937;
+
+  --theme-border-color: rgba(148, 163, 184, 0.4);
+  --theme-border-color-strong: rgba(148, 163, 184, 0.6);
+  --theme-shadow-soft: 0 24rpx 60rpx rgba(0, 0, 0, 0.65);
 }
 
 // 主题工具类

@@ -29,6 +29,9 @@ watch(
     uni.setStorageSync(THEME_STORAGE_KEY, mode);
     if (typeof document !== 'undefined') {
       document.documentElement.dataset.theme = mode;
+      document.documentElement.classList.toggle('theme-dark', mode === 'dark');
+      document.documentElement.classList.toggle('theme-light', mode === 'light');
+      document.body?.setAttribute('data-theme', mode);
     }
   },
   { immediate: true },
