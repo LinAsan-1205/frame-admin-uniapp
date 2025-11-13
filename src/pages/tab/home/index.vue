@@ -339,7 +339,6 @@ function handleAction(action: ActionItem) {
 }
 
 .hero-card {
-  width: 100%;
   padding: 48rpx 40rpx 40rpx;
   border-radius: 48rpx;
   background: linear-gradient(135deg, #0f172a, #1d4ed8);
@@ -464,7 +463,6 @@ function handleAction(action: ActionItem) {
 }
 
 .panel {
-  width: 100%;
   padding: 40rpx 36rpx;
   border-radius: 36rpx;
   background-color: #ffffff;
@@ -603,7 +601,6 @@ function handleAction(action: ActionItem) {
 }
 
 .cta-panel {
-  width: 100%;
   padding: 40rpx 36rpx;
   border-radius: 36rpx;
   background: linear-gradient(135deg, #fef9c3, #fef3c7);
