@@ -4,9 +4,9 @@
   "version": "1.5.0",
   "description": "frame-admin-uni-app",
   "author": {
-    "name": "江阳小道",
-    "email": "oyjt001@gmail.com",
-    "github": "https://github.com/oyjt"
+    "name": "frame-admin-uni-app",
+    "email": "1603889221@qq.com",
+    "github": "https://github.com/LinAsan-1205/frame-admin-uniapp"
   },
   "license": "MIT",
   "homepage": "https://github.com/oyjt/uniapp-vue3-template",
@@ -17,7 +17,6 @@
   "keywords": [
     "Vue3",
     "uniapp",
-    "uniapp-vue3-template",
     "Vite5",
     "TypeScript",
     "uview-plus",
