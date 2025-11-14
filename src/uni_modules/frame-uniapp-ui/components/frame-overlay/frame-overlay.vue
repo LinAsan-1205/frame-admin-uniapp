@@ -47,6 +47,8 @@ watch(() => props.show, (newVal) => {
     
     // 下一帧开始动画（参考frame-transition的时序）
     nextTick(() => {
+      // 强制重绘，确保 opacity: 0 已生效
+      const forceReflow = currentOpacity.value
       setTimeout(() => {
         currentOpacity.value = props.opacity
         contentOpacity.value = 1
