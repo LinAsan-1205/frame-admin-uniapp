@@ -31,6 +31,7 @@ const { n, classes } = createNamespace('overlay')
 const isAnimating = ref(false)
 const currentOpacity = ref(0)
 const contentOpacity = ref(0)
+const enableTransition = ref(true)
 let timer: any = null
 
 // 监听 show 变化，控制动画
@@ -38,20 +39,23 @@ watch(() => props.show, (newVal) => {
   clearTimeout(timer)
   
   if (newVal) {
-    // 显示遮罩 - 先设置初始状态
+    // 显示遮罩 - 先禁用过渡效果，重置状态
+    enableTransition.value = false
     currentOpacity.value = 0
     contentOpacity.value = 0
     
     // 立即显示元素（此时opacity为0，不可见）
     isAnimating.value = true
     
-    // 下一帧开始动画（参考frame-transition的时序）
+    // 下一帧启用过渡并开始动画
     nextTick(() => {
-      // 强制重绘，确保 opacity: 0 已生效
-      const forceReflow = currentOpacity.value
       setTimeout(() => {
-        currentOpacity.value = props.opacity
-        contentOpacity.value = 1
+        enableTransition.value = true
+        // 再等一帧，确保 transition 已启用
+        setTimeout(() => {
+          currentOpacity.value = props.opacity
+          contentOpacity.value = 1
+        }, 20)
       }, 20)
     })
     
@@ -86,7 +90,7 @@ const overlayStyles = computed(() => {
   const baseStyles: Record<string, any> = {
     zIndex: props.zIndex,
     backgroundColor: `rgba(0, 0, 0, ${currentOpacity.value})`,
-    transition: `background-color ${props.duration}ms ease`,
+    transition: enableTransition.value ? `background-color ${props.duration}ms ease` : 'none',
   }
 
   // 合并自定义样式
@@ -103,7 +107,7 @@ const overlayStyles = computed(() => {
 // 内容样式
 const contentStyles = computed(() => ({
   opacity: contentOpacity.value,
-  transition: `opacity ${props.duration}ms ease`,
+  transition: enableTransition.value ? `opacity ${props.duration}ms ease` : 'none',
   pointerEvents: contentOpacity.value === 0 ? 'none' : 'auto',
 }))
 
