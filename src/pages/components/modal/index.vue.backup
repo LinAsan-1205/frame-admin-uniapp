@@ -1,0 +1,283 @@
+<template>
+  <view class="component-page">
+    <view class="page-header">
+      <text class="page-title">Modal 模态框</text>
+      <text class="page-desc">模态对话框，用于展示重要信息</text>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">基础对话框</text>
+      </view>
+      <view class="section-content">
+        <frame-space :size="12" :wrap="true">
+          <frame-button size="small" @click="showBasicModal">
+            基础对话框
+          </frame-button>
+          <frame-button size="small" @click="showConfirmModal">
+            确认对话框
+          </frame-button>
+          <frame-button size="small" @click="showAlertModal">
+            警告对话框
+          </frame-button>
+        </frame-space>
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">自定义配置</text>
+      </view>
+      <view class="section-content">
+        <frame-space :size="12" :wrap="true">
+          <frame-button size="small" @click="showClosableModal">
+            可关闭对话框
+          </frame-button>
+          <frame-button size="small" @click="showNoButtonModal">
+            无按钮对话框
+          </frame-button>
+          <frame-button size="small" @click="showClickOverlayModal">
+            点击遮罩关闭
+          </frame-button>
+        </frame-space>
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">API 属性</text>
+      </view>
+      <view class="api-list">
+        <view class="api-item">
+          <text class="api-name">title</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">标题</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">content</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">内容</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">show-cancel</text>
+          <text class="api-type">boolean</text>
+          <text class="api-desc">是否显示取消按钮</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">cancel-text</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">取消按钮文字</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">confirm-text</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">确认按钮文字</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">closable</text>
+          <text class="api-type">boolean</text>
+          <text class="api-desc">是否显示关闭按钮</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">close-on-click-overlay</text>
+          <text class="api-type">boolean</text>
+          <text class="api-desc">点击遮罩是否关闭</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 模态框组件 -->
+    <frame-modal
+      :show="modalShow"
+      :title="modalTitle"
+      :content="modalContent"
+      :show-cancel="modalShowCancel"
+      :cancel-text="modalCancelText"
+      :confirm-text="modalConfirmText"
+      :confirm-color="modalConfirmColor"
+      :closable="modalClosable"
+      :close-on-click-overlay="modalCloseOnOverlay"
+      @close="modalShow = false"
+      @cancel="modalShow = false"
+      @confirm="handleConfirm"
+    />
+  </view>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const modalShow = ref(false)
+const modalTitle = ref('')
+const modalContent = ref('')
+const modalShowCancel = ref(true)
+const modalCancelText = ref('取消')
+const modalConfirmText = ref('确定')
+const modalConfirmColor = ref('')
+const modalClosable = ref(false)
+const modalCloseOnOverlay = ref(false)
+
+function showBasicModal() {
+  modalTitle.value = '提示'
+  modalContent.value = '这是一个基础的模态框'
+  modalShowCancel.value = true
+  modalClosable.value = false
+  modalCloseOnOverlay.value = false
+  modalConfirmColor.value = ''
+  modalShow.value = true
+}
+
+function showConfirmModal() {
+  modalTitle.value = '确认操作'
+  modalContent.value = '确定要执行此操作吗？'
+  modalShowCancel.value = true
+  modalClosable.value = false
+  modalCloseOnOverlay.value = false
+  modalConfirmColor.value = '#2563eb'
+  modalShow.value = true
+}
+
+function showAlertModal() {
+  modalTitle.value = '警告'
+  modalContent.value = '此操作不可撤销，请谨慎操作！'
+  modalShowCancel.value = true
+  modalClosable.value = false
+  modalCloseOnOverlay.value = false
+  modalConfirmColor.value = '#ef4444'
+  modalShow.value = true
+}
+
+function showClosableModal() {
+  modalTitle.value = '可关闭对话框'
+  modalContent.value = '点击右上角的关闭按钮可以关闭对话框'
+  modalShowCancel.value = true
+  modalClosable.value = true
+  modalCloseOnOverlay.value = false
+  modalConfirmColor.value = ''
+  modalShow.value = true
+}
+
+function showNoButtonModal() {
+  modalTitle.value = '无按钮对话框'
+  modalContent.value = '这个对话框没有底部按钮，点击右上角关闭'
+  modalShowCancel.value = false
+  modalClosable.value = true
+  modalCloseOnOverlay.value = false
+  modalConfirmColor.value = ''
+  modalShow.value = true
+}
+
+function showClickOverlayModal() {
+  modalTitle.value = '点击遮罩关闭'
+  modalContent.value = '点击对话框外的遮罩层可以关闭对话框'
+  modalShowCancel.value = true
+  modalClosable.value = false
+  modalCloseOnOverlay.value = true
+  modalConfirmColor.value = ''
+  modalShow.value = true
+}
+
+function handleConfirm() {
+  modalShow.value = false
+  uni.showToast({
+    title: '确认成功',
+    icon: 'success',
+  })
+}
+</script>
+
+<style scoped lang="scss">
+.component-page {
+  min-height: 100vh;
+  background: var(--fui-color-bg-primary);
+  padding: 32rpx;
+  padding-bottom: 100rpx;
+}
+
+.page-header {
+  padding: 40rpx 0;
+  margin-bottom: 32rpx;
+}
+
+.page-title {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: var(--fui-color-text-primary);
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.page-desc {
+  font-size: 28rpx;
+  color: var(--fui-color-text-secondary);
+  display: block;
+  line-height: 1.6;
+}
+
+.demo-section {
+  background: var(--fui-color-surface);
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.section-header {
+  margin-bottom: 24rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 2rpx solid var(--fui-color-border);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--fui-color-text-primary);
+  display: block;
+}
+
+.section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.api-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.api-item {
+  padding: 24rpx;
+  background: var(--fui-color-surface-muted);
+  border-radius: 16rpx;
+  border: 1rpx solid var(--fui-color-border);
+}
+
+.api-name {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--fui-color-primary);
+  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+  margin-bottom: 8rpx;
+}
+
+.api-type {
+  display: inline-block;
+  padding: 4rpx 12rpx;
+  background: var(--fui-color-primary);
+  color: #ffffff;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  margin-bottom: 12rpx;
+}
+
+.api-desc {
+  display: block;
+  font-size: 24rpx;
+  color: var(--fui-color-text-secondary);
+  line-height: 1.6;
+  margin-top: 8rpx;
+}
+</style>

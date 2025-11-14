@@ -1,0 +1,240 @@
+<template>
+  <view class="component-page">
+    <view class="page-header">
+      <text class="page-title">NoticeBar 通知栏</text>
+      <text class="page-desc">用于循环播放展示一组消息通知</text>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">基础用法</text>
+      </view>
+      <view class="section-content">
+        <frame-notice-bar text="这是一条通知消息" />
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">可关闭</text>
+      </view>
+      <view class="section-content">
+        <frame-notice-bar
+          text="这条通知可以关闭"
+          mode="closeable"
+        />
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">链接模式</text>
+      </view>
+      <view class="section-content">
+        <frame-notice-bar
+          text="点击查看更多信息"
+          mode="link"
+          @click="handleNoticeClick"
+        />
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">滚动通知</text>
+      </view>
+      <view class="section-content">
+        <frame-notice-bar
+          text="这是一条很长很长的通知消息，内容会自动滚动播放，方便用户查看完整信息"
+          :scrollable="true"
+          :speed="50"
+        />
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">文本换行</text>
+      </view>
+      <view class="section-content">
+        <frame-notice-bar
+          text="这是一条支持换行的通知消息，可以显示多行内容，适合展示较长的文本信息"
+          :wrapable="true"
+        />
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">自定义颜色</text>
+      </view>
+      <view class="section-content">
+        <frame-notice-bar
+          text="警告信息"
+          bg-color="#fef0f0"
+          color="#f56c6c"
+          left-icon="warning"
+        />
+        <frame-notice-bar
+          text="成功信息"
+          bg-color="#f0f9ff"
+          color="#409eff"
+          left-icon="success"
+        />
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">API 属性</text>
+      </view>
+      <view class="api-list">
+        <view class="api-item">
+          <text class="api-name">text</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">通知文本内容</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">mode</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">模式：closeable | link</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">scrollable</text>
+          <text class="api-type">boolean</text>
+          <text class="api-desc">是否开启滚动播放</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">wrapable</text>
+          <text class="api-type">boolean</text>
+          <text class="api-desc">是否开启文本换行</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">speed</text>
+          <text class="api-type">number</text>
+          <text class="api-desc">滚动速度(px/s)</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">bg-color</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">背景颜色</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">color</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">文字颜色</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">left-icon</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">左侧图标</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script setup lang="ts">
+function handleNoticeClick() {
+  uni.showToast({
+    title: '点击了通知栏',
+    icon: 'none',
+  })
+}
+</script>
+
+<style scoped lang="scss">
+.component-page {
+  min-height: 100vh;
+  background: var(--fui-color-bg-primary);
+  padding: 32rpx;
+  padding-bottom: 100rpx;
+}
+
+.page-header {
+  padding: 40rpx 0;
+  margin-bottom: 32rpx;
+}
+
+.page-title {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: var(--fui-color-text-primary);
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.page-desc {
+  font-size: 28rpx;
+  color: var(--fui-color-text-secondary);
+  display: block;
+  line-height: 1.6;
+}
+
+.demo-section {
+  background: var(--fui-color-surface);
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.section-header {
+  margin-bottom: 24rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 2rpx solid var(--fui-color-border);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--fui-color-text-primary);
+  display: block;
+}
+
+.section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.api-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.api-item {
+  padding: 24rpx;
+  background: var(--fui-color-surface-muted);
+  border-radius: 16rpx;
+  border: 1rpx solid var(--fui-color-border);
+}
+
+.api-name {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--fui-color-primary);
+  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+  margin-bottom: 8rpx;
+}
+
+.api-type {
+  display: inline-block;
+  padding: 4rpx 12rpx;
+  background: var(--fui-color-primary);
+  color: #ffffff;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  margin-bottom: 12rpx;
+}
+
+.api-desc {
+  display: block;
+  font-size: 24rpx;
+  color: var(--fui-color-text-secondary);
+  line-height: 1.6;
+  margin-top: 8rpx;
+}
+</style>

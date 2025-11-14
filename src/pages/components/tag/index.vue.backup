@@ -1,0 +1,206 @@
+<template>
+  <view class="component-page">
+    <view class="page-header">
+      <text class="page-title">Tag 标签</text>
+      <text class="page-desc">用于标记和分类的标签组件</text>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">Filled 实心</text>
+      </view>
+      <view class="section-content">
+        <view class="tag-group">
+          <frame-tag type="default" variant="filled">默认</frame-tag>
+          <frame-tag type="primary" variant="filled">主要</frame-tag>
+          <frame-tag type="success" variant="filled">成功</frame-tag>
+          <frame-tag type="warning" variant="filled">警告</frame-tag>
+          <frame-tag type="danger" variant="filled">危险</frame-tag>
+        </view>
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">Outlined 描边</text>
+      </view>
+      <view class="section-content">
+        <view class="tag-group">
+          <frame-tag type="default" variant="outlined">默认</frame-tag>
+          <frame-tag type="primary" variant="outlined">主要</frame-tag>
+          <frame-tag type="success" variant="outlined">成功</frame-tag>
+          <frame-tag type="warning" variant="outlined">警告</frame-tag>
+          <frame-tag type="danger" variant="outlined">危险</frame-tag>
+        </view>
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">Light 浅色</text>
+      </view>
+      <view class="section-content">
+        <view class="tag-group">
+          <frame-tag type="default" variant="light">默认</frame-tag>
+          <frame-tag type="primary" variant="light">主要</frame-tag>
+          <frame-tag type="success" variant="light">成功</frame-tag>
+          <frame-tag type="warning" variant="light">警告</frame-tag>
+          <frame-tag type="danger" variant="light">危险</frame-tag>
+        </view>
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">其他功能</text>
+      </view>
+      <view class="section-content">
+        <view class="tag-group">
+          <frame-tag type="primary" :closable="true">可关闭</frame-tag>
+          <frame-tag type="success" :round="true">圆形</frame-tag>
+          <frame-tag type="warning" size="sm">小尺寸</frame-tag>
+          <frame-tag type="danger" size="lg">大尺寸</frame-tag>
+        </view>
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">API 属性</text>
+      </view>
+      <view class="api-list">
+        <view class="api-item">
+          <text class="api-name">type</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">类型：default | primary | success | warning | danger</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">variant</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">变体：filled | outlined | light</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">size</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">尺寸：sm | md | lg</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">closable</text>
+          <text class="api-type">boolean</text>
+          <text class="api-desc">是否可关闭</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">round</text>
+          <text class="api-type">boolean</text>
+          <text class="api-desc">是否圆形</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script setup lang="ts">
+</script>
+
+<style scoped lang="scss">
+.component-page {
+  min-height: 100vh;
+  background: var(--fui-color-bg-primary);
+  padding: 32rpx;
+  padding-bottom: 100rpx;
+}
+
+.page-header {
+  padding: 40rpx 0;
+  margin-bottom: 32rpx;
+}
+
+.page-title {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: var(--fui-color-text-primary);
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.page-desc {
+  font-size: 28rpx;
+  color: var(--fui-color-text-secondary);
+  display: block;
+  line-height: 1.6;
+}
+
+.demo-section {
+  background: var(--fui-color-surface);
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.section-header {
+  margin-bottom: 24rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 2rpx solid var(--fui-color-border);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--fui-color-text-primary);
+  display: block;
+}
+
+.section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.tag-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  align-items: center;
+}
+
+.api-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.api-item {
+  padding: 24rpx;
+  background: var(--fui-color-surface-muted);
+  border-radius: 16rpx;
+  border: 1rpx solid var(--fui-color-border);
+}
+
+.api-name {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--fui-color-primary);
+  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+  margin-bottom: 8rpx;
+}
+
+.api-type {
+  display: inline-block;
+  padding: 4rpx 12rpx;
+  background: var(--fui-color-primary);
+  color: #ffffff;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  margin-bottom: 12rpx;
+}
+
+.api-desc {
+  display: block;
+  font-size: 24rpx;
+  color: var(--fui-color-text-secondary);
+  line-height: 1.6;
+  margin-top: 8rpx;
+}
+</style>

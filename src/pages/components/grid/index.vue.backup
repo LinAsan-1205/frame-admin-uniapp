@@ -1,0 +1,197 @@
+<template>
+  <view class="component-page">
+    <view class="page-header">
+      <text class="page-title">Grid 网格</text>
+      <text class="page-desc">宫格布局，适合展示多个同级功能入口</text>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">基础网格（4列）</text>
+      </view>
+      <view class="section-content">
+        <frame-grid :columns="4" :border="true" :clickable="true">
+          <frame-grid-item icon="home" text="首页" />
+          <frame-grid-item icon="user" text="我的" />
+          <frame-grid-item icon="setting" text="设置" />
+          <frame-grid-item icon="star" text="收藏" />
+        </frame-grid>
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">3列网格</text>
+      </view>
+      <view class="section-content">
+        <frame-grid :columns="3" :border="true">
+          <frame-grid-item icon="scan" text="扫一扫" icon-color="#2563eb" />
+          <frame-grid-item icon="qrcode" text="付款码" icon-color="#10b981" />
+          <frame-grid-item icon="wallet" text="钱包" icon-color="#f59e0b" />
+          <frame-grid-item icon="card" text="卡包" icon-color="#ef4444" />
+          <frame-grid-item icon="coupon" text="优惠券" icon-color="#8b5cf6" />
+          <frame-grid-item icon="gift" text="礼品卡" icon-color="#ec4899" />
+        </frame-grid>
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">带徽章</text>
+      </view>
+      <view class="section-content">
+        <frame-grid :columns="4" :gap="16">
+          <frame-grid-item icon="message" text="消息" :badge="5" />
+          <frame-grid-item icon="bell" text="通知" :badge="99" />
+          <frame-grid-item icon="mail" text="邮件" :dot="true" />
+          <frame-grid-item icon="task" text="待办" />
+        </frame-grid>
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">正方形格子</text>
+      </view>
+      <view class="section-content">
+        <frame-grid :columns="3" :border="true" :square="true">
+          <frame-grid-item icon="photo" text="相册" />
+          <frame-grid-item icon="camera" text="相机" />
+          <frame-grid-item icon="video" text="视频" />
+        </frame-grid>
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">API 属性</text>
+      </view>
+      <view class="api-list">
+        <view class="api-item">
+          <text class="api-name">columns</text>
+          <text class="api-type">number</text>
+          <text class="api-desc">列数</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">border</text>
+          <text class="api-type">boolean</text>
+          <text class="api-desc">是否显示边框</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">square</text>
+          <text class="api-type">boolean</text>
+          <text class="api-desc">是否正方形格子</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">clickable</text>
+          <text class="api-type">boolean</text>
+          <text class="api-desc">是否可点击</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">gap</text>
+          <text class="api-type">number</text>
+          <text class="api-desc">格子间距(rpx)</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script setup lang="ts">
+</script>
+
+<style scoped lang="scss">
+.component-page {
+  min-height: 100vh;
+  background: var(--fui-color-bg-primary);
+  padding: 32rpx;
+  padding-bottom: 100rpx;
+}
+
+.page-header {
+  padding: 40rpx 0;
+  margin-bottom: 32rpx;
+}
+
+.page-title {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: var(--fui-color-text-primary);
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.page-desc {
+  font-size: 28rpx;
+  color: var(--fui-color-text-secondary);
+  display: block;
+  line-height: 1.6;
+}
+
+.demo-section {
+  background: var(--fui-color-surface);
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.section-header {
+  margin-bottom: 24rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 2rpx solid var(--fui-color-border);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--fui-color-text-primary);
+  display: block;
+}
+
+.section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.api-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.api-item {
+  padding: 24rpx;
+  background: var(--fui-color-surface-muted);
+  border-radius: 16rpx;
+  border: 1rpx solid var(--fui-color-border);
+}
+
+.api-name {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--fui-color-primary);
+  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+  margin-bottom: 8rpx;
+}
+
+.api-type {
+  display: inline-block;
+  padding: 4rpx 12rpx;
+  background: var(--fui-color-primary);
+  color: #ffffff;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  margin-bottom: 12rpx;
+}
+
+.api-desc {
+  display: block;
+  font-size: 24rpx;
+  color: var(--fui-color-text-secondary);
+  line-height: 1.6;
+  margin-top: 8rpx;
+}
+</style>

@@ -7,8 +7,8 @@ page {
   margin: 0 auto;
   /* stylelint-disable-next-line declaration-property-value-no-unknown */
   font-size: 28rpx;
-  color: var(--theme-main-color);
-  background-color: var(--theme-bg-color);
+  color: var(--fui-color-text-primary);
+  background-color: var(--fui-color-bg-primary);
 }
 
 /* #ifdef H5 */
@@ -18,12 +18,12 @@ body {
   width: 100%;
   min-height: 100vh;
   margin: 0;
-  color: var(--theme-main-color);
-  background-color: var(--theme-bg-color-secondary);
+  color: var(--fui-color-text-primary);
+  background-color: var(--fui-color-bg-secondary);
 }
 
 body[data-theme='dark'] {
-  background-color: var(--theme-bg-color);
+  background-color: var(--fui-color-bg-primary);
 }
 
 #app {

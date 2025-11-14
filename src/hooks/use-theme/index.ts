@@ -36,7 +36,7 @@ function applyTheme(mode: ThemeMode) {
     document.body?.setAttribute('data-theme', mode);
   }
 
-  // uni-app 环境：通过设置全局类名
+  // uni-app 环境：设置 page 元素的主题
   // #ifdef H5
   const pages = getCurrentPages();
   if (pages.length > 0) {
@@ -44,6 +44,22 @@ function applyTheme(mode: ThemeMode) {
     if (currentPage?.$vm?.$el) {
       currentPage.$vm.$el.setAttribute('data-theme', mode);
     }
+  }
+  
+  // 设置所有 page 元素的主题类
+  if (typeof document !== 'undefined') {
+    const pageElements = document.querySelectorAll('uni-page-body, page');
+    pageElements.forEach((el) => {
+      el.setAttribute('data-theme', mode);
+      if (mode === 'dark') {
+        el.classList.add('theme-dark');
+        el.classList.remove('theme-light');
+      }
+      else {
+        el.classList.add('theme-light');
+        el.classList.remove('theme-dark');
+      }
+    });
   }
   // #endif
 

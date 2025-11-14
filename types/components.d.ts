@@ -9,13 +9,19 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AgreePrivacy: typeof import('./../src/components/agree-privacy/index.vue')['default']
+    ApiItem: typeof import('./../src/components/ApiItem.vue')['default']
     CommonCard: typeof import('./../src/components/common-card/index.vue')['default']
+    ComponentCard: typeof import('./../src/components/component-card/index.vue')['default']
+    DemoCard: typeof import('./../src/components/DemoCard.vue')['default']
+    DemoHeader: typeof import('./../src/components/demo-header/index.vue')['default']
+    DemoPage: typeof import('./../src/components/DemoPage.vue')['default']
     DemoSection: typeof import('./../src/components/demo-section/index.vue')['default']
     FeatureCard: typeof import('./../src/components/feature-card/index.vue')['default']
     LangSelect: typeof import('./../src/components/lang-select/index.vue')['default']
     PageHero: typeof import('./../src/components/page-hero/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SectionHeader: typeof import('./../src/components/section-header/index.vue')['default']
     ThemePicker: typeof import('./../src/components/theme-picker/index.vue')['default']
   }
 }

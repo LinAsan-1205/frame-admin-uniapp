@@ -1,0 +1,372 @@
+/**
+ * Frame UI SCSS Mixins & Functions
+ * 提供强大的 CSS 变量生成系统和实用工具
+ */
+
+@use 'sass:color';
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:meta';
+@use 'sass:math';
+
+// ============================================
+// 命名空间配置
+// ============================================
+$namespace: 'fui' !default;
+
+// ============================================
+// CSS 变量名生成函数
+// ============================================
+
+/**
+ * 生成 CSS 变量名
+ * @param $name-units - 变量名单元（支持多个参数）
+ * @returns CSS 变量名
+ * @example
+ * to-css-var-name('color', 'primary') => '--fui-color-primary'
+ * to-css-var-name('button', 'bg') => '--fui-button-bg'
+ */
+@function to-css-var-name($name-units...) {
+  $name: '--#{$namespace}';
+  @each $unit in $name-units {
+    @if $unit != '' {
+      $name: $name + '-' + $unit;
+    }
+  }
+  @return $name;
+}
+
+/**
+ * 获取 CSS 变量
+ * @param $name-units - 变量名单元
+ * @returns var() 表达式
+ * @example
+ * get-css-var('color', 'primary') => var(--fui-color-primary)
+ */
+@function get-css-var($name-units...) {
+  @return var(#{to-css-var-name($name-units...)});
+}
+
+/**
+ * 定义 CSS 变量
+ * @param $name-units - 变量名单元
+ * @param $value - 变量值
+ * @example
+ * @include define-css-var(('color', 'primary'), #2563eb);
+ * // 生成: --fui-color-primary: #2563eb;
+ */
+@mixin define-css-var($name-units, $value) {
+  #{to-css-var-name($name-units...)}: #{$value};
+}
+
+// ============================================
+// 颜色工具函数
+// ============================================
+
+/**
+ * 获取基础颜色变量
+ * @param $type - 颜色类型（primary, success, warning, error 等）
+ * @returns CSS 变量
+ */
+@function get-base-color-var($type) {
+  @return get-css-var('color', $type);
+}
+
+/**
+ * 生成颜色亮度层级（用于混合白色）
+ * @param $base-color - 基础颜色
+ * @param $level - 层级（1-10）
+ * @param $mixed-color - 混合颜色（默认白色）
+ * @returns 混合后的颜色
+ * @example
+ * lighten-color(#2563eb, 1) => 浅一级的蓝色
+ * lighten-color(#2563eb, 5) => 浅五级的蓝色
+ */
+@function lighten-color($base-color, $level, $mixed-color: #ffffff) {
+  @return color.mix($mixed-color, $base-color, math.percentage(math.div($level, 10)));
+}
+
+/**
+ * 生成颜色深度层级（用于混合黑色）
+ * @param $base-color - 基础颜色
+ * @param $level - 层级（1-10）
+ * @param $mixed-color - 混合颜色（默认黑色）
+ * @returns 混合后的颜色
+ */
+@function darken-color($base-color, $level, $mixed-color: #000000) {
+  @return color.mix($mixed-color, $base-color, math.percentage(math.div($level, 10)));
+}
+
+/**
+ * 生成颜色透明度层级
+ * @param $base-color - 基础颜色
+ * @param $level - 层级（1-10，数字越大越透明）
+ * @returns 带透明度的颜色
+ */
+@function opacity-color($base-color, $level) {
+  @return rgba($base-color, math.div(10 - $level, 10));
+}
+
+// ============================================
+// 批量定义 CSS 变量
+// ============================================
+
+/**
+ * 批量定义预设值（直接值）
+ * @param $base-name - 基础名称
+ * @param $style-map - 样式映射表
+ * @param $inspect - 是否使用 inspect（默认 false）
+ * @example
+ * @include define-preset-values('button', (
+ *   height: 44px,
+ *   padding: 16px
+ * ));
+ * // 生成:
+ * // --fui-button-height: 44px;
+ * // --fui-button-padding: 16px;
+ */
+@mixin define-preset-values($base-name, $style-map, $inspect: false) {
+  @each $name in map.keys($style-map) {
+    @include define-css-var(
+      ($base-name, $name),
+      if($inspect, #{meta.inspect(map.get($style-map, $name))}, map.get($style-map, $name))
+    );
+  }
+}
+
+/**
+ * 批量定义预设样式（引用其他 CSS 变量）
+ * @param $base-name - 基础名称
+ * @param $style-map - 样式映射表（值为变量名单元数组）
+ * @example
+ * @include define-preset-style('button', (
+ *   color: ('color', 'text-primary'),
+ *   bg: ('color', 'surface')
+ * ));
+ * // 生成:
+ * // --fui-button-color: var(--fui-color-text-primary);
+ * // --fui-button-bg: var(--fui-color-surface);
+ */
+@mixin define-preset-style($base-name, $style-map) {
+  @each $name in map.keys($style-map) {
+    $style-units: map.get($style-map, $name);
+
+    @if list.length($style-units) != 0 {
+      @include define-css-var(($base-name, $name), get-css-var($style-units...));
+    }
+  }
+}
+
+// ============================================
+// 响应式工具
+// ============================================
+
+/**
+ * 媒体查询 - 最小宽度
+ * @param $breakpoint - 断点值
+ */
+@mixin media-min($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+/**
+ * 媒体查询 - 最大宽度
+ * @param $breakpoint - 断点值
+ */
+@mixin media-max($breakpoint) {
+  @media (max-width: $breakpoint - 1px) {
+    @content;
+  }
+}
+
+/**
+ * 媒体查询 - 区间
+ * @param $min - 最小宽度
+ * @param $max - 最大宽度
+ */
+@mixin media-between($min, $max) {
+  @media (min-width: $min) and (max-width: $max - 1px) {
+    @content;
+  }
+}
+
+// ============================================
+// 常用样式 Mixins
+// ============================================
+
+/**
+ * 文本省略
+ * @param $lines - 行数（默认 1，多行省略需要支持）
+ */
+@mixin text-ellipsis($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/**
+ * Flex 居中
+ * @param $direction - flex-direction 值（默认 row）
+ */
+@mixin flex-center($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+  justify-content: center;
+}
+
+/**
+ * 绝对定位居中
+ */
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/**
+ * 清除浮动
+ */
+@mixin clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+/**
+ * 安全区域适配
+ * @param $position - top | bottom | left | right
+ * @param $base-value - 基础值（默认 0）
+ */
+@mixin safe-area($position, $base-value: 0) {
+  @if $position == 'top' {
+    padding-top: calc(#{$base-value} + constant(safe-area-inset-top));
+    padding-top: calc(#{$base-value} + env(safe-area-inset-top));
+  } @else if $position == 'bottom' {
+    padding-bottom: calc(#{$base-value} + constant(safe-area-inset-bottom));
+    padding-bottom: calc(#{$base-value} + env(safe-area-inset-bottom));
+  } @else if $position == 'left' {
+    padding-left: calc(#{$base-value} + constant(safe-area-inset-left));
+    padding-left: calc(#{$base-value} + env(safe-area-inset-left));
+  } @else if $position == 'right' {
+    padding-right: calc(#{$base-value} + constant(safe-area-inset-right));
+    padding-right: calc(#{$base-value} + env(safe-area-inset-right));
+  }
+}
+
+/**
+ * 1px 边框（解决移动端 1px 问题）
+ * @param $color - 边框颜色
+ * @param $position - 位置（top | bottom | left | right | all）
+ * @param $radius - 圆角（仅 all 时有效）
+ */
+@mixin hairline($color, $position: all, $radius: 0) {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+
+    @if $position == all {
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      border: 1px solid $color;
+      border-radius: $radius * 2;
+      transform: scale(0.5);
+      transform-origin: 0 0;
+    } @else if $position == top {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: $color;
+      transform: scaleY(0.5);
+    } @else if $position == bottom {
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: $color;
+      transform: scaleY(0.5);
+    } @else if $position == left {
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: 100%;
+      background-color: $color;
+      transform: scaleX(0.5);
+    } @else if $position == right {
+      top: 0;
+      right: 0;
+      width: 1px;
+      height: 100%;
+      background-color: $color;
+      transform: scaleX(0.5);
+    }
+  }
+}
+
+/**
+ * 毛玻璃效果
+ * @param $blur - 模糊度（默认 10px）
+ * @param $opacity - 不透明度（默认 0.8）
+ */
+@mixin glass-morphism($blur: 10px, $opacity: 0.8) {
+  background: rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+}
+
+/**
+ * 渐变文字
+ * @param $gradient - 渐变值
+ */
+@mixin gradient-text($gradient) {
+  background: $gradient;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/**
+ * 滚动条样式（仅 Webkit 内核）
+ * @param $width - 宽度
+ * @param $track-color - 轨道颜色
+ * @param $thumb-color - 滑块颜色
+ */
+@mixin scrollbar($width: 8px, $track-color: #f1f1f1, $thumb-color: #888) {
+  &::-webkit-scrollbar {
+    width: $width;
+    height: $width;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $track-color;
+    border-radius: $width * 0.5;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $thumb-color;
+    border-radius: $width * 0.5;
+
+    &:hover {
+      background: darken($thumb-color, 10%);
+    }
+  }
+}

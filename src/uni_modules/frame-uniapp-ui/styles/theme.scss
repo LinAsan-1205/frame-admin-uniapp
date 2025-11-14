@@ -1,0 +1,92 @@
+// Frame UI 主题系统 - 统一的主题变量定义
+// 所有变量使用 --fui- 前缀
+
+// ============================================
+// 浅色模式（默认）
+// ============================================
+:root,
+page,
+body {
+  // 主色调
+  --fui-color-primary: #2563eb;
+  --fui-color-success: #10b981;
+  --fui-color-warning: #f59e0b;
+  --fui-color-error: #ef4444;
+
+  // 文字颜色
+  --fui-color-text-primary: #0f172a;
+  --fui-color-text-secondary: #475467;
+  --fui-color-text-tertiary: #6b7280;
+  --fui-color-text-quaternary: #9ca3af;
+  --fui-color-text-disabled: #d1d5db;
+
+  // 背景/表面
+  --fui-color-bg-primary: #f5f6f8;
+  --fui-color-bg-secondary: #e5e7eb;
+  --fui-color-surface: #ffffff;
+  --fui-color-surface-muted: #f8fafc;
+
+  // 边框
+  --fui-color-border: #e2e8f0;
+  --fui-color-border-strong: #cbd5f5;
+
+  // 阴影
+  --fui-shadow-soft: 0 24rpx 60rpx rgba(15, 23, 42, 0.08);
+  --fui-shadow-sm: 0 12rpx 28rpx rgba(15, 23, 42, 0.08);
+
+  // 组件专用 - 默认按钮
+  --fui-button-default-bg: rgba(15, 23, 42, 0.04);
+  --fui-button-default-border: rgba(15, 23, 42, 0.12);
+  --fui-button-default-text: var(--fui-color-text-primary);
+
+  // 组件专用 - 状态颜色文本
+  --fui-color-success-text: #062c16;
+  --fui-color-warning-text: #422006;
+  --fui-color-danger-text: #ffffff;
+}
+
+// ============================================
+// 暗黑模式
+// ============================================
+:root[data-theme='dark'],
+body[data-theme='dark'],
+page[data-theme='dark'],
+uni-page-body[data-theme='dark'],
+.theme-dark {
+  // 主色调
+  --fui-color-primary: #3b82f6;
+  --fui-color-success: #34d399;
+  --fui-color-warning: #fbbf24;
+  --fui-color-error: #f87171;
+
+  // 文字颜色
+  --fui-color-text-primary: #f3f4f6;
+  --fui-color-text-secondary: #d1d5db;
+  --fui-color-text-tertiary: #94a3b8;
+  --fui-color-text-quaternary: #64748b;
+  --fui-color-text-disabled: #475569;
+
+  // 背景/表面
+  --fui-color-bg-primary: #050a16;
+  --fui-color-bg-secondary: #0f172a;
+  --fui-color-surface: #111827;
+  --fui-color-surface-muted: #1f2937;
+
+  // 边框
+  --fui-color-border: rgba(148, 163, 184, 0.4);
+  --fui-color-border-strong: rgba(148, 163, 184, 0.6);
+
+  // 阴影
+  --fui-shadow-soft: 0 24rpx 60rpx rgba(0, 0, 0, 0.65);
+  --fui-shadow-sm: 0 12rpx 28rpx rgba(0, 0, 0, 0.4);
+
+  // 组件专用 - 默认按钮
+  --fui-button-default-bg: rgba(148, 163, 184, 0.08);
+  --fui-button-default-border: rgba(148, 163, 184, 0.2);
+  --fui-button-default-text: var(--fui-color-text-primary);
+
+  // 组件专用 - 状态颜色文本
+  --fui-color-success-text: #d1fae5;
+  --fui-color-warning-text: #fef3c7;
+  --fui-color-danger-text: #ffffff;
+}

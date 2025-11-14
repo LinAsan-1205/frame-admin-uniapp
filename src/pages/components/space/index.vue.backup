@@ -1,0 +1,224 @@
+<template>
+  <view class="component-page">
+    <view class="page-header">
+      <text class="page-title">Space 间距</text>
+      <text class="page-desc">设置组件之间的间距</text>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">水平间距</text>
+      </view>
+      <view class="section-content">
+        <frame-space direction="horizontal" :size="16">
+          <frame-button size="small">按钮1</frame-button>
+          <frame-button size="small">按钮2</frame-button>
+          <frame-button size="small">按钮3</frame-button>
+        </frame-space>
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">垂直间距</text>
+      </view>
+      <view class="section-content">
+        <frame-space direction="vertical" :size="16">
+          <view class="space-item">项目 1</view>
+          <view class="space-item">项目 2</view>
+          <view class="space-item">项目 3</view>
+        </frame-space>
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">自动换行</text>
+      </view>
+      <view class="section-content">
+        <frame-space :wrap="true" :size="12">
+          <frame-tag type="primary">标签1</frame-tag>
+          <frame-tag type="success">标签2</frame-tag>
+          <frame-tag type="warning">标签3</frame-tag>
+          <frame-tag type="danger">标签4</frame-tag>
+          <frame-tag type="default">标签5</frame-tag>
+          <frame-tag type="primary">标签6</frame-tag>
+          <frame-tag type="success">标签7</frame-tag>
+          <frame-tag type="warning">标签8</frame-tag>
+        </frame-space>
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">不同尺寸</text>
+      </view>
+      <view class="section-content">
+        <text class="demo-label">小间距(8)：</text>
+        <frame-space :size="8">
+          <frame-button size="small">按钮</frame-button>
+          <frame-button size="small">按钮</frame-button>
+          <frame-button size="small">按钮</frame-button>
+        </frame-space>
+
+        <text class="demo-label">中间距(16)：</text>
+        <frame-space :size="16">
+          <frame-button size="small">按钮</frame-button>
+          <frame-button size="small">按钮</frame-button>
+          <frame-button size="small">按钮</frame-button>
+        </frame-space>
+
+        <text class="demo-label">大间距(32)：</text>
+        <frame-space :size="32">
+          <frame-button size="small">按钮</frame-button>
+          <frame-button size="small">按钮</frame-button>
+          <frame-button size="small">按钮</frame-button>
+        </frame-space>
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">API 属性</text>
+      </view>
+      <view class="api-list">
+        <view class="api-item">
+          <text class="api-name">direction</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">间距方向：horizontal | vertical</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">size</text>
+          <text class="api-type">number</text>
+          <text class="api-desc">间距大小(rpx)</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">wrap</text>
+          <text class="api-type">boolean</text>
+          <text class="api-desc">是否自动换行</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">align</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">对齐方式：start | center | end</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script setup lang="ts">
+</script>
+
+<style scoped lang="scss">
+.component-page {
+  min-height: 100vh;
+  background: var(--fui-color-bg-primary);
+  padding: 32rpx;
+  padding-bottom: 100rpx;
+}
+
+.page-header {
+  padding: 40rpx 0;
+  margin-bottom: 32rpx;
+}
+
+.page-title {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: var(--fui-color-text-primary);
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.page-desc {
+  font-size: 28rpx;
+  color: var(--fui-color-text-secondary);
+  display: block;
+  line-height: 1.6;
+}
+
+.demo-section {
+  background: var(--fui-color-surface);
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.section-header {
+  margin-bottom: 24rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 2rpx solid var(--fui-color-border);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--fui-color-text-primary);
+  display: block;
+}
+
+.section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.demo-label {
+  font-size: 26rpx;
+  font-weight: 500;
+  color: var(--fui-color-text-secondary);
+  display: block;
+  margin-top: 8rpx;
+}
+
+.space-item {
+  padding: 24rpx;
+  background: linear-gradient(135deg, var(--fui-color-primary) 0%, var(--fui-color-success) 100%);
+  color: #ffffff;
+  border-radius: 12rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+
+.api-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.api-item {
+  padding: 24rpx;
+  background: var(--fui-color-surface-muted);
+  border-radius: 16rpx;
+  border: 1rpx solid var(--fui-color-border);
+}
+
+.api-name {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--fui-color-primary);
+  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+  margin-bottom: 8rpx;
+}
+
+.api-type {
+  display: inline-block;
+  padding: 4rpx 12rpx;
+  background: var(--fui-color-primary);
+  color: #ffffff;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  margin-bottom: 12rpx;
+}
+
+.api-desc {
+  display: block;
+  font-size: 24rpx;
+  color: var(--fui-color-text-secondary);
+  line-height: 1.6;
+  margin-top: 8rpx;
+}
+</style>
