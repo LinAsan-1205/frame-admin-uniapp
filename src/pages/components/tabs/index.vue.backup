@@ -1,0 +1,255 @@
+<template>
+  <view class="component-page">
+    <view class="page-header">
+      <text class="page-title">Tabs 标签页</text>
+      <text class="page-desc">选项卡切换组件</text>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">基础用法</text>
+      </view>
+      <view class="section-content">
+        <frame-tabs
+          v-model="activeTab1"
+          :items="tabItems1"
+        />
+        <view class="tab-content">
+          当前选中：{{ activeTab1 }}
+        </view>
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">带图标</text>
+      </view>
+      <view class="section-content">
+        <frame-tabs
+          v-model="activeTab2"
+          :items="tabItems2"
+        />
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">带徽标</text>
+      </view>
+      <view class="section-content">
+        <frame-tabs
+          v-model="activeTab3"
+          :items="tabItems3"
+        />
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">可滚动</text>
+      </view>
+      <view class="section-content">
+        <frame-tabs
+          v-model="activeTab4"
+          :items="tabItems4"
+          :scrollable="true"
+        />
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">自定义颜色</text>
+      </view>
+      <view class="section-content">
+        <frame-tabs
+          v-model="activeTab5"
+          :items="tabItems1"
+          active-color="#10b981"
+          line-color="#10b981"
+        />
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">API 属性</text>
+      </view>
+      <view class="api-list">
+        <view class="api-item">
+          <text class="api-name">items</text>
+          <text class="api-type">TabItem[]</text>
+          <text class="api-desc">标签列表数据</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">v-model</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">当前激活的标签值</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">scrollable</text>
+          <text class="api-type">boolean</text>
+          <text class="api-desc">是否可滚动</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">active-color</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">激活标签的颜色</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">line-color</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">底部指示线颜色</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import type { TabItem } from '@/uni_modules/frame-uniapp-ui/components/frame-tabs/types'
+
+const activeTab1 = ref('tab1')
+const activeTab2 = ref('home')
+const activeTab3 = ref('message')
+const activeTab4 = ref('tab1')
+const activeTab5 = ref('tab1')
+
+const tabItems1: TabItem[] = [
+  { value: 'tab1', label: '标签一' },
+  { value: 'tab2', label: '标签二' },
+  { value: 'tab3', label: '标签三' },
+  { value: 'tab4', label: '标签四' },
+]
+
+const tabItems2: TabItem[] = [
+  { value: 'home', label: '首页', icon: 'home' },
+  { value: 'category', label: '分类', icon: 'menu' },
+  { value: 'cart', label: '购物车', icon: 'cart' },
+  { value: 'user', label: '我的', icon: 'user' },
+]
+
+const tabItems3: TabItem[] = [
+  { value: 'message', label: '消息', badge: 99 },
+  { value: 'notice', label: '通知', badge: 5 },
+  { value: 'todo', label: '待办', dot: true },
+  { value: 'other', label: '其他' },
+]
+
+const tabItems4: TabItem[] = [
+  { value: 'tab1', label: '标签一' },
+  { value: 'tab2', label: '标签二' },
+  { value: 'tab3', label: '标签三' },
+  { value: 'tab4', label: '标签四' },
+  { value: 'tab5', label: '标签五' },
+  { value: 'tab6', label: '标签六' },
+  { value: 'tab7', label: '标签七' },
+  { value: 'tab8', label: '标签八' },
+]
+</script>
+
+<style scoped lang="scss">
+.component-page {
+  min-height: 100vh;
+  background: var(--fui-color-bg-primary);
+  padding: 32rpx;
+  padding-bottom: 100rpx;
+}
+
+.page-header {
+  padding: 40rpx 0;
+  margin-bottom: 32rpx;
+}
+
+.page-title {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: var(--fui-color-text-primary);
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.page-desc {
+  font-size: 28rpx;
+  color: var(--fui-color-text-secondary);
+  display: block;
+  line-height: 1.6;
+}
+
+.demo-section {
+  background: var(--fui-color-surface);
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.section-header {
+  margin-bottom: 24rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 2rpx solid var(--fui-color-border);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--fui-color-text-primary);
+  display: block;
+}
+
+.section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.tab-content {
+  padding: 32rpx;
+  text-align: center;
+  background: var(--fui-color-surface-muted);
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: var(--fui-color-text-primary);
+}
+
+.api-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.api-item {
+  padding: 24rpx;
+  background: var(--fui-color-surface-muted);
+  border-radius: 16rpx;
+  border: 1rpx solid var(--fui-color-border);
+}
+
+.api-name {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--fui-color-primary);
+  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+  margin-bottom: 8rpx;
+}
+
+.api-type {
+  display: inline-block;
+  padding: 4rpx 12rpx;
+  background: var(--fui-color-primary);
+  color: #ffffff;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  margin-bottom: 12rpx;
+}
+
+.api-desc {
+  display: block;
+  font-size: 24rpx;
+  color: var(--fui-color-text-secondary);
+  line-height: 1.6;
+  margin-top: 8rpx;
+}
+</style>

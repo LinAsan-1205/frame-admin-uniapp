@@ -1,0 +1,195 @@
+<template>
+  <view class="component-page">
+    <view class="page-header">
+      <text class="page-title">Divider 分割线</text>
+      <text class="page-desc">用于分隔内容的分割线</text>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">基础用法</text>
+      </view>
+      <view class="section-content">
+        <text class="demo-label">基础分割线：</text>
+        <frame-divider />
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">带文字</text>
+      </view>
+      <view class="section-content">
+        <text class="demo-label">默认居中：</text>
+        <frame-divider>默认文字</frame-divider>
+        
+        <text class="demo-label">左侧文字：</text>
+        <frame-divider content-position="left">左侧文字</frame-divider>
+        
+        <text class="demo-label">右侧文字：</text>
+        <frame-divider content-position="right">右侧文字</frame-divider>
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">虚线样式</text>
+      </view>
+      <view class="section-content">
+        <text class="demo-label">虚线分割：</text>
+        <frame-divider :dashed="true">虚线分割</frame-divider>
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">自定义颜色</text>
+      </view>
+      <view class="section-content">
+        <text class="demo-label">蓝色分割线：</text>
+        <frame-divider color="#2563eb">蓝色分割线</frame-divider>
+        
+        <text class="demo-label">绿色分割线：</text>
+        <frame-divider color="#10b981">绿色分割线</frame-divider>
+        
+        <text class="demo-label">红色分割线：</text>
+        <frame-divider color="#ef4444">红色分割线</frame-divider>
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">API 属性</text>
+      </view>
+      <view class="api-list">
+        <view class="api-item">
+          <text class="api-name">content-position</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">内容位置：left | center | right</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">dashed</text>
+          <text class="api-type">boolean</text>
+          <text class="api-desc">是否虚线</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">color</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">分割线颜色</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">margin</text>
+          <text class="api-type">number</text>
+          <text class="api-desc">上下边距(rpx)</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script setup lang="ts">
+</script>
+
+<style scoped lang="scss">
+.component-page {
+  min-height: 100vh;
+  background: var(--fui-color-bg-primary);
+  padding: 32rpx;
+  padding-bottom: 100rpx;
+}
+
+.page-header {
+  padding: 40rpx 0;
+  margin-bottom: 32rpx;
+}
+
+.page-title {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: var(--fui-color-text-primary);
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.page-desc {
+  font-size: 28rpx;
+  color: var(--fui-color-text-secondary);
+  display: block;
+  line-height: 1.6;
+}
+
+.demo-section {
+  background: var(--fui-color-surface);
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.section-header {
+  margin-bottom: 24rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 2rpx solid var(--fui-color-border);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--fui-color-text-primary);
+  display: block;
+}
+
+.section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.demo-label {
+  font-size: 26rpx;
+  font-weight: 500;
+  color: var(--fui-color-text-secondary);
+  display: block;
+  margin-top: 8rpx;
+}
+
+.api-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.api-item {
+  padding: 24rpx;
+  background: var(--fui-color-surface-muted);
+  border-radius: 16rpx;
+  border: 1rpx solid var(--fui-color-border);
+}
+
+.api-name {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--fui-color-primary);
+  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+  margin-bottom: 8rpx;
+}
+
+.api-type {
+  display: inline-block;
+  padding: 4rpx 12rpx;
+  background: var(--fui-color-primary);
+  color: #ffffff;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  margin-bottom: 12rpx;
+}
+
+.api-desc {
+  display: block;
+  font-size: 24rpx;
+  color: var(--fui-color-text-secondary);
+  line-height: 1.6;
+  margin-top: 8rpx;
+}
+</style>

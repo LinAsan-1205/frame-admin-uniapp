@@ -1,0 +1,214 @@
+<template>
+  <view class="component-page">
+    <view class="page-header">
+      <text class="page-title">Icon 图标</text>
+      <text class="page-desc">提供丰富的图标资源，支持自定义颜色和尺寸</text>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">基础用法</text>
+      </view>
+      <view class="section-content">
+        <view class="icon-row">
+          <view class="icon-item">
+            <frame-icon name="search" size="lg" />
+            <text class="icon-label">默认</text>
+          </view>
+          <view class="icon-item">
+            <frame-icon name="home" size="lg" color="#2563eb" />
+            <text class="icon-label">蓝色</text>
+          </view>
+          <view class="icon-item">
+            <frame-icon name="star" size="lg" color="#10b981" :spin="true" />
+            <text class="icon-label">旋转</text>
+          </view>
+          <view class="icon-item">
+            <frame-icon name="user" size="xl" color="#f59e0b" :bold="true" />
+            <text class="icon-label">加粗</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">不同尺寸</text>
+      </view>
+      <view class="section-content">
+        <view class="icon-row">
+          <view class="icon-item">
+            <frame-icon name="heart" size="sm" color="#ef4444" />
+            <text class="icon-label">小</text>
+          </view>
+          <view class="icon-item">
+            <frame-icon name="heart" size="md" color="#ef4444" />
+            <text class="icon-label">中</text>
+          </view>
+          <view class="icon-item">
+            <frame-icon name="heart" size="lg" color="#ef4444" />
+            <text class="icon-label">大</text>
+          </view>
+          <view class="icon-item">
+            <frame-icon name="heart" size="xl" color="#ef4444" />
+            <text class="icon-label">超大</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="demo-section">
+      <view class="section-header">
+        <text class="section-title">API 属性</text>
+      </view>
+      <view class="api-list">
+        <view class="api-item">
+          <text class="api-name">name</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">图标名称</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">size</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">图标大小：sm | md | lg | xl</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">color</text>
+          <text class="api-type">string</text>
+          <text class="api-desc">图标颜色</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">spin</text>
+          <text class="api-type">boolean</text>
+          <text class="api-desc">是否旋转</text>
+        </view>
+        <view class="api-item">
+          <text class="api-name">bold</text>
+          <text class="api-type">boolean</text>
+          <text class="api-desc">是否加粗</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script setup lang="ts">
+</script>
+
+<style scoped lang="scss">
+.component-page {
+  min-height: 100vh;
+  background: var(--fui-color-bg-primary);
+  padding: 32rpx;
+  padding-bottom: 100rpx;
+}
+
+.page-header {
+  padding: 40rpx 0;
+  margin-bottom: 32rpx;
+}
+
+.page-title {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: var(--fui-color-text-primary);
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.page-desc {
+  font-size: 28rpx;
+  color: var(--fui-color-text-secondary);
+  display: block;
+  line-height: 1.6;
+}
+
+.demo-section {
+  background: var(--fui-color-surface);
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.section-header {
+  margin-bottom: 24rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 2rpx solid var(--fui-color-border);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--fui-color-text-primary);
+  display: block;
+}
+
+.section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.icon-row {
+  display: flex;
+  gap: 32rpx;
+  flex-wrap: wrap;
+}
+
+.icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+  padding: 20rpx;
+  background: var(--fui-color-surface-muted);
+  border-radius: 16rpx;
+  min-width: 120rpx;
+}
+
+.icon-label {
+  font-size: 24rpx;
+  color: var(--fui-color-text-secondary);
+}
+
+.api-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.api-item {
+  padding: 24rpx;
+  background: var(--fui-color-surface-muted);
+  border-radius: 16rpx;
+  border: 1rpx solid var(--fui-color-border);
+}
+
+.api-name {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--fui-color-primary);
+  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+  margin-bottom: 8rpx;
+}
+
+.api-type {
+  display: inline-block;
+  padding: 4rpx 12rpx;
+  background: var(--fui-color-primary);
+  color: #ffffff;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  margin-bottom: 12rpx;
+}
+
+.api-desc {
+  display: block;
+  font-size: 24rpx;
+  color: var(--fui-color-text-secondary);
+  line-height: 1.6;
+  margin-top: 8rpx;
+}
+</style>

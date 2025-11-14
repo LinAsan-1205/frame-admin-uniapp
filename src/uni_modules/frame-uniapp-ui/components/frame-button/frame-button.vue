@@ -1,7 +1,6 @@
 <template>
   <button
-    class="fui-button"
-    :class="[classes, customClass]"
+    :class="buttonClasses"
     :style="buttonStyle"
     :disabled="isDisabled"
     :id="buttonId"
@@ -30,27 +29,30 @@
     @chooseavatar="handleChooseAvatar"
     @agreeprivacyauthorization="handleAgreePrivacyAuthorization"
   >
-    <view v-if="loading" class="fui-button__loading">
-      <view class="fui-button__spinner" :style="spinnerStyle" />
+    <view v-if="loading" :class="n('loading')">
+      <view :class="n('spinner')" :style="spinnerStyle" />
     </view>
-    <view v-else-if="icon || hasIconSlot" class="fui-button__icon">
+    <view v-else-if="icon || hasIconSlot" :class="n('icon')">
       <text v-if="icon" :class="[classPrefix, icon]" />
       <slot v-else name="icon" />
     </view>
-    <view class="fui-button__content">
+    <view :class="n('content')">
       <slot />
     </view>
   </button>
 </template>
 
 <script setup lang="ts">
-import { computed, useSlots } from 'vue';
-
+import { computed, useSlots } from 'vue'
+import { createNamespace } from '../../utils'
 import type {
   FrameButtonClickEvent,
   FrameButtonEmits,
   FrameButtonProps,
-} from './types';
+} from './types'
+
+// 使用 BEM 命名工具
+const { n, classes: bemClasses } = createNamespace('button')
 
 const props = withDefaults(defineProps<FrameButtonProps>(), {
   variant: 'base',
@@ -70,39 +72,42 @@ const props = withDefaults(defineProps<FrameButtonProps>(), {
   hoverStopPropagation: false,
   lang: 'en',
   showMessageCard: false,
-});
+})
 
-const emit = defineEmits<FrameButtonEmits>();
+const emit = defineEmits<FrameButtonEmits>()
 
-const slots = useSlots();
-const hasIconSlot = computed(() => Boolean(slots.icon));
-const isDisabled = computed(() => props.disabled || props.loading);
+const slots = useSlots()
+const hasIconSlot = computed(() => Boolean(slots.icon))
+const isDisabled = computed(() => props.disabled || props.loading)
 
 // 处理 round 属性，映射到 shape
 const computedShape = computed(() => {
-  if (props.round === false) {
-    return 'square';
-  }
-  return props.shape;
-});
+  if (props.round === false)
+    return 'square'
 
-const classes = computed(() => [
-  `fui-button--variant-${props.variant}`,
-  `fui-button--theme-${props.theme}`,
-  `fui-button--size-${props.size}`,
-  `fui-button--shape-${computedShape.value}`,
-  {
-    'fui-button--block': props.block,
-    'fui-button--ghost': props.ghost,
-    'fui-button--hairline': props.hairline,
-    'is-loading': props.loading,
-    'is-disabled': isDisabled.value,
-  },
-]);
+  return props.shape
+})
+
+// 使用 BEM 工具生成类名
+const buttonClasses = computed(() => {
+  return bemClasses(
+    n(),
+    n(`--variant-${props.variant}`),
+    n(`--theme-${props.theme}`),
+    n(`--size-${props.size}`),
+    n(`--shape-${computedShape.value}`),
+    [props.block, n('--block')],
+    [props.ghost, n('--ghost')],
+    [props.hairline, n('--hairline')],
+    [props.loading, 'is-loading'],
+    [isDisabled.value, 'is-disabled'],
+    props.customClass,
+  )
+})
 
 const computedHoverClass = computed(() => {
-  return isDisabled.value ? 'none' : props.hoverClass;
-});
+  return isDisabled.value ? 'none' : props.hoverClass
+})
 
 const spinnerStyle = computed(() => {
   if (props.loadingColor) {
@@ -111,82 +116,81 @@ const spinnerStyle = computed(() => {
       borderRightColor: `${props.loadingColor}40`,
       borderBottomColor: `${props.loadingColor}40`,
       borderLeftColor: `${props.loadingColor}40`,
-    };
+    }
   }
-  return {};
-});
+  return {}
+})
 
 const buttonStyle = computed(() => {
-  const style: Record<string, any> = {};
+  const style: Record<string, any> = {}
 
   // 自定义高度
   if (props.customHeight) {
-    style.minHeight = props.customHeight;
-    style.height = props.customHeight;
+    style.minHeight = props.customHeight
+    style.height = props.customHeight
   }
 
   // 自定义字体大小
-  if (props.customFontSize) {
-    style.fontSize = props.customFontSize;
-  }
+  if (props.customFontSize)
+    style.fontSize = props.customFontSize
 
   // 合并自定义样式
   if (props.customStyle) {
-    if (typeof props.customStyle === 'string') {
-      return props.customStyle;
-    }
-    Object.assign(style, props.customStyle);
+    if (typeof props.customStyle === 'string')
+      return props.customStyle
+
+    Object.assign(style, props.customStyle)
   }
 
-  return style;
-});
+  return style
+})
 
 function handleClick(event: FrameButtonClickEvent) {
-  if (isDisabled.value) {
-    return;
-  }
-  emit('click', event);
+  if (isDisabled.value)
+    return
+
+  emit('click', event)
 }
 
 function handleGetUserInfo(event: any) {
-  emit('getuserinfo', event.detail);
+  emit('getuserinfo', event.detail)
 }
 
 function handleContact(event: any) {
-  emit('contact', event.detail);
+  emit('contact', event.detail)
 }
 
 function handleGetPhoneNumber(event: any) {
-  emit('getphonenumber', event.detail);
+  emit('getphonenumber', event.detail)
 }
 
 function handleGetRealtimePhoneNumber(event: any) {
-  emit('getrealtimephonenumber', event.detail);
+  emit('getrealtimephonenumber', event.detail)
 }
 
 function handleOpenSetting(event: any) {
-  emit('opensetting', event.detail);
+  emit('opensetting', event.detail)
 }
 
 function handleLaunchApp(event: any) {
-  emit('launchapp', event.detail);
+  emit('launchapp', event.detail)
 }
 
 function handleError(event: any) {
-  emit('error', event.detail);
+  emit('error', event.detail)
 }
 
 function handleChooseAvatar(event: any) {
-  emit('chooseavatar', event.detail);
+  emit('chooseavatar', event.detail)
 }
 
 function handleAgreePrivacyAuthorization(event: any) {
-  emit('agreeprivacyauthorization', event.detail);
+  emit('agreeprivacyauthorization', event.detail)
 }
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/variables.scss';
+@import '../../styles/index.scss';
 
 /* 重置 button 默认样式 */
 .fui-button {
