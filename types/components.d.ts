@@ -16,6 +16,8 @@ declare module 'vue' {
     DemoHeader: typeof import('./../src/components/demo-header/index.vue')['default']
     DemoPage: typeof import('./../src/components/DemoPage.vue')['default']
     DemoSection: typeof import('./../src/components/demo-section/index.vue')['default']
+    DemoSectionTabs: typeof import('./../src/components/DemoSectionTabs.vue')['default']
+    DemoTabPane: typeof import('./../src/components/DemoTabPane.vue')['default']
     FeatureCard: typeof import('./../src/components/feature-card/index.vue')['default']
     LangSelect: typeof import('./../src/components/lang-select/index.vue')['default']
     PageHero: typeof import('./../src/components/page-hero/index.vue')['default']

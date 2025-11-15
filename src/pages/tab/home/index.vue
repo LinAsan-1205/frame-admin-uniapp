@@ -164,6 +164,14 @@ const allComponents = computed<ComponentCardItem[]>(() => [
     icon: 'i-mdi-bullhorn-outline',
   },
   {
+    key: 'segmented',
+    name: 'Segmented 分段器',
+    desc: '用于复杂区域进行分段和隐藏',
+    path: '/pages/components/segmented/index',
+    category: 'basic',
+    icon: 'i-mdi-view-split-horizontal',
+  },
+  {
     key: 'loading',
     name: 'Loading 加载',
     desc: '加载提示动画',

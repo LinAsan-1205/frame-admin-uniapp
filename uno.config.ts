@@ -25,6 +25,29 @@ export default defineConfig({
       },
     }),
   ],
+  safelist: [
+    // Message 组件图标
+    'i-mdi-check-circle',
+    'i-mdi-close-circle',
+    'i-mdi-alert-circle',
+    'i-mdi-information',
+    'i-mdi-close',
+    'i-mdi-heart',
+    // NavBar 组件图标
+    'i-mdi-menu',
+    'i-mdi-star',
+    'i-mdi-magnify',
+    'i-mdi-dots-vertical',
+    // 首页图标
+    'i-mdi-view-split-horizontal',
+    // 分段器图标
+    'i-mdi-home',
+    'i-mdi-account',
+    'i-mdi-cog',
+    'i-mdi-chart-line',
+    'i-mdi-database',
+    'i-mdi-file-document',
+  ],
   /**
    * 自定义快捷语句
    * @see https://github.com/unocss/unocss#shortcuts

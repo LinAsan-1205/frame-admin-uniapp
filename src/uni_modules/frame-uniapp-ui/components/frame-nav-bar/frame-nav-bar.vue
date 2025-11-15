@@ -12,7 +12,7 @@
       <!-- 导航栏内容 -->
       <view :class="n('content')" :style="contentStyles">
         <!-- 左侧 -->
-        <view v-if="showLeft || $slots.left" :class="n('left')" @click="handleLeftClick">
+        <view v-if="showLeft || $slots.left" :class="n('left')" :style="leftStyles" @click="handleLeftClick">
           <slot name="left">
             <!-- 返回图标或首页图标 -->
             <frame-icon
@@ -47,7 +47,7 @@
         </view>
 
         <!-- 右侧 -->
-        <view v-if="showRight || $slots.right" :class="n('right')" @click="handleRightClick">
+        <view v-if="showRight || $slots.right" :class="n('right')" :style="rightStyles" @click="handleRightClick">
           <slot name="right">
             <!-- 右侧文字 -->
             <text v-if="rightText" :class="n('right-text')" :style="{ color: rightIconColor || color }">
@@ -137,6 +137,24 @@ const contentStyles = computed(() => {
   return {
     height: addUnit(props.height),
   }
+})
+
+// 左侧样式
+const leftStyles = computed(() => {
+  const styles: Record<string, any> = {}
+  if (props.leftWidth) {
+    styles.minWidth = addUnit(props.leftWidth)
+  }
+  return styles
+})
+
+// 右侧样式
+const rightStyles = computed(() => {
+  const styles: Record<string, any> = {}
+  if (props.rightWidth) {
+    styles.minWidth = addUnit(props.rightWidth)
+  }
+  return styles
 })
 
 // 标题类名
@@ -283,10 +301,12 @@ export default {
   font-size: 32rpx;
   font-weight: 600;
   line-height: 1;
-  @include text-ellipsis;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 
   &--center {
-    text-align: center;
+    justify-content: center;
   }
 }
 

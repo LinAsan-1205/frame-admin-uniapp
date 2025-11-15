@@ -162,6 +162,14 @@
             "navigationBarBackgroundColor": "#ffffff",
             "navigationBarTextStyle": "black"
           }
+        },
+        {
+          "path": "segmented/index",
+          "style": {
+            "navigationBarTitleText": "Segmented 分段器",
+            "navigationBarBackgroundColor": "#ffffff",
+            "navigationBarTextStyle": "black"
+          }
         }
       ]
     }

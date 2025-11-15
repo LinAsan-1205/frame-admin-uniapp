@@ -55,6 +55,12 @@ export interface FrameMessageProps {
   icon?: string
 
   /**
+   * 是否显示关闭按钮
+   * @default false
+   */
+  closable?: boolean
+
+  /**
    * z-index 层级
    * @default 2000
    */
@@ -115,6 +121,10 @@ export const frameMessageProps = {
     type: String,
     default: '',
   },
+  closable: {
+    type: Boolean,
+    default: false,
+  },
   zIndex: {
     type: Number,
     default: 2000,
@@ -130,11 +140,11 @@ export const frameMessageProps = {
 }
 
 /**
- * 类型图标映射
+ * 类型图标映射 (使用 MDI 图标)
  */
 export const messageIconMap: Record<MessageType, string> = {
-  success: 'success',
-  error: 'error',
-  warning: 'warning',
-  info: 'info',
+  success: 'check-circle',
+  error: 'close-circle',
+  warning: 'alert-circle',
+  info: 'information',
 }

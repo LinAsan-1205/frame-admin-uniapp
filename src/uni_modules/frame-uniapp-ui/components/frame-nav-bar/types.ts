@@ -80,6 +80,11 @@ export interface FrameNavBarProps {
   leftIconColor?: string
 
   /**
+   * 左侧最小宽度
+   */
+  leftWidth?: string | number
+
+  /**
    * 是否显示首页图标（当在首页时）
    * @default true
    */
@@ -123,6 +128,11 @@ export interface FrameNavBarProps {
    * 右侧图标颜色
    */
   rightIconColor?: string
+
+  /**
+   * 右侧最小宽度
+   */
+  rightWidth?: string | number
 
   /**
    * 是否开启顶部安全区适配
@@ -225,6 +235,10 @@ export const frameNavBarProps = {
     type: String,
     default: '',
   },
+  leftWidth: {
+    type: [String, Number],
+    default: '',
+  },
   showHomeIcon: {
     type: Boolean,
     default: true,
@@ -255,6 +269,10 @@ export const frameNavBarProps = {
   },
   rightIconColor: {
     type: String,
+    default: '',
+  },
+  rightWidth: {
+    type: [String, Number],
     default: '',
   },
   safeAreaInsetTop: {

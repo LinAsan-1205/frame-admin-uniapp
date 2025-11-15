@@ -1,26 +1,53 @@
-﻿<template>
+<template>
   <DemoPage title="Message 消息提示" description="轻量级的信息反馈组件">
     <DemoSection title="消息类型">
       <frame-space :size="12" :wrap="true">
-        <frame-button size="small" theme="success" @click="showMessage('success')">成功提示</frame-button>
-        <frame-button size="small" theme="danger" @click="showMessage('error')">错误提示</frame-button>
-        <frame-button size="small" theme="warning" @click="showMessage('warning')">警告提示</frame-button>
-        <frame-button size="small" theme="primary" @click="showMessage('info')">信息提示</frame-button>
+        <frame-button size="small" theme="success" @click="showMessage('success')">
+          成功提示
+        </frame-button>
+        <frame-button size="small" theme="danger" @click="showMessage('error')">
+          错误提示
+        </frame-button>
+        <frame-button size="small" theme="warning" @click="showMessage('warning')">
+          警告提示
+        </frame-button>
+        <frame-button size="small" theme="primary" @click="showMessage('info')">
+          信息提示
+        </frame-button>
       </frame-space>
     </DemoSection>
 
     <DemoSection title="显示位置">
       <frame-space :size="12" :wrap="true">
-        <frame-button size="small" @click="showMessagePosition('top')">顶部显示</frame-button>
-        <frame-button size="small" @click="showMessagePosition('center')">居中显示</frame-button>
-        <frame-button size="small" @click="showMessagePosition('bottom')">底部显示</frame-button>
+        <frame-button size="small" @click="showMessagePosition('top')">
+          顶部显示
+        </frame-button>
+        <frame-button size="small" @click="showMessagePosition('center')">
+          居中显示
+        </frame-button>
+        <frame-button size="small" @click="showMessagePosition('bottom')">
+          底部显示
+        </frame-button>
       </frame-space>
     </DemoSection>
 
     <DemoSection title="自定义配置">
       <frame-space :size="12" :wrap="true">
-        <frame-button size="small" @click="showLongMessage">长时间显示(5s)</frame-button>
-        <frame-button size="small" @click="showNoIconMessage">无图标提示</frame-button>
+        <frame-button size="small" @click="showLongMessage">
+          长时间显示(5s)
+        </frame-button>
+        <frame-button size="small" @click="showNoIconMessage">
+          无图标提示
+        </frame-button>
+        <frame-button size="small" @click="showClosableMessage">
+          手动关闭
+        </frame-button>
+        <frame-button size="small" @click="showCustomContent">
+          自定义内容
+        </frame-button>
+        <frame-button size="small" @click="showCustomIcon">
+          自定义图标
+        </frame-button>
       </frame-space>
     </DemoSection>
 
@@ -30,6 +57,12 @@
       <ApiItem name="position" type="string" description="显示位置：top | center | bottom" />
       <ApiItem name="duration" type="number" description="显示时长(ms)，默认3000" />
       <ApiItem name="show-icon" type="boolean" description="是否显示图标" />
+      <ApiItem name="closable" type="boolean" description="是否显示关闭按钮" />
+    </DemoSection>
+
+    <DemoSection title="插槽" :grid="true">
+      <ApiItem name="default" type="slot" description="自定义消息内容，会覆盖 message 属性" />
+      <ApiItem name="icon" type="slot" description="自定义图标内容" />
     </DemoSection>
 
     <frame-message
@@ -39,23 +72,35 @@
       :position="messagePosition"
       :duration="messageDuration"
       :show-icon="messageShowIcon"
-      @close="messageShow = false"
-    />
+      :closable="messageClosable"
+      @close="handleMessageClose"
+    >
+      <template v-if="useCustomIcon" #icon>
+        <view class="i-mdi-heart" style="color: #ef4444; font-size: 48rpx; width: 48rpx; height: 48rpx;" />
+      </template>
+      <view v-if="useCustomContent" style="display: flex; align-items: center; gap: 8rpx;">
+        <text style="font-weight: 600;">自定义内容：</text>
+        <text>支持任意内容</text>
+      </view>
+    </frame-message>
   </DemoPage>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
+import ApiItem from '@/components/ApiItem.vue';
 import DemoPage from '@/components/DemoPage.vue';
 import DemoSection from '@/components/DemoSection.vue';
-import ApiItem from '@/components/ApiItem.vue';
 
-const messageShow = ref(false)
-const messageType = ref<'success' | 'error' | 'warning' | 'info'>('success')
-const messageText = ref('')
-const messagePosition = ref<'top' | 'center' | 'bottom'>('top')
-const messageDuration = ref(3000)
-const messageShowIcon = ref(true)
+const messageShow = ref(false);
+const messageType = ref<'success' | 'error' | 'warning' | 'info'>('success');
+const messageText = ref('');
+const messagePosition = ref<'top' | 'center' | 'bottom'>('top');
+const messageDuration = ref(3000);
+const messageShowIcon = ref(true);
+const messageClosable = ref(false);
+const useCustomContent = ref(false);
+const useCustomIcon = ref(false);
 
 function showMessage(type: 'success' | 'error' | 'warning' | 'info') {
   const messages = {
@@ -63,39 +108,79 @@ function showMessage(type: 'success' | 'error' | 'warning' | 'info') {
     error: '操作失败，请重试',
     warning: '请注意检查信息',
     info: '这是一条提示信息',
-  }
-  messageType.value = type
-  messageText.value = messages[type]
-  messagePosition.value = 'top'
-  messageDuration.value = 3000
-  messageShowIcon.value = true
-  messageShow.value = true
+  };
+  messageType.value = type;
+  messageText.value = messages[type];
+  messagePosition.value = 'top';
+  messageDuration.value = 3000;
+  messageShowIcon.value = true;
+  messageShow.value = true;
 }
 
 function showMessagePosition(position: 'top' | 'center' | 'bottom') {
-  messageType.value = 'info'
-  messageText.value = `${position === 'top' ? '顶部' : position === 'center' ? '居中' : '底部'}显示`
-  messagePosition.value = position
-  messageDuration.value = 3000
-  messageShowIcon.value = true
-  messageShow.value = true
+  messageType.value = 'info';
+  messageText.value = `${position === 'top' ? '顶部' : position === 'center' ? '居中' : '底部'}显示`;
+  messagePosition.value = position;
+  messageDuration.value = 3000;
+  messageShowIcon.value = true;
+  messageShow.value = true;
 }
 
 function showLongMessage() {
-  messageType.value = 'success'
-  messageText.value = '这条消息会显示 5 秒钟'
-  messagePosition.value = 'top'
-  messageDuration.value = 5000
-  messageShowIcon.value = true
-  messageShow.value = true
+  messageType.value = 'success';
+  messageText.value = '这条消息会显示 5 秒钟';
+  messagePosition.value = 'top';
+  messageDuration.value = 5000;
+  messageShowIcon.value = true;
+  messageShow.value = true;
 }
 
 function showNoIconMessage() {
-  messageType.value = 'info'
-  messageText.value = '这是没有图标的消息'
-  messagePosition.value = 'top'
-  messageDuration.value = 3000
-  messageShowIcon.value = false
-  messageShow.value = true
+  messageType.value = 'info';
+  messageText.value = '这是没有图标的消息';
+  messagePosition.value = 'top';
+  messageDuration.value = 3000;
+  messageShowIcon.value = false;
+  messageClosable.value = false;
+  messageShow.value = true;
+}
+
+function showClosableMessage() {
+  messageType.value = 'warning';
+  messageText.value = '可以手动关闭的消息';
+  messagePosition.value = 'top';
+  messageDuration.value = 0;
+  messageShowIcon.value = true;
+  messageClosable.value = true;
+  messageShow.value = true;
+}
+
+function showCustomContent() {
+  messageType.value = 'info';
+  messagePosition.value = 'top';
+  messageDuration.value = 3000;
+  messageShowIcon.value = true;
+  messageClosable.value = false;
+  useCustomContent.value = true;
+  useCustomIcon.value = false;
+  messageShow.value = true;
+}
+
+function showCustomIcon() {
+  messageType.value = 'success';
+  messageText.value = '自定义爱心图标';
+  messagePosition.value = 'top';
+  messageDuration.value = 3000;
+  messageShowIcon.value = true;
+  messageClosable.value = false;
+  useCustomContent.value = false;
+  useCustomIcon.value = true;
+  messageShow.value = true;
+}
+
+function handleMessageClose() {
+  messageShow.value = false;
+  useCustomContent.value = false;
+  useCustomIcon.value = false;
 }
 </script>
