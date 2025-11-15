@@ -122,8 +122,8 @@ $tag: map.merge(
     }
 
     &.#{$namespace}-tag--variant-light {
-      background-color: get-css-var('color', 'surface', 'muted');
-      color: get-css-var('color', 'text', 'secondary');
+      background-color: get-css-var('surface', 'muted');
+      color: get-css-var('text', 'secondary');
       border-color: transparent;
     }
   }
