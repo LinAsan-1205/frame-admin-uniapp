@@ -41,8 +41,8 @@ function handleClick() {
 .component-card {
   padding: 28rpx;
   border-radius: 20rpx;
-  background: var(--fui-color-surface, #ffffff);
-  border: 1rpx solid var(--fui-color-border, #e5e7eb);
+  background: var(--fui-surface-base, #ffffff);
+  border: 1rpx solid var(--fui-border-base, #e5e7eb);
   transition: all 250ms ease;
   cursor: pointer;
   display: flex;
@@ -53,7 +53,7 @@ function handleClick() {
 .component-card:active {
   transform: translateY(-2rpx);
   box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.08);
-  border-color: var(--fui-color-primary, #667eea);
+  border-color: var(--fui-primary-base, #667eea);
 }
 
 .component-card__header {
@@ -64,7 +64,7 @@ function handleClick() {
 
 .component-card__icon {
   font-size: 36rpx;
-  color: var(--fui-color-primary, #667eea);
+  color: var(--fui-primary-base, #667eea);
   display: flex;
   align-items: center;
 }
@@ -72,7 +72,7 @@ function handleClick() {
 .component-card__name {
   font-size: 28rpx;
   font-weight: 600;
-  color: var(--fui-color-text-primary, #1a1a1a);
+  color: var(--fui-text-base, #1a1a1a);
   flex: 1;
   min-width: 0;
 }
@@ -83,13 +83,13 @@ function handleClick() {
   font-size: 22rpx;
   font-weight: 600;
   color: #ffffff;
-  background: var(--fui-color-primary, #667eea);
+  background: var(--fui-primary-base, #667eea);
   flex-shrink: 0;
 }
 
 .component-card__desc {
   font-size: 24rpx;
-  color: var(--fui-color-text-secondary, #6b7280);
+  color: var(--fui-text-secondary, #6b7280);
   line-height: 1.5;
 }
 
