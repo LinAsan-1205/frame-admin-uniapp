@@ -62,7 +62,7 @@ $namespace: 'fui' !default;
  * 获取基础颜色变量
  */
 @function get-base-color-var($type) {
-  @return get-css-var('color', $type, 'base');
+  @return get-css-var($type, 'base');
 }
 
 /**
@@ -71,6 +71,6 @@ $namespace: 'fui' !default;
 @mixin define-type-color($type) {
   $colors: map.get($color-map, $type);
   @each $name in map.keys($colors) {
-    @include define-css-var(('color', $type, $name), map.get($colors, $name));
+    @include define-css-var(($type, $name), map.get($colors, $name));
   }
 }
