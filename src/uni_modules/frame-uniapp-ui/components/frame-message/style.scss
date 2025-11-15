@@ -1,4 +1,4 @@
-@use 'sass:map';
+﻿@use 'sass:map';
 @use '../../styles/design' as *;
 
 // Message 组件变量
@@ -7,11 +7,11 @@ $message: map.merge(
   (
     padding: 16rpx 24rpx,
     gap: 12rpx,
-    bg-color: get-css-var('color', 'surface', 'base'),
+    bg-color: get-css-var('surface', 'base'),
     border-radius: 16rpx,
     shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.12),
     font-size: 28rpx,
-    color: get-css-var('color', 'text', 'base'),
+    color: get-css-var('text', 'base'),
     offset-top: 100rpx,
     offset-bottom: 100rpx,
   ),

@@ -1,4 +1,4 @@
-@use 'sass:map';
+﻿@use 'sass:map';
 @use '../../styles/design' as *;
 
 // Pagination 组件变量
@@ -9,8 +9,8 @@ $pagination: map.merge(
     font-size: 28rpx,
     font-size-small: 24rpx,
     font-size-large: 32rpx,
-    color: get-css-var('color', 'text', 'base'),
-    color-secondary: get-css-var('color', 'text', 'secondary'),
+    color: get-css-var('text', 'base'),
+    color-secondary: get-css-var('text', 'secondary'),
     color-primary: get-base-color-var('primary'),
   ),
   $pagination

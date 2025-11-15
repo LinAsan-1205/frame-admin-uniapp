@@ -1,10 +1,10 @@
-@use 'sass:map';
+﻿@use 'sass:map';
 @use '../../styles/design' as *;
 
 $popup: () !default;
 $popup: map.merge(
   (
-    bg-color: get-css-var('color', 'surface', 'base'),
+    bg-color: get-css-var('surface', 'base'),
   ),
   $popup
 );

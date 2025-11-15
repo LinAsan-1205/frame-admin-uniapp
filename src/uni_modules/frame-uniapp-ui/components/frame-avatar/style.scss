@@ -1,12 +1,12 @@
-@use 'sass:map';
+﻿@use 'sass:map';
 @use '../../styles/design' as *;
 
 // Avatar 组件变量
 $avatar: () !default;
 $avatar: map.merge(
   (
-    bg-color: get-css-var('color', 'surface', 'muted'),
-    color: get-css-var('color', 'text', 'tertiary'),
+    bg-color: get-css-var('surface', 'muted'),
+    color: get-css-var('text', 'tertiary'),
     border-radius-square: 12rpx,
   ),
   $avatar

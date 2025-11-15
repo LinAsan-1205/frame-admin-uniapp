@@ -6,9 +6,9 @@ $cell: () !default;
 $cell: map.merge(
   (
     padding: 24rpx 32rpx,
-    bg-color: get-css-var('color', 'surface', 'base'),
-    border-color: get-css-var('color', 'border', 'base'),
-    hover-bg: get-css-var('color', 'surface', 'muted'),
+    bg-color: get-css-var('surface', 'base'),
+    border-color: get-css-var('border', 'base'),
+    hover-bg: get-css-var('surface', 'muted'),
     // 小尺寸
     padding-sm: 16rpx 24rpx,
     // 大尺寸
@@ -16,22 +16,22 @@ $cell: map.merge(
     // 图标
     icon-size: 40rpx,
     icon-margin: 16rpx,
-    icon-color: get-css-var('color', 'text', 'secondary'),
+    icon-color: get-css-var('text', 'secondary'),
     // 标题
     title-size: 28rpx,
-    title-color: get-css-var('color', 'text', 'base'),
+    title-color: get-css-var('text', 'base'),
     // 标签
     label-size: 24rpx,
     label-margin: 8rpx,
-    label-color: get-css-var('color', 'text', 'tertiary'),
+    label-color: get-css-var('text', 'tertiary'),
     // 值
     value-size: 28rpx,
     value-margin: 24rpx,
-    value-color: get-css-var('color', 'text', 'secondary'),
+    value-color: get-css-var('text', 'secondary'),
     // 箭头
     arrow-size: 32rpx,
     arrow-margin: 8rpx,
-    arrow-color: get-css-var('color', 'text', 'quaternary'),
+    arrow-color: get-css-var('text', 'tertiary'),
     // 必填标记
     required-size: 28rpx,
     required-margin: 4rpx,

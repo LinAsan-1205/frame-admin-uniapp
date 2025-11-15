@@ -6,19 +6,19 @@ $modal: () !default;
 $modal: map.merge(
   (
     max-width: 90%,
-    bg-color: get-css-var('color', 'surface', 'base'),
+    bg-color: get-css-var('surface', 'base'),
     border-radius: 24rpx,
     shadow: 0 16rpx 48rpx rgba(0, 0, 0, 0.15),
     close-size: 56rpx,
     close-top: 24rpx,
     close-right: 24rpx,
-    close-color: get-css-var('color', 'text', 'quaternary'),
+    close-color: get-css-var('text', 'tertiary'),
     header-padding: 48rpx 32rpx 24rpx,
     title-size: 36rpx,
-    title-color: get-css-var('color', 'text', 'base'),
+    title-color: get-css-var('text', 'base'),
     body-padding: 0 32rpx 32rpx,
     content-size: 28rpx,
-    content-color: get-css-var('color', 'text', 'secondary'),
+    content-color: get-css-var('text', 'secondary'),
     footer-padding: 0 32rpx 32rpx,
   ),
   $modal
@@ -52,11 +52,11 @@ $modal: map.merge(
   z-index: 1;
 
   &:hover {
-    color: get-css-var('color', 'text', 'secondary');
+    color: get-css-var('text', 'secondary');
   }
 
   &:active {
-    color: get-css-var('color', 'text', 'base');
+    color: get-css-var('text', 'base');
   }
 }
 

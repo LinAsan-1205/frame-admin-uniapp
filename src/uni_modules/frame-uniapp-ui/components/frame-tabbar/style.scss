@@ -1,4 +1,4 @@
-@use 'sass:map';
+﻿@use 'sass:map';
 @use '../../styles/design' as *;
 
 // Tabbar 组件变量
@@ -7,12 +7,12 @@ $tabbar: map.merge(
   (
     height: 100rpx,
     bg-color: get-base-color-var('background'),
-    border-color: get-css-var('color', 'border', 'base'),
+    border-color: get-css-var('border', 'base'),
     shadow: 0 -1rpx 4rpx rgba(0, 0, 0, 0.05),
     icon-size: 40rpx,
     icon-margin: 6rpx,
     text-size: 22rpx,
-    text-color: get-css-var('color', 'text', 'secondary'),
+    text-color: get-css-var('text', 'secondary'),
     active-color: get-base-color-var('primary'),
     capsule-height: 96rpx,
     capsule-padding: 0 24rpx,

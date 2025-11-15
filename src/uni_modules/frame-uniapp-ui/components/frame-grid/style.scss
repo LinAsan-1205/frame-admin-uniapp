@@ -1,11 +1,11 @@
-@use 'sass:map';
+﻿@use 'sass:map';
 @use '../../styles/design' as *;
 
 // Grid 组件变量
 $grid: () !default;
 $grid: map.merge(
   (
-    border-color: get-css-var('color', 'border', 'base'),
+    border-color: get-css-var('border', 'base'),
     border-width: 1rpx,
   ),
   $grid

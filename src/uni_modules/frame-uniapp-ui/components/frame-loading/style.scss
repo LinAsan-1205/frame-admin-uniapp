@@ -1,4 +1,4 @@
-@use 'sass:map';
+﻿@use 'sass:map';
 @use '../../styles/design' as *;
 
 // Loading 组件变量
@@ -13,7 +13,7 @@ $loading: map.merge(
     dot-gap: 8rpx,
     dot-color: get-base-color-var('primary'),
     text-size: 28rpx,
-    text-color: get-css-var('color', 'text', 'secondary'),
+    text-color: get-css-var('text', 'secondary'),
   ),
   $loading
 );

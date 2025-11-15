@@ -1,19 +1,19 @@
-@use 'sass:map';
+﻿@use 'sass:map';
 @use '../../styles/design' as *;
 
 // NavBar 组件变量
 $nav-bar: () !default;
 $nav-bar: map.merge(
   (
-    bg-color: get-css-var('color', 'surface', 'base'),
+    bg-color: get-css-var('surface', 'base'),
     height: 88rpx,
     padding: 0 32rpx,
     title-size: 32rpx,
-    title-color: get-css-var('color', 'text', 'base'),
+    title-color: get-css-var('text', 'base'),
     text-size: 28rpx,
-    text-color: get-css-var('color', 'text', 'secondary'),
+    text-color: get-css-var('text', 'secondary'),
     icon-size: 40rpx,
-    border-color: get-css-var('color', 'border', 'base'),
+    border-color: get-css-var('border', 'base'),
   ),
   $nav-bar
 );

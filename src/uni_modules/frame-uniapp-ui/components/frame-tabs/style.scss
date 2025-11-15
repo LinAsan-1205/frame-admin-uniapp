@@ -1,15 +1,15 @@
-@use 'sass:map';
+﻿@use 'sass:map';
 @use '../../styles/design' as *;
 
 // Tabs 组件变量
 $tabs: () !default;
 $tabs: map.merge(
   (
-    bg-color: get-css-var('color', 'surface', 'base'),
+    bg-color: get-css-var('surface', 'base'),
     item-padding: 24rpx 32rpx,
     item-font-size: 28rpx,
-    item-color: get-css-var('color', 'text', 'secondary'),
-    item-color-active: get-css-var('color', 'text', 'base'),
+    item-color: get-css-var('text', 'secondary'),
+    item-color-active: get-css-var('text', 'base'),
     gap: 8rpx,
     line-height: 4rpx,
     line-width: 40rpx,

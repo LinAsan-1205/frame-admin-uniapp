@@ -1,4 +1,4 @@
-@use 'sass:map';
+﻿@use 'sass:map';
 @use '../../styles/design' as *;
 
 // GridItem 组件变量
@@ -6,14 +6,14 @@ $grid-item: () !default;
 $grid-item: map.merge(
   (
     padding: 32rpx 16rpx,
-    bg-color: get-css-var('color', 'surface', 'base'),
-    bg-color-hover: get-css-var('color', 'surface', 'muted'),
-    border-color: get-css-var('color', 'border', 'base'),
+    bg-color: get-css-var('surface', 'base'),
+    bg-color-hover: get-css-var('surface', 'muted'),
+    border-color: get-css-var('border', 'base'),
     icon-size: 56rpx,
     icon-margin: 12rpx,
-    icon-color: get-css-var('color', 'text', 'secondary'),
+    icon-color: get-css-var('text', 'secondary'),
     text-size: 24rpx,
-    text-color: get-css-var('color', 'text', 'secondary'),
+    text-color: get-css-var('text', 'secondary'),
   ),
   $grid-item
 );

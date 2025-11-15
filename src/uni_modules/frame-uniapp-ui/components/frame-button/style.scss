@@ -1,4 +1,4 @@
-@use 'sass:map';
+﻿@use 'sass:map';
 @use '../../styles/design' as *;
 
 // Button 组件变量
@@ -36,8 +36,8 @@ $button: map.merge(
     radius-square-small: 6rpx,
     radius-square-large: 10rpx,
     // 颜色
-    color: get-css-var('color', 'text', 'base'),
-    bg-color: get-css-var('color', 'background', 'secondary'),
+    color: get-css-var('text', 'base'),
+    bg-color: get-css-var('background', 'secondary'),
   ),
   $button
 );
@@ -368,14 +368,14 @@ $button: map.merge(
 .#{$namespace}-button--theme-default {
   &.#{$namespace}-button--variant-base {
     background: get-base-color-var('background');
-    color: get-css-var('color', 'text', 'base');
-    border-color: get-css-var('color', 'border', 'base');
+    color: get-css-var('text', 'base');
+    border-color: get-css-var('border', 'base');
   }
 
   &.#{$namespace}-button--variant-outline {
     background-color: transparent;
-    color: get-css-var('color', 'text', 'base');
-    border-color: get-css-var('color', 'border', 'base');
+    color: get-css-var('text', 'base');
+    border-color: get-css-var('border', 'base');
   }
 }
 

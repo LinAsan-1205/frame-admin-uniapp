@@ -1,17 +1,17 @@
-@use 'sass:map';
+﻿@use 'sass:map';
 @use '../../styles/design' as *;
 
 // Divider 组件变量
 $divider: () !default;
 $divider: map.merge(
   (
-    border-color: get-css-var('color', 'border', 'base'),
+    border-color: get-css-var('border', 'base'),
     border-width: 2rpx,
     border-width-hairline: 1rpx,
     vertical-margin: 0 16rpx,
     content-padding: 0 24rpx,
     content-font-size: 28rpx,
-    content-color: get-css-var('color', 'text', 'tertiary'),
+    content-color: get-css-var('text', 'tertiary'),
     content-min-width: 48rpx,
   ),
   $divider

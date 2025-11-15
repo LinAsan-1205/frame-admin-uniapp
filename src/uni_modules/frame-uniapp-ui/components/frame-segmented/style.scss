@@ -1,14 +1,14 @@
-@use 'sass:map';
+﻿@use 'sass:map';
 @use '../../styles/design' as *;
 
 // Segmented 组件变量
 $segmented: () !default;
 $segmented: map.merge(
   (
-    bg-color: get-css-var('color', 'background', 'secondary'),
-    item-color: get-css-var('color', 'text', 'secondary'),
-    item-color-active: get-css-var('color', 'text', 'base'),
-    indicator-bg: get-css-var('color', 'surface', 'base'),
+    bg-color: get-css-var('background', 'secondary'),
+    item-color: get-css-var('text', 'secondary'),
+    item-color-active: get-css-var('text', 'base'),
+    indicator-bg: get-css-var('surface', 'base'),
     padding: 6rpx,
     gap: 8rpx,
     // 尺寸

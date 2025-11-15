@@ -1,4 +1,4 @@
-@use 'sass:map';
+﻿@use 'sass:map';
 @use '../../styles/design' as *;
 
 // Tag 组件变量
@@ -111,14 +111,14 @@ $tag: map.merge(
   // 默认类型
   &--type-default {
     &.#{$namespace}-tag--variant-filled {
-      background-color: get-css-var('color', 'text', 'tertiary');
+      background-color: get-css-var('text', 'tertiary');
       color: get-base-color-var('white');
     }
 
     &.#{$namespace}-tag--variant-outlined {
       background-color: transparent;
-      border-color: get-css-var('color', 'border', 'base');
-      color: get-css-var('color', 'text', 'base');
+      border-color: get-css-var('border', 'base');
+      color: get-css-var('text', 'base');
     }
 
     &.#{$namespace}-tag--variant-light {
