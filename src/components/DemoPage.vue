@@ -1,9 +1,13 @@
 <template>
-  <view class="demo-page">
-    <view class="demo-page__header">
-      <image class="demo-page__logo" src="@/static/images/logo.png" mode="aspectFit" />
-      <text class="demo-page__title">{{ title }}</text>
-      <text class="demo-page__desc">{{ description }}</text>
+  <view class="demo-page min-h-screen flex flex-col gap-40rpx p-48rpx pb-120rpx">
+    <view class="demo-page__header flex flex-col items-center gap-16rpx border-2rpx border-[rgba(0,61,173,0.1)] rd-32rpx border-solid p-32rpx shadow-[0_8rpx_24rpx_rgba(0,61,173,0.08)]">
+      <image class="mb-16rpx h-120rpx w-120rpx" src="@/static/images/logo.png" mode="aspectFit" />
+      <text class="demo-page__title text-center text-48rpx font-bold">
+        {{ title }}
+      </text>
+      <text class="demo-page__desc text-center text-28rpx leading-relaxed op-85">
+        {{ description }}
+      </text>
     </view>
     <slot />
   </view>
@@ -11,53 +15,48 @@
 
 <script setup lang="ts">
 interface Props {
-  title: string
-  description?: string
+  title: string;
+  description?: string;
 }
 
-defineProps<Props>()
+defineProps<Props>();
 </script>
 
 <style scoped lang="scss">
 .demo-page {
-  min-height: 100vh;
-  padding: 48rpx 32rpx 120rpx;
-  display: flex;
-  flex-direction: column;
-  gap: 40rpx;
-  background: var(--theme-surface-color, var(--fui-color-bg-primary));
+  background: var(--fui-color-bg-primary);
 }
 
 .demo-page__header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16rpx;
-  padding: 32rpx;
   background: linear-gradient(135deg, #003dad15, rgba(255, 255, 255, 0.8));
-  border-radius: 32rpx;
-  border: 2rpx solid rgba(0, 61, 173, 0.1);
-  box-shadow: 0 8rpx 24rpx rgba(0, 61, 173, 0.08);
-}
-
-.demo-page__logo {
-  width: 120rpx;
-  height: 120rpx;
-  margin-bottom: 16rpx;
 }
 
 .demo-page__title {
-  font-size: 48rpx;
-  font-weight: 700;
   color: #003dad;
-  text-align: center;
 }
 
 .demo-page__desc {
-  font-size: 28rpx;
-  color: var(--theme-content-color, var(--fui-color-text-secondary));
-  text-align: center;
-  line-height: 1.6;
-  opacity: 0.85;
+  color: var(--fui-color-text-secondary);
+}
+
+// 暗黑模式
+[data-theme='dark'] {
+  .demo-page {
+    background: #0f172a;
+  }
+
+  .demo-page__header {
+    background: rgba(17, 24, 39, 0.8);
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.4);
+  }
+
+  .demo-page__title {
+    color: #60a5fa;
+  }
+
+  .demo-page__desc {
+    color: var(--fui-color-text-secondary);
+  }
 }
 </style>

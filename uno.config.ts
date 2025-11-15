@@ -12,7 +12,13 @@ const { presetWeappAttributify, transformerAttributify } = extractorAttributify(
 export default defineConfig({
   presets: [
     // https://github.com/MellowCo/unocss-preset-weapp
-    presetWeapp(),
+    presetWeapp({
+      // 启用暗黑模式支持 - 使用 data-theme 属性
+      dark: {
+        dark: '[data-theme="dark"]',
+      },
+      attributifyPseudo: true,
+    }),
     // attributify autocomplete
     presetWeappAttributify() as any,
     // https://unocss.dev/presets/icons
@@ -55,6 +61,10 @@ export default defineConfig({
   shortcuts: {
     'border-base': 'border border-gray-500_10',
     'center': 'flex justify-center items-center',
+    // Demo 组件暗黑模式快捷类
+    'demo-card-base': 'p-28rpx rd-28rpx border-2rpx border-solid flex flex-col gap-20rpx items-center transition-all duration-300',
+    'demo-card-light': 'border-[rgba(0,61,173,0.15)] bg-gradient-to-br from-[rgba(0,61,173,0.05)] to-[rgba(255,255,255,0.9)] shadow-[0_4rpx_12rpx_rgba(0,61,173,0.06)]',
+    'demo-card-dark': 'dark:border-[rgba(59,130,246,0.3)] dark:bg-[rgba(31,41,55,0.6)] dark:backdrop-blur-8rpx dark:shadow-[0_4rpx_16rpx_rgba(0,0,0,0.3),inset_0_1rpx_0_rgba(255,255,255,0.05)]',
   },
   theme: {
     colors: {

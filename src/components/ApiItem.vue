@@ -1,62 +1,62 @@
 <template>
-  <view class="api-item">
-    <text class="api-item__name">{{ name }}</text>
-    <text v-if="type" class="api-item__type">{{ type }}</text>
-    <text class="api-item__desc">{{ description }}</text>
+  <view class="api-item border-2rpx border-[rgba(0,61,173,0.15)] rd-28rpx border-solid p-24rpx shadow-[0_2rpx_8rpx_rgba(0,61,173,0.06)] transition-all active:translate-y--2rpx">
+    <text class="api-item__name mb-8rpx block text-28rpx font-bold font-mono">
+      {{ name }}
+    </text>
+    <text v-if="type" class="api-item__type mb-12rpx inline-block rd-8rpx px-12rpx py-4rpx text-22rpx text-white font-semibold">
+      {{ type }}
+    </text>
+    <text class="api-item__desc mt-8rpx block text-24rpx leading-relaxed">
+      {{ description }}
+    </text>
   </view>
 </template>
 
 <script setup lang="ts">
 interface Props {
-  name: string
-  type?: string
-  description: string
+  name: string;
+  type?: string;
+  description: string;
 }
 
-defineProps<Props>()
+defineProps<Props>();
 </script>
 
 <style scoped lang="scss">
 .api-item {
-  padding: 24rpx 28rpx;
-  border-radius: 28rpx;
-  border: 2rpx solid rgba(0, 61, 173, 0.15);
   background: linear-gradient(135deg, rgba(0, 61, 173, 0.05), rgba(255, 255, 255, 0.9));
-  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2rpx 8rpx rgba(0, 61, 173, 0.06);
-
-  &:active {
-    transform: translateY(-2rpx);
-    box-shadow: 0 6rpx 20rpx rgba(0, 61, 173, 0.12);
-    border-color: #003dad;
-  }
 }
 
 .api-item__name {
-  display: block;
-  font-size: 28rpx;
-  font-weight: 700;
   color: #003dad;
-  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
-  margin-bottom: 8rpx;
 }
 
 .api-item__type {
-  display: inline-block;
-  padding: 4rpx 12rpx;
   background: #003dad;
-  color: #ffffff;
-  border-radius: 8rpx;
-  font-size: 22rpx;
-  font-weight: 600;
-  margin-bottom: 12rpx;
 }
 
 .api-item__desc {
-  display: block;
-  font-size: 24rpx;
-  color: var(--theme-content-color, var(--fui-color-text-secondary));
-  line-height: 1.6;
-  margin-top: 8rpx;
+  color: var(--fui-color-text-secondary);
+}
+
+// 暗黑模式
+[data-theme='dark'] {
+  .api-item {
+    background: rgba(17, 24, 39, 0.8);
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.3);
+  }
+
+  .api-item__name {
+    color: #60a5fa;
+  }
+
+  .api-item__type {
+    background: #3b82f6;
+  }
+
+  .api-item__desc {
+    color: var(--fui-color-text-secondary);
+  }
 }
 </style>

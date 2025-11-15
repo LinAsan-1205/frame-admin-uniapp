@@ -1,13 +1,19 @@
 <template>
   <view class="component-card" @click="handleClick">
     <view class="component-card__header">
-      <view class="component-card__icon" v-if="icon">
+      <view v-if="icon" class="component-card__icon">
         <view :class="icon" />
       </view>
-      <text class="component-card__name">{{ name }}</text>
-      <text v-if="badge" class="component-card__badge">{{ badge }}</text>
+      <text class="component-card__name">
+        {{ name }}
+      </text>
+      <text v-if="badge" class="component-card__badge">
+        {{ badge }}
+      </text>
     </view>
-    <text class="component-card__desc">{{ desc }}</text>
+    <text class="component-card__desc">
+      {{ desc }}
+    </text>
     <view v-if="$slots.preview" class="component-card__preview">
       <slot name="preview" />
     </view>
@@ -15,19 +21,19 @@
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits<{
-  click: []
-}>()
-
 defineProps<{
-  name: string
-  desc: string
-  badge?: string
-  icon?: string
-}>()
+  name: string;
+  desc: string;
+  badge?: string;
+  icon?: string;
+}>();
+
+const emit = defineEmits<{
+  click: [];
+}>();
 
 function handleClick() {
-  emit('click')
+  emit('click');
 }
 </script>
 
@@ -91,5 +97,12 @@ function handleClick() {
   display: flex;
   justify-content: flex-end;
   margin-top: 8rpx;
+}
+
+// 暗黑模式 - 已使用 CSS 变量，自动适配
+:root[data-theme='dark'] {
+  .component-card:active {
+    box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.6);
+  }
 }
 </style>
