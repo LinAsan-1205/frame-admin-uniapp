@@ -1,8 +1,40 @@
 @use 'sass:map';
 @use './design' as *;
 
+// 亮色模式（默认）
 page {
   @each $type in join($types, $secondary) {
     @include define-type-color($type);
   }
+}
+
+// 暗黑模式
+page[data-theme='dark'] {
+  // 主题色保持不变
+  @each $type in $types {
+    @include define-type-color($type);
+  }
+  
+  // 暗黑模式下的文字颜色
+  --fui-text-base: #e5e7eb;
+  --fui-text-secondary: #9ca3af;
+  --fui-text-tertiary: #6b7280;
+  --fui-text-disabled: #4b5563;
+  
+  // 暗黑模式下的背景颜色
+  --fui-background-base: #0f172a;
+  --fui-background-secondary: #1e293b;
+  --fui-background-tertiary: #334155;
+  
+  // 暗黑模式下的表面颜色
+  --fui-surface-base: #1e293b;
+  --fui-surface-muted: #334155;
+  
+  // 暗黑模式下的边框颜色
+  --fui-border-base: #334155;
+  --fui-border-strong: #475569;
+  
+  // 黑白色保持不变
+  --fui-black-base: #000000;
+  --fui-white-base: #ffffff;
 }
