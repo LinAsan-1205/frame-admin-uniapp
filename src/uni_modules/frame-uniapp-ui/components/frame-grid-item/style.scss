@@ -1,0 +1,94 @@
+@use 'sass:map';
+@use '../../styles/design' as *;
+
+// GridItem 组件变量
+$grid-item: () !default;
+$grid-item: map.merge(
+  (
+    padding: 32rpx 16rpx,
+    bg-color: get-css-var('color', 'surface', 'base'),
+    bg-color-hover: get-css-var('color', 'surface', 'muted'),
+    border-color: get-css-var('color', 'border', 'base'),
+    icon-size: 56rpx,
+    icon-margin: 12rpx,
+    icon-color: get-css-var('color', 'text', 'secondary'),
+    text-size: 24rpx,
+    text-color: get-css-var('color', 'text', 'secondary'),
+  ),
+  $grid-item
+);
+
+.#{$namespace}-grid-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: get-css-var('grid-item', 'padding');
+  background-color: get-css-var('grid-item', 'bg-color');
+  transition: background-color 180ms cubic-bezier(0.2, 0, 0, 1);
+  box-sizing: border-box;
+
+  &--var {
+    @include define-preset-values('grid-item', $grid-item);
+  }
+
+  // 带边框
+  &--border {
+    border-right: 1rpx solid get-css-var('grid-item', 'border-color');
+    border-bottom: 1rpx solid get-css-var('grid-item', 'border-color');
+  }
+
+  // 正方形
+  &--square {
+    &::before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
+
+    .#{$namespace}-grid-item__content {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+    }
+  }
+
+  // 居中
+  &--center {
+    text-align: center;
+  }
+
+  // 可点击
+  &--clickable {
+    cursor: pointer;
+  }
+
+  // hover 效果
+  &--hover {
+    background-color: get-css-var('grid-item', 'bg-color-hover');
+  }
+}
+
+.#{$namespace}-grid-item__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.#{$namespace}-grid-item__icon {
+  margin-bottom: get-css-var('grid-item', 'icon-margin');
+  font-size: get-css-var('grid-item', 'icon-size');
+  line-height: 1;
+  color: get-css-var('grid-item', 'icon-color');
+}
+
+.#{$namespace}-grid-item__text {
+  font-size: get-css-var('grid-item', 'text-size');
+  color: get-css-var('grid-item', 'text-color');
+  line-height: 1.5;
+}

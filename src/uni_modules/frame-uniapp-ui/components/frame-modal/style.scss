@@ -1,0 +1,88 @@
+@use 'sass:map';
+@use '../../styles/design' as *;
+
+// Modal 组件变量
+$modal: () !default;
+$modal: map.merge(
+  (
+    max-width: 90%,
+    bg-color: get-css-var('color', 'surface', 'base'),
+    border-radius: 24rpx,
+    shadow: 0 16rpx 48rpx rgba(0, 0, 0, 0.15),
+    close-size: 56rpx,
+    close-top: 24rpx,
+    close-right: 24rpx,
+    close-color: get-css-var('color', 'text', 'quaternary'),
+    header-padding: 48rpx 32rpx 24rpx,
+    title-size: 36rpx,
+    title-color: get-css-var('color', 'text', 'base'),
+    body-padding: 0 32rpx 32rpx,
+    content-size: 28rpx,
+    content-color: get-css-var('color', 'text', 'secondary'),
+    footer-padding: 0 32rpx 32rpx,
+  ),
+  $modal
+);
+
+.#{$namespace}-modal {
+  position: relative;
+  max-width: get-css-var('modal', 'max-width');
+  background: get-css-var('modal', 'bg-color');
+  border-radius: get-css-var('modal', 'border-radius');
+  overflow: hidden;
+  box-shadow: get-css-var('modal', 'shadow');
+
+  &--var {
+    @include define-preset-values('modal', $modal);
+  }
+}
+
+.#{$namespace}-modal__close {
+  position: absolute;
+  top: get-css-var('modal', 'close-top');
+  right: get-css-var('modal', 'close-right');
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: get-css-var('modal', 'close-size');
+  height: get-css-var('modal', 'close-size');
+  cursor: pointer;
+  color: get-css-var('modal', 'close-color');
+  transition: color 180ms cubic-bezier(0.2, 0, 0, 1);
+  z-index: 1;
+
+  &:hover {
+    color: get-css-var('color', 'text', 'secondary');
+  }
+
+  &:active {
+    color: get-css-var('color', 'text', 'base');
+  }
+}
+
+.#{$namespace}-modal__header {
+  padding: get-css-var('modal', 'header-padding');
+  text-align: center;
+}
+
+.#{$namespace}-modal__title {
+  font-size: get-css-var('modal', 'title-size');
+  font-weight: 600;
+  color: get-css-var('modal', 'title-color');
+  line-height: 1.5;
+}
+
+.#{$namespace}-modal__body {
+  padding: get-css-var('modal', 'body-padding');
+  text-align: center;
+}
+
+.#{$namespace}-modal__content {
+  font-size: get-css-var('modal', 'content-size');
+  color: get-css-var('modal', 'content-color');
+  line-height: 1.6;
+}
+
+.#{$namespace}-modal__footer {
+  padding: get-css-var('modal', 'footer-padding');
+}

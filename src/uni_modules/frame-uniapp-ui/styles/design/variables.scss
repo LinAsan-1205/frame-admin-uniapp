@@ -1,0 +1,76 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:meta';
+@import './theme.scss';
+
+// 命名空间
+$namespace: 'fui' !default;
+
+/**
+ * 生成 CSS 变量名
+ * @example to-css-var-name('color', 'primary') => --fui-color-primary
+ */
+@function to-css-var-name($name-units...) {
+  $name: '--' + $namespace;
+  @each $unit in $name-units {
+    @if $unit != '' {
+      $name: $name + '-' + $unit;
+    }
+  }
+  @return $name;
+}
+
+/**
+ * 获取 CSS 变量
+ * @example get-css-var('color', 'primary') => var(--fui-color-primary)
+ */
+@function get-css-var($name-units...) {
+  @return var(#{to-css-var-name($name-units...)});
+}
+
+/**
+ * 定义 CSS 变量
+ * @example @include define-css-var(('color', 'primary'), #2563eb);
+ */
+@mixin define-css-var($name-units, $value) {
+  #{to-css-var-name($name-units...)}: #{$value};
+}
+
+/**
+ * 批量定义预设值（直接值）
+ */
+@mixin define-preset-values($base-name, $style-map, $inspect: false) {
+  @each $name in map.keys($style-map) {
+    @include define-css-var(($base-name, $name), if($inspect, #{meta.inspect(map.get($style-map, $name))}, map.get($style-map, $name)));
+  }
+}
+
+/**
+ * 批量定义预设样式（引用其他 CSS 变量）
+ */
+@mixin define-preset-style($base-name, $style-map) {
+  @each $name in map.keys($style-map) {
+    $style-units: map.get($style-map, $name);
+    
+    @if list.length($style-units) != 0 {
+      @include define-css-var(($base-name, $name), get-css-var($style-units...));
+    }
+  }
+}
+
+/**
+ * 获取基础颜色变量
+ */
+@function get-base-color-var($type) {
+  @return get-css-var('color', $type, 'base');
+}
+
+/**
+ * 定义类型颜色
+ */
+@mixin define-type-color($type) {
+  $colors: map.get($color-map, $type);
+  @each $name in map.keys($colors) {
+    @include define-css-var(('color', $type, $name), map.get($colors, $name));
+  }
+}

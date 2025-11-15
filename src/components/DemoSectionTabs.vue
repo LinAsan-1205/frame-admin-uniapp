@@ -55,7 +55,7 @@ defineExpose({
   display: flex;
   position: relative;
   background: transparent;
-  border-bottom: 2rpx solid var(--fui-color-border);
+  border-bottom: 2rpx solid var(--fui-border-base);
   margin-bottom: 32rpx;
 }
 
@@ -78,7 +78,7 @@ defineExpose({
     transform: translateX(-50%) scaleX(0);
     width: 60%;
     height: 4rpx;
-    background: var(--fui-color-primary);
+    background: var(--fui-primary-base);
     border-radius: 2rpx;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -93,7 +93,7 @@ defineExpose({
     }
 
     .demo-section-tabs__tab-text {
-      color: var(--fui-color-primary);
+      color: var(--fui-primary-base);
       font-weight: 600;
       transform: scale(1.05);
     }
@@ -102,7 +102,7 @@ defineExpose({
 
 .demo-section-tabs__tab-text {
   font-size: 30rpx;
-  color: var(--fui-color-text-secondary);
+  color: var(--fui-text-secondary);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   line-height: 1;
 }

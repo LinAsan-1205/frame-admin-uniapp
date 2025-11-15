@@ -1,0 +1,85 @@
+@use 'sass:map';
+@use '../../styles/design' as *;
+
+// Badge 组件变量
+$badge: () !default;
+$badge: map.merge(
+  (
+    min-width: 28rpx,
+    height: 28rpx,
+    padding: 0 6rpx,
+    border-radius: 14rpx,
+    font-size: 18rpx,
+    border-width: 2rpx,
+    dot-size: 16rpx,
+    border-color: get-base-color-var('surface'),
+  ),
+  $badge
+);
+
+.#{$namespace}-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+  &--var {
+    @include define-preset-values('badge', $badge);
+  }
+}
+
+.#{$namespace}-badge__content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: get-css-var('badge', 'min-width');
+  height: get-css-var('badge', 'height');
+  padding: get-css-var('badge', 'padding');
+  border-radius: get-css-var('badge', 'border-radius');
+  font-size: get-css-var('badge', 'font-size');
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  border: get-css-var('badge', 'border-width') solid get-css-var('badge', 'border-color');
+  box-sizing: border-box;
+
+  // 小红点
+  &--dot {
+    min-width: get-css-var('badge', 'dot-size');
+    width: get-css-var('badge', 'dot-size');
+    height: get-css-var('badge', 'dot-size');
+    padding: 0;
+    border-radius: 50%;
+  }
+
+  // 类型样式
+  @mixin define-badge-style($style-map) {
+    @include define-preset-style('badge', $style-map);
+  }
+
+  @each $type in $types {
+    &--type-#{$type} {
+      @include define-badge-style(
+        (
+          bg-color: ('color', $type, 'base'),
+          color: ('color', 'white', 'base'),
+        )
+      );
+      background-color: get-css-var('badge', 'bg-color');
+      color: get-css-var('badge', 'color');
+    }
+  }
+
+  &--type-default {
+    background-color: get-base-color-var('text');
+    color: get-base-color-var('white');
+  }
+}
+
+.#{$namespace}-badge__text {
+  transform: scale(0.9);
+}

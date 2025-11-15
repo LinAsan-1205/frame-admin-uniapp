@@ -78,8 +78,10 @@ const lineState = reactive({
 const tabsClasses = computed(() =>
   classes(
     n(),
+    n('--var'),
     [props.border, n('--border')],
-    [props.scrollable, n('--scrollable')],
+    [props.sticky, n('--sticky')],
+    [isScrollable.value, n('--scrollable')],
     props.customClass,
   ),
 )
@@ -241,74 +243,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/index.scss';
-
-.fui-tabs {
-  position: relative;
-  background: var(--fui-color-surface);
-
-  &--border {
-    border-bottom: 1rpx solid var(--fui-color-border);
-  }
-}
-
-.fui-tabs__scroll {
-  width: 100%;
-  white-space: nowrap;
-}
-
-.fui-tabs__list {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  min-width: 100%;
-}
-
-.fui-tabs--scrollable {
-  .fui-tabs__list {
-    min-width: auto;
-  }
-}
-
-.fui-tabs__item {
-  position: relative;
-  flex-shrink: 0;
-  padding: 24rpx 32rpx;
-  cursor: pointer;
-  user-select: none;
-
-  &--active {
-    .fui-tabs__item-text {
-      font-weight: 600;
-    }
-  }
-
-  &--disabled {
-    cursor: not-allowed;
-    opacity: 0.4;
-  }
-
-  &:active:not(&--disabled) {
-    opacity: 0.8;
-  }
-}
-
-.fui-tabs__item-content {
-  @include flex-center;
-  gap: 8rpx;
-}
-
-.fui-tabs__item-text {
-  font-size: 28rpx;
-  line-height: 1.5;
-  white-space: nowrap;
-  transition: color $fui-transition;
-}
-
-.fui-tabs__line {
-  position: absolute;
-  bottom: 0;
-  border-radius: 4rpx;
-  transition-timing-function: ease-out;
-}
+@import './style.scss';
 </style>

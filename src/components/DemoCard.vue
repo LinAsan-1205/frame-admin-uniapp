@@ -21,7 +21,7 @@ defineProps<Props>();
 }
 
 .demo-card__label {
-  color: var(--fui-color-text-secondary);
+  color: var(--fui-text-secondary);
 }
 
 // 暗黑模式
@@ -33,7 +33,7 @@ defineProps<Props>();
   }
 
   .demo-card__label {
-    color: var(--fui-color-text-secondary);
+    color: var(--fui-text-secondary);
   }
 }
 </style>

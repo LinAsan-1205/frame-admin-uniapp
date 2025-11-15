@@ -1,0 +1,152 @@
+@use 'sass:map';
+@use '../../styles/design' as *;
+
+// Tag 组件变量
+$tag: () !default;
+$tag: map.merge(
+  (
+    padding: 4rpx 12rpx,
+    border-radius: 8rpx,
+    font-size: 24rpx,
+    border-width: 2rpx,
+    gap: 8rpx,
+    // 小尺寸
+    padding-sm: 2rpx 8rpx,
+    font-size-sm: 22rpx,
+    // 大尺寸
+    padding-lg: 6rpx 16rpx,
+    font-size-lg: 26rpx,
+    // 关闭按钮
+    close-size: 32rpx,
+  ),
+  $tag
+);
+
+.#{$namespace}-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: get-css-var('tag', 'gap');
+  padding: get-css-var('tag', 'padding');
+  border-radius: get-css-var('tag', 'border-radius');
+  font-size: get-css-var('tag', 'font-size');
+  line-height: 1.5;
+  font-weight: 500;
+  border: get-css-var('tag', 'border-width') solid transparent;
+  transition: all 180ms cubic-bezier(0.2, 0, 0, 1);
+  white-space: nowrap;
+
+  &--var {
+    @include define-preset-values('tag', $tag);
+  }
+
+  // 尺寸
+  &--size-sm {
+    padding: get-css-var('tag', 'padding-sm');
+    font-size: get-css-var('tag', 'font-size-sm');
+  }
+
+  &--size-lg {
+    padding: get-css-var('tag', 'padding-lg');
+    font-size: get-css-var('tag', 'font-size-lg');
+  }
+
+  // 圆形
+  &--round {
+    border-radius: 999rpx;
+  }
+
+  // 禁用
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // 类型 + 变体样式
+  @mixin define-tag-style($style-map) {
+    @include define-preset-style('tag', $style-map);
+  }
+
+  @each $type in $types {
+    &--type-#{$type} {
+      // filled 变体
+      &.#{$namespace}-tag--variant-filled {
+        @include define-tag-style(
+          (
+            bg-color: ('color', $type, 'base'),
+            color: ('color', 'white', 'base'),
+          )
+        );
+        background-color: get-css-var('tag', 'bg-color');
+        color: get-css-var('tag', 'color');
+      }
+
+      // outlined 变体
+      &.#{$namespace}-tag--variant-outlined {
+        @include define-tag-style(
+          (
+            border-color: ('color', $type, 'base'),
+            color: ('color', $type, 'base'),
+          )
+        );
+        background-color: transparent;
+        border-color: get-css-var('tag', 'border-color');
+        color: get-css-var('tag', 'color');
+      }
+
+      // light 变体
+      &.#{$namespace}-tag--variant-light {
+        @include define-tag-style(
+          (
+            color: ('color', $type, 'base'),
+          )
+        );
+        border-color: transparent;
+        background-color: rgba(get-base-color-var($type), 0.1);
+        color: get-css-var('tag', 'color');
+      }
+    }
+  }
+
+  // 默认类型
+  &--type-default {
+    &.#{$namespace}-tag--variant-filled {
+      background-color: get-css-var('color', 'text', 'tertiary');
+      color: get-base-color-var('white');
+    }
+
+    &.#{$namespace}-tag--variant-outlined {
+      background-color: transparent;
+      border-color: get-css-var('color', 'border', 'base');
+      color: get-css-var('color', 'text', 'base');
+    }
+
+    &.#{$namespace}-tag--variant-light {
+      background-color: get-css-var('color', 'surface', 'muted');
+      color: get-css-var('color', 'text', 'secondary');
+      border-color: transparent;
+    }
+  }
+}
+
+.#{$namespace}-tag__content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.#{$namespace}-tag__close {
+  font-size: get-css-var('tag', 'close-size');
+  line-height: 1;
+  cursor: pointer;
+  transition: opacity 180ms cubic-bezier(0.2, 0, 0, 1);
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:active {
+    opacity: 0.5;
+  }
+}

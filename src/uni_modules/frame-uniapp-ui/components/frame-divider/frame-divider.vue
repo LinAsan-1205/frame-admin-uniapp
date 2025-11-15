@@ -33,6 +33,7 @@ const hasContent = computed(() => Boolean(slots.default))
 const dividerClasses = computed(() =>
   classes(
     n(),
+    n('--var'),
     n(`--${props.direction}`),
     n(`--content-${props.contentPosition}`),
     [props.dashed, n('--dashed')],
@@ -99,89 +100,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/index.scss';
-
-.fui-divider {
-  display: flex;
-  align-items: center;
-  border-color: var(--fui-color-border);
-  box-sizing: border-box;
-
-  // 水平分割线
-  &--horizontal {
-    width: 100%;
-    border-top-width: 2rpx;
-    border-top-style: solid;
-
-    &.fui-divider--hairline {
-      border-top-width: 1rpx;
-    }
-
-    &.fui-divider--dashed {
-      border-top-style: dashed;
-    }
-
-    // 有内容时
-    &.fui-divider--with-content {
-      border-top: none;
-
-      &::before,
-      &::after {
-        content: '';
-        flex: 1;
-        border-top-width: 2rpx;
-        border-top-style: solid;
-        border-color: inherit;
-      }
-
-      &.fui-divider--hairline::before,
-      &.fui-divider--hairline::after {
-        border-top-width: 1rpx;
-      }
-
-      &.fui-divider--dashed::before,
-      &.fui-divider--dashed::after {
-        border-top-style: dashed;
-      }
-
-      // 内容位置
-      &.fui-divider--content-left {
-        &::before {
-          max-width: 48rpx;
-        }
-      }
-
-      &.fui-divider--content-right {
-        &::after {
-          max-width: 48rpx;
-        }
-      }
-    }
-  }
-
-  // 垂直分割线
-  &--vertical {
-    width: 2rpx;
-    height: 1em;
-    margin: 0 16rpx;
-    border-left-width: 2rpx;
-    border-left-style: solid;
-
-    &.fui-divider--hairline {
-      width: 1rpx;
-      border-left-width: 1rpx;
-    }
-
-    &.fui-divider--dashed {
-      border-left-style: dashed;
-    }
-  }
-}
-
-.fui-divider__content {
-  padding: 0 24rpx;
-  font-size: 28rpx;
-  color: var(--fui-color-text-tertiary);
-  white-space: nowrap;
-}
+@import './style.scss';
 </style>

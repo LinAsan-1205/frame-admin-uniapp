@@ -1,0 +1,100 @@
+@use 'sass:map';
+@use '../../styles/design' as *;
+
+// Message 组件变量
+$message: () !default;
+$message: map.merge(
+  (
+    padding: 16rpx 24rpx,
+    gap: 12rpx,
+    bg-color: get-css-var('color', 'surface', 'base'),
+    border-radius: 16rpx,
+    shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.12),
+    font-size: 28rpx,
+    color: get-css-var('color', 'text', 'base'),
+    offset-top: 100rpx,
+    offset-bottom: 100rpx,
+  ),
+  $message
+);
+
+// 外层容器 - 固定定位
+.#{$namespace}-message__wrapper {
+  position: fixed;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+
+  &--var {
+    @include define-preset-values('message', $message);
+  }
+
+  // top 位置 - 适配刘海屏
+  &--top {
+    top: get-css-var('message', 'offset-top');
+    top: calc(get-css-var('message', 'offset-top') + constant(safe-area-inset-top));
+    top: calc(get-css-var('message', 'offset-top') + env(safe-area-inset-top));
+  }
+
+  // center 位置
+  &--center {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  // bottom 位置 - 适配底部横条
+  &--bottom {
+    bottom: get-css-var('message', 'offset-bottom');
+    bottom: calc(get-css-var('message', 'offset-bottom') + constant(safe-area-inset-bottom));
+    bottom: calc(get-css-var('message', 'offset-bottom') + env(safe-area-inset-bottom));
+  }
+}
+
+// Message 内容样式
+.#{$namespace}-message {
+  display: inline-flex;
+  align-items: center;
+  gap: get-css-var('message', 'gap');
+  padding: get-css-var('message', 'padding');
+  background: get-css-var('message', 'bg-color');
+  border-radius: get-css-var('message', 'border-radius');
+  box-shadow: get-css-var('message', 'shadow');
+  font-size: get-css-var('message', 'font-size');
+  color: get-css-var('message', 'color');
+  pointer-events: auto;
+}
+
+.#{$namespace}-message__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.#{$namespace}-message__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.#{$namespace}-message__text {
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.#{$namespace}-message__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 16rpx;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 180ms cubic-bezier(0.2, 0, 0, 1);
+
+  &:hover {
+    opacity: 1;
+  }
+}

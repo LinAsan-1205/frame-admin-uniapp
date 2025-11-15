@@ -1,0 +1,27 @@
+@use 'sass:map';
+@use '../../styles/design' as *;
+
+// Grid 组件变量
+$grid: () !default;
+$grid: map.merge(
+  (
+    border-color: get-css-var('color', 'border', 'base'),
+    border-width: 1rpx,
+  ),
+  $grid
+);
+
+.#{$namespace}-grid {
+  display: grid;
+  width: 100%;
+
+  &--var {
+    @include define-preset-values('grid', $grid);
+  }
+
+  // 带边框
+  &--border {
+    border-top: get-css-var('grid', 'border-width') solid get-css-var('grid', 'border-color');
+    border-left: get-css-var('grid', 'border-width') solid get-css-var('grid', 'border-color');
+  }
+}

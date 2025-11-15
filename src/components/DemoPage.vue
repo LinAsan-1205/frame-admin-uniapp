@@ -24,7 +24,7 @@ defineProps<Props>();
 
 <style scoped lang="scss">
 .demo-page {
-  background: var(--fui-color-bg-primary);
+  background: var(--fui-background-base);
 }
 
 .demo-page__header {
@@ -36,7 +36,7 @@ defineProps<Props>();
 }
 
 .demo-page__desc {
-  color: var(--fui-color-text-secondary);
+  color: var(--fui-text-secondary);
 }
 
 // 暗黑模式
@@ -56,7 +56,7 @@ defineProps<Props>();
   }
 
   .demo-page__desc {
-    color: var(--fui-color-text-secondary);
+    color: var(--fui-text-secondary);
   }
 }
 </style>

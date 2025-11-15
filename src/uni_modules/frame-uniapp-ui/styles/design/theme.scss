@@ -1,0 +1,53 @@
+@use 'sass:map';
+
+// 颜色映射表
+$color-map: () !default;
+$color-map: map.deep-merge(
+  (
+    primary: (
+      base: #2563eb,
+    ),
+    success: (
+      base: #10b981,
+    ),
+    warning: (
+      base: #f59e0b,
+    ),
+    danger: (
+      base: #ef4444,
+    ),
+    info: (
+      base: #6b7280,
+    ),
+    black: (
+      base: #000000,
+    ),
+    white: (
+      base: #ffffff,
+    ),
+    text: (
+      base: #0f172a,
+      secondary: #475467,
+      tertiary: #6b7280,
+      disabled: #d1d5db,
+    ),
+    background: (
+      base: #ffffff,
+      secondary: #f5f6f8,
+      tertiary: #e5e7eb,
+    ),
+    border: (
+      base: #e2e8f0,
+      strong: #cbd5f5,
+    ),
+    surface: (
+      base: #ffffff,
+      muted: #f8fafc,
+    ),
+  ),
+  $color-map
+);
+
+// 类型列表
+$types: primary, success, warning, danger, info;
+$secondary: black, white, text, background, border, surface;

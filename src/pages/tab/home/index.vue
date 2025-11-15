@@ -114,7 +114,7 @@ interface ComponentCardItem {
   name: string;
   desc: string;
   path: string;
-  category: 'basic' | 'form' | 'feedback' | 'data';
+  category: 'basic' | 'form' | 'feedback' | 'data' | 'navigation';
   icon?: string;
 }
 
@@ -123,7 +123,7 @@ const { t } = useI18n();
 const { isDark, toggleTheme } = useTheme();
 
 // 当前激活的分类
-const activeCategory = ref<'all' | 'basic' | 'feedback' | 'data'>('all');
+const activeCategory = ref<'all' | 'basic' | 'feedback' | 'data' | 'navigation'>('all');
 
 // 所有组件配置
 const allComponents = computed<ComponentCardItem[]>(() => [
@@ -287,6 +287,14 @@ const allComponents = computed<ComponentCardItem[]>(() => [
     category: 'data',
     icon: 'i-mdi-page-next-outline',
   },
+  {
+    key: 'tabbar',
+    name: 'Tabbar 标签栏',
+    desc: '底部导航栏，用于在不同页面之间进行切换',
+    path: '/pages/components/tabbar/index',
+    category: 'navigation',
+    icon: 'i-mdi-dock-bottom',
+  },
 ]);
 
 // 按分类筛选组件
@@ -306,9 +314,13 @@ const dataComponents = computed(() =>
   allComponents.value.filter(c => c.category === 'data'),
 );
 
+const navigationComponents = computed(() =>
+  allComponents.value.filter(c => c.category === 'navigation'),
+);
+
 // 分类标签配置
 const categoryTabs = computed<Array<{
-  value: 'all' | 'basic' | 'feedback' | 'data';
+  value: 'all' | 'basic' | 'feedback' | 'data' | 'navigation';
   label: string;
   count: number;
   icon: string;
@@ -348,6 +360,8 @@ const displayedComponents = computed(() => {
       return feedbackComponents.value;
     case 'data':
       return dataComponents.value;
+    case 'navigation':
+      return navigationComponents.value;
     default:
       return allComponents.value;
   }
@@ -357,7 +371,7 @@ const privacyTitle = computed(() => t('home.privacy.title'));
 const privacySubTitle = computed(() => t('home.privacy.subtitle'));
 
 // 切换分类
-function switchCategory(category: 'all' | 'basic' | 'feedback' | 'data') {
+function switchCategory(category: 'all' | 'basic' | 'feedback' | 'data' | 'navigation') {
   activeCategory.value = category;
 }
 

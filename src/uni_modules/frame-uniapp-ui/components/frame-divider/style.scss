@@ -1,0 +1,106 @@
+@use 'sass:map';
+@use '../../styles/design' as *;
+
+// Divider 组件变量
+$divider: () !default;
+$divider: map.merge(
+  (
+    border-color: get-css-var('color', 'border', 'base'),
+    border-width: 2rpx,
+    border-width-hairline: 1rpx,
+    vertical-margin: 0 16rpx,
+    content-padding: 0 24rpx,
+    content-font-size: 28rpx,
+    content-color: get-css-var('color', 'text', 'tertiary'),
+    content-min-width: 48rpx,
+  ),
+  $divider
+);
+
+.#{$namespace}-divider {
+  display: flex;
+  align-items: center;
+  border-color: get-css-var('divider', 'border-color');
+  box-sizing: border-box;
+
+  &--var {
+    @include define-preset-values('divider', $divider);
+  }
+
+  // 水平分割线
+  &--horizontal {
+    width: 100%;
+    border-top-width: get-css-var('divider', 'border-width');
+    border-top-style: solid;
+
+    &.#{$namespace}-divider--hairline {
+      border-top-width: get-css-var('divider', 'border-width-hairline');
+    }
+
+    &.#{$namespace}-divider--dashed {
+      border-top-style: dashed;
+    }
+
+    // 有内容时
+    &.#{$namespace}-divider--with-content {
+      border-top: none;
+
+      &::before,
+      &::after {
+        content: '';
+        flex: 1;
+        border-top-width: get-css-var('divider', 'border-width');
+        border-top-style: solid;
+        border-color: inherit;
+      }
+
+      &.#{$namespace}-divider--hairline::before,
+      &.#{$namespace}-divider--hairline::after {
+        border-top-width: get-css-var('divider', 'border-width-hairline');
+      }
+
+      &.#{$namespace}-divider--dashed::before,
+      &.#{$namespace}-divider--dashed::after {
+        border-top-style: dashed;
+      }
+
+      // 内容位置
+      &.#{$namespace}-divider--content-left {
+        &::before {
+          max-width: get-css-var('divider', 'content-min-width');
+        }
+      }
+
+      &.#{$namespace}-divider--content-right {
+        &::after {
+          max-width: get-css-var('divider', 'content-min-width');
+        }
+      }
+    }
+  }
+
+  // 垂直分割线
+  &--vertical {
+    width: get-css-var('divider', 'border-width');
+    height: 1em;
+    margin: get-css-var('divider', 'vertical-margin');
+    border-left-width: get-css-var('divider', 'border-width');
+    border-left-style: solid;
+
+    &.#{$namespace}-divider--hairline {
+      width: get-css-var('divider', 'border-width-hairline');
+      border-left-width: get-css-var('divider', 'border-width-hairline');
+    }
+
+    &.#{$namespace}-divider--dashed {
+      border-left-style: dashed;
+    }
+  }
+}
+
+.#{$namespace}-divider__content {
+  padding: get-css-var('divider', 'content-padding');
+  font-size: get-css-var('divider', 'content-font-size');
+  color: get-css-var('divider', 'content-color');
+  white-space: nowrap;
+}

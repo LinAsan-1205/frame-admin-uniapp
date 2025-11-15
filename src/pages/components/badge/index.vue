@@ -3,13 +3,19 @@
     <DemoSection title="基础用法">
       <view class="badge-row">
         <frame-badge :value="5">
-          <view class="badge-box">消息</view>
+          <view class="badge-box">
+            消息
+          </view>
         </frame-badge>
         <frame-badge :value="99" type="primary">
-          <view class="badge-box">通知</view>
+          <view class="badge-box">
+            通知
+          </view>
         </frame-badge>
         <frame-badge :value="120" :max="99" type="success">
-          <view class="badge-box">待办</view>
+          <view class="badge-box">
+            待办
+          </view>
         </frame-badge>
       </view>
     </DemoSection>
@@ -17,13 +23,19 @@
     <DemoSection title="小红点">
       <view class="badge-row">
         <frame-badge :dot="true">
-          <view class="badge-box">小红点</view>
+          <view class="badge-box">
+            小红点
+          </view>
         </frame-badge>
         <frame-badge :dot="true" type="success">
-          <view class="badge-box">成功</view>
+          <view class="badge-box">
+            成功
+          </view>
         </frame-badge>
         <frame-badge :dot="true" type="warning">
-          <view class="badge-box">警告</view>
+          <view class="badge-box">
+            警告
+          </view>
         </frame-badge>
       </view>
     </DemoSection>
@@ -31,19 +43,29 @@
     <DemoSection title="不同类型">
       <view class="badge-row">
         <frame-badge :value="5" type="default">
-          <view class="badge-box">默认</view>
+          <view class="badge-box">
+            默认
+          </view>
         </frame-badge>
         <frame-badge :value="5" type="primary">
-          <view class="badge-box">主要</view>
+          <view class="badge-box">
+            主要
+          </view>
         </frame-badge>
         <frame-badge :value="5" type="success">
-          <view class="badge-box">成功</view>
+          <view class="badge-box">
+            成功
+          </view>
         </frame-badge>
         <frame-badge :value="5" type="warning">
-          <view class="badge-box">警告</view>
+          <view class="badge-box">
+            警告
+          </view>
         </frame-badge>
         <frame-badge :value="5" type="danger">
-          <view class="badge-box">危险</view>
+          <view class="badge-box">
+            危险
+          </view>
         </frame-badge>
       </view>
     </DemoSection>
@@ -58,9 +80,9 @@
 </template>
 
 <script setup lang="ts">
+import ApiItem from '@/components/ApiItem.vue';
 import DemoPage from '@/components/DemoPage.vue';
 import DemoSection from '@/components/DemoSection.vue';
-import ApiItem from '@/components/ApiItem.vue';
 </script>
 
 <style scoped lang="scss">
@@ -75,7 +97,7 @@ import ApiItem from '@/components/ApiItem.vue';
   background: linear-gradient(135deg, rgba(0, 61, 173, 0.05), rgba(255, 255, 255, 0.9));
   border-radius: 12rpx;
   font-size: 24rpx;
-  color: var(--theme-content-color, var(--fui-color-text-primary));
+  color: var(--theme-content-color, var(--fui-text-base));
   border: 2rpx solid rgba(0, 61, 173, 0.15);
 }
 </style>

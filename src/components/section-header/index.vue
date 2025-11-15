@@ -25,7 +25,7 @@ defineProps<{
 .section-header {
   margin-bottom: 24rpx;
   padding-bottom: 16rpx;
-  border-bottom: 2rpx solid var(--fui-color-border, #f0f2f5);
+  border-bottom: 2rpx solid var(--fui-border-base, #f0f2f5);
 }
 
 .section-header__main {
@@ -37,19 +37,19 @@ defineProps<{
 
 .section-header__icon {
   font-size: 32rpx;
-  color: var(--fui-color-primary, #667eea);
+  color: var(--fui-primary-base, #667eea);
 }
 
 .section-header__title {
   font-size: 32rpx;
   font-weight: 600;
-  color: var(--fui-color-text-primary, #1a1a1a);
+  color: var(--fui-text-base, #1a1a1a);
   display: block;
 }
 
 .section-header__subtitle {
   font-size: 24rpx;
-  color: var(--fui-color-text-secondary, #6b7280);
+  color: var(--fui-text-secondary, #6b7280);
   display: block;
   line-height: 1.5;
 }

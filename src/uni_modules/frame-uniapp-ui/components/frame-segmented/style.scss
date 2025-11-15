@@ -1,0 +1,152 @@
+@use 'sass:map';
+@use '../../styles/design' as *;
+
+// Segmented 组件变量
+$segmented: () !default;
+$segmented: map.merge(
+  (
+    bg-color: get-css-var('color', 'background', 'secondary'),
+    item-color: get-css-var('color', 'text', 'secondary'),
+    item-color-active: get-css-var('color', 'text', 'base'),
+    indicator-bg: get-css-var('color', 'surface', 'base'),
+    padding: 6rpx,
+    gap: 8rpx,
+    // 尺寸
+    padding-sm: 8rpx 0,
+    font-size-sm: 24rpx,
+    padding-md: 12rpx 0,
+    font-size-md: 28rpx,
+    padding-lg: 16rpx 0,
+    font-size-lg: 32rpx,
+    // 圆角
+    radius-square: 8rpx,
+    radius-square-item: 4rpx,
+    radius-round: 12rpx,
+    radius-round-item: 8rpx,
+  ),
+  $segmented
+);
+
+.#{$namespace}-segmented {
+  position: relative;
+  display: flex;
+  background: get-css-var('segmented', 'bg-color');
+  padding: get-css-var('segmented', 'padding');
+  gap: get-css-var('segmented', 'gap');
+
+  &--var {
+    @include define-preset-values('segmented', $segmented);
+  }
+
+  &--block {
+    width: 100%;
+  }
+
+  &--disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  // 尺寸
+  &--sm {
+    .#{$namespace}-segmented__item {
+      padding: get-css-var('segmented', 'padding-sm');
+      font-size: get-css-var('segmented', 'font-size-sm');
+    }
+  }
+
+  &--md {
+    .#{$namespace}-segmented__item {
+      padding: get-css-var('segmented', 'padding-md');
+      font-size: get-css-var('segmented', 'font-size-md');
+    }
+  }
+
+  &--lg {
+    .#{$namespace}-segmented__item {
+      padding: get-css-var('segmented', 'padding-lg');
+      font-size: get-css-var('segmented', 'font-size-lg');
+    }
+  }
+
+  // 形状
+  &--square {
+    border-radius: get-css-var('segmented', 'radius-square');
+
+    .#{$namespace}-segmented__item {
+      border-radius: get-css-var('segmented', 'radius-square-item');
+    }
+
+    .#{$namespace}-segmented__indicator {
+      border-radius: get-css-var('segmented', 'radius-square-item');
+    }
+  }
+
+  &--round {
+    border-radius: get-css-var('segmented', 'radius-round');
+
+    .#{$namespace}-segmented__item {
+      border-radius: get-css-var('segmented', 'radius-round-item');
+    }
+
+    .#{$namespace}-segmented__indicator {
+      border-radius: get-css-var('segmented', 'radius-round-item');
+    }
+  }
+
+  &--pill {
+    border-radius: 999rpx;
+
+    .#{$namespace}-segmented__item {
+      border-radius: 999rpx;
+    }
+
+    .#{$namespace}-segmented__indicator {
+      border-radius: 999rpx;
+    }
+  }
+}
+
+.#{$namespace}-segmented__item {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: get-css-var('segmented', 'gap');
+  padding: get-css-var('segmented', 'padding-md');
+  font-size: get-css-var('segmented', 'font-size-md');
+  color: get-css-var('segmented', 'item-color');
+  cursor: pointer;
+  transition: color 180ms cubic-bezier(0.2, 0, 0, 1);
+  user-select: none;
+
+  &--active {
+    color: get-css-var('segmented', 'item-color-active');
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.#{$namespace}-segmented__item-icon {
+  flex-shrink: 0;
+}
+
+.#{$namespace}-segmented__item-text {
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.#{$namespace}-segmented__indicator {
+  position: absolute;
+  z-index: 1;
+  top: 6rpx;
+  bottom: 6rpx;
+  background: get-css-var('segmented', 'indicator-bg');
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.08);
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}

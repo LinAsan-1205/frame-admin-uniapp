@@ -15,3 +15,5 @@ trigger: manual
 # styles
 - 样式要符合当前系统主题
 - 颜色字体大小 不允许写死 必须用已有的 如果没有 就写到src\uni_modules\frame-uniapp-ui\styles\variables.scss里面
+- 样式的 颜色 大小 边距大小 只要是数字 颜色之类的 都需要放到当前组件的var 里面 定义
+- 每个vue文件里面不写css css 全部定义到style.scss 然后在组件里面引入

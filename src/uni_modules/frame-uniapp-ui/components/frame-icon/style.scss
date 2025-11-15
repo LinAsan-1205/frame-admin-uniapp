@@ -1,0 +1,52 @@
+@use 'sass:map';
+@use '../../styles/design' as *;
+
+// Icon 组件变量
+$icon: () !default;
+$icon: map.merge(
+  (
+    size-xs: 32rpx,
+    size-sm: 40rpx,
+    size-md: 48rpx,
+    size-lg: 56rpx,
+    size-xl: 64rpx,
+  ),
+  $icon
+);
+
+.#{$namespace}-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  line-height: 1;
+
+  &--var {
+    @include define-preset-values('icon', $icon);
+  }
+
+  // 加粗
+  &--bold {
+    font-weight: bold;
+  }
+
+  // 旋转动画
+  &--spin {
+    animation: #{$namespace}-icon-rotate linear infinite;
+  }
+}
+
+.#{$namespace}-icon__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes #{$namespace}-icon-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

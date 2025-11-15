@@ -1,0 +1,390 @@
+@use 'sass:map';
+@use '../../styles/design' as *;
+
+// Button 组件变量
+$button: () !default;
+$button: map.merge(
+  (
+    // 默认尺寸
+    height: 80rpx,
+    padding: 0 30rpx,
+    font-size: 28rpx,
+    border-width: 2rpx,
+    border-radius: 999rpx,
+    // 小尺寸
+    height-mini: 56rpx,
+    padding-mini: 0 16rpx,
+    font-size-mini: 22rpx,
+    border-width-mini: 1rpx,
+    // 小尺寸
+    height-small: 64rpx,
+    padding-small: 0 20rpx,
+    font-size-small: 24rpx,
+    border-width-small: 1rpx,
+    // 大尺寸
+    height-large: 96rpx,
+    padding-large: 0 40rpx,
+    font-size-large: 32rpx,
+    border-width-large: 2rpx,
+    // 圆角
+    radius-rounded: 16rpx,
+    radius-rounded-mini: 10rpx,
+    radius-rounded-small: 12rpx,
+    radius-rounded-large: 20rpx,
+    radius-square: 8rpx,
+    radius-square-mini: 4rpx,
+    radius-square-small: 6rpx,
+    radius-square-large: 10rpx,
+    // 颜色
+    color: get-css-var('color', 'text', 'base'),
+    bg-color: get-css-var('color', 'background', 'secondary'),
+  ),
+  $button
+);
+
+.#{$namespace}-button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+  text-align: center;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: get-css-var('button', 'height');
+  padding: get-css-var('button', 'padding');
+  border-radius: get-css-var('button', 'border-radius');
+  border-width: get-css-var('button', 'border-width');
+  border-style: solid;
+  border-color: transparent;
+  font-size: get-css-var('button', 'font-size');
+  font-weight: 600;
+  line-height: 1.4;
+  color: get-css-var('button', 'color');
+  background-color: get-css-var('button', 'bg-color');
+  transition: all 180ms cubic-bezier(0.2, 0, 0, 1);
+  box-shadow: 0 -1rpx 4rpx rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+
+  &--var {
+    @include define-preset-values('button', $button);
+  }
+
+  &::after {
+    border: none !important;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    transform: translate(-50%, -50%);
+    transition: width 600ms ease, height 600ms ease, opacity 600ms ease;
+    opacity: 0;
+  }
+
+  &:active::before {
+    width: 300%;
+    height: 300%;
+    opacity: 1;
+  }
+
+  // 尺寸
+  &--size-mini {
+    min-height: get-css-var('button', 'height-mini');
+    padding: get-css-var('button', 'padding-mini');
+    font-size: get-css-var('button', 'font-size-mini');
+    line-height: 1.4;
+    border-width: get-css-var('button', 'border-width-mini');
+  }
+
+  &--size-small {
+    min-height: get-css-var('button', 'height-small');
+    padding: get-css-var('button', 'padding-small');
+    font-size: get-css-var('button', 'font-size-small');
+    line-height: 1.4;
+    border-width: get-css-var('button', 'border-width-small');
+  }
+
+  &--size-large {
+    min-height: get-css-var('button', 'height-large');
+    padding: get-css-var('button', 'padding-large');
+    font-size: get-css-var('button', 'font-size-large');
+    line-height: 1.4;
+    border-width: get-css-var('button', 'border-width-large');
+  }
+
+  // 形状
+  &--shape-rounded {
+    border-radius: get-css-var('button', 'radius-rounded');
+
+    &.#{$namespace}-button--size-mini {
+      border-radius: get-css-var('button', 'radius-rounded-mini');
+    }
+
+    &.#{$namespace}-button--size-small {
+      border-radius: get-css-var('button', 'radius-rounded-small');
+    }
+
+    &.#{$namespace}-button--size-large {
+      border-radius: get-css-var('button', 'radius-rounded-large');
+    }
+  }
+
+  &--shape-pill {
+    border-radius: 999rpx;
+  }
+
+  &--shape-square {
+    border-radius: get-css-var('button', 'radius-square');
+
+    &.#{$namespace}-button--size-mini {
+      border-radius: get-css-var('button', 'radius-square-mini');
+    }
+
+    &.#{$namespace}-button--size-small {
+      border-radius: get-css-var('button', 'radius-square-small');
+    }
+
+    &.#{$namespace}-button--size-large {
+      border-radius: get-css-var('button', 'radius-square-large');
+    }
+  }
+
+  // 块级
+  &--block {
+    width: 100%;
+  }
+
+  // 细边框
+  &--hairline {
+    border-width: 1rpx;
+
+    &.#{$namespace}-button--size-small {
+      border-width: 1rpx;
+    }
+
+    &.#{$namespace}-button--size-large {
+      border-width: 1rpx;
+    }
+  }
+
+  // 状态
+  &.is-loading {
+    cursor: wait;
+    pointer-events: none;
+  }
+
+  &.is-disabled {
+    opacity: 0.5;
+    box-shadow: none;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+.#{$namespace}-button__loading,
+.#{$namespace}-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.#{$namespace}-button__content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.#{$namespace}-button__spinner {
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+  border-width: 4rpx;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.25);
+  border-top-color: currentcolor;
+  animation: #{$namespace}-rotate 800ms linear infinite;
+}
+
+.#{$namespace}-button--size-small .#{$namespace}-button__spinner {
+  width: 28rpx;
+  height: 28rpx;
+  border-width: 3rpx;
+}
+
+.#{$namespace}-button--size-large .#{$namespace}-button__spinner {
+  width: 36rpx;
+  height: 36rpx;
+  border-width: 4rpx;
+}
+
+@keyframes #{$namespace}-rotate {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// 主题样式
+@mixin define-button-style($style-map) {
+  @include define-preset-style('button', $style-map);
+}
+
+@each $type in $types {
+  .#{$namespace}-button--theme-#{$type} {
+    // base 变体
+    &.#{$namespace}-button--variant-base {
+      @include define-button-style(
+        (
+          color: ('color', 'white', 'base'),
+          bg-color: ('color', $type, 'base'),
+          border-color: ('color', $type, 'base'),
+        )
+      );
+      background: get-css-var('button', 'bg-color');
+      color: get-css-var('button', 'color');
+      border-color: get-css-var('button', 'border-color');
+      box-shadow: 0 8rpx 20rpx rgba(15, 23, 42, 0.12),
+                  0 4rpx 8rpx rgba(15, 23, 42, 0.08),
+                  inset 0 -2rpx 0 rgba(0, 0, 0, 0.1);
+
+      &:active {
+        box-shadow: 0 4rpx 12rpx rgba(15, 23, 42, 0.15),
+                    0 2rpx 4rpx rgba(15, 23, 42, 0.1),
+                    inset 0 2rpx 4rpx rgba(0, 0, 0, 0.15);
+      }
+    }
+
+    // outline 变体
+    &.#{$namespace}-button--variant-outline {
+      @include define-button-style(
+        (
+          color: ('color', $type, 'base'),
+          border-color: ('color', $type, 'base'),
+        )
+      );
+      background-color: transparent;
+      color: get-css-var('button', 'color');
+      border-color: get-css-var('button', 'border-color');
+      box-shadow: none;
+
+      &:active {
+        background: rgba(get-base-color-var($type), 0.08);
+      }
+    }
+
+    // dashed 变体
+    &.#{$namespace}-button--variant-dashed {
+      @include define-button-style(
+        (
+          color: ('color', $type, 'base'),
+          border-color: ('color', $type, 'base'),
+        )
+      );
+      background-color: transparent;
+      color: get-css-var('button', 'color');
+      border-color: get-css-var('button', 'border-color');
+      border-style: dashed;
+      box-shadow: none;
+
+      &:active {
+        background: rgba(get-base-color-var($type), 0.08);
+      }
+    }
+
+    // text 变体
+    &.#{$namespace}-button--variant-text {
+      @include define-button-style(
+        (
+          color: ('color', $type, 'base'),
+        )
+      );
+      background-color: transparent;
+      color: get-css-var('button', 'color');
+      border-color: transparent;
+      box-shadow: none;
+      min-height: auto;
+      padding: 4rpx 0;
+
+      &:active {
+        opacity: 0.7;
+      }
+
+      &.#{$namespace}-button--size-small {
+        padding: 2rpx 0;
+        min-height: auto;
+      }
+
+      &.#{$namespace}-button--size-large {
+        padding: 6rpx 0;
+        min-height: auto;
+      }
+    }
+
+    // ghost 修饰符
+    &.#{$namespace}-button--ghost {
+      @include define-button-style(
+        (
+          color: ('color', $type, 'base'),
+          border-color: ('color', $type, 'base'),
+        )
+      );
+      background-color: transparent;
+      color: get-css-var('button', 'color');
+      border-color: get-css-var('button', 'border-color');
+      box-shadow: none;
+
+      &:active {
+        background: rgba(get-base-color-var($type), 0.1);
+      }
+    }
+  }
+}
+
+// 默认主题
+.#{$namespace}-button--theme-default {
+  &.#{$namespace}-button--variant-base {
+    background: get-base-color-var('background');
+    color: get-css-var('color', 'text', 'base');
+    border-color: get-css-var('color', 'border', 'base');
+  }
+
+  &.#{$namespace}-button--variant-outline {
+    background-color: transparent;
+    color: get-css-var('color', 'text', 'base');
+    border-color: get-css-var('color', 'border', 'base');
+  }
+}
+
+// 点击效果
+.#{$namespace}-button:not(.is-disabled):not(.#{$namespace}-button--variant-text):active {
+  transform: translateY(2rpx) scale(0.98);
+}
+
+// 移除 uni-app button 默认的 hover 样式
+.button-hover {
+  opacity: 1;
+}

@@ -1,0 +1,158 @@
+@use 'sass:map';
+@use '../../styles/design' as *;
+
+// Loading 组件变量
+$loading: () !default;
+$loading: map.merge(
+  (
+    gap: 16rpx,
+    spinner-border-width: 4rpx,
+    spinner-border-color: rgba(0, 0, 0, 0.1),
+    spinner-color: get-base-color-var('primary'),
+    dot-size: 12rpx,
+    dot-gap: 8rpx,
+    dot-color: get-base-color-var('primary'),
+    text-size: 28rpx,
+    text-color: get-css-var('color', 'text', 'secondary'),
+  ),
+  $loading
+);
+
+.#{$namespace}-loading {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: get-css-var('loading', 'gap');
+
+  &--var {
+    @include define-preset-values('loading', $loading);
+  }
+
+  // 垂直排列
+  &--vertical {
+    flex-direction: column;
+  }
+}
+
+.#{$namespace}-loading__spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Spinner 动画
+.#{$namespace}-loading__spinner-inner {
+  border: get-css-var('loading', 'spinner-border-width') solid get-css-var('loading', 'spinner-border-color');
+  border-top-color: get-css-var('loading', 'spinner-color');
+  border-radius: 50%;
+  animation: #{$namespace}-loading-spin 0.8s linear infinite;
+}
+
+// Circular 动画
+.#{$namespace}-loading__circular {
+  position: relative;
+  border-radius: 50%;
+  animation: #{$namespace}-loading-rotate 2s linear infinite;
+}
+
+.#{$namespace}-loading__circular-path {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: get-css-var('loading', 'spinner-border-width') solid transparent;
+  border-top-color: get-css-var('loading', 'spinner-color');
+  border-right-color: get-css-var('loading', 'spinner-color');
+  border-radius: 50%;
+  animation: #{$namespace}-loading-circular 1.5s ease-in-out infinite;
+}
+
+// Dots 动画
+.#{$namespace}-loading__dots {
+  display: flex;
+  align-items: center;
+  gap: get-css-var('loading', 'dot-gap');
+}
+
+.#{$namespace}-loading__dot {
+  width: get-css-var('loading', 'dot-size');
+  height: get-css-var('loading', 'dot-size');
+  background-color: get-css-var('loading', 'dot-color');
+  border-radius: 50%;
+  animation: #{$namespace}-loading-dots 1.4s ease-in-out infinite;
+
+  &:nth-child(1) {
+    animation-delay: -0.32s;
+  }
+
+  &:nth-child(2) {
+    animation-delay: -0.16s;
+  }
+}
+
+// Pulse 动画
+.#{$namespace}-loading__pulse {
+  background-color: get-css-var('loading', 'spinner-color');
+  border-radius: 50%;
+  animation: #{$namespace}-loading-pulse 1.2s ease-in-out infinite;
+}
+
+.#{$namespace}-loading__text {
+  font-size: get-css-var('loading', 'text-size');
+  color: get-css-var('loading', 'text-color');
+  line-height: 1.5;
+}
+
+// 动画定义
+@keyframes #{$namespace}-loading-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes #{$namespace}-loading-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes #{$namespace}-loading-circular {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes #{$namespace}-loading-dots {
+  0%, 80%, 100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes #{$namespace}-loading-pulse {
+  0%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}

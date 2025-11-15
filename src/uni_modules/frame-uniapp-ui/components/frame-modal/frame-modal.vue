@@ -83,6 +83,7 @@ const { n, classes } = createNamespace('modal')
 const modalClasses = computed(() =>
   classes(
     n(),
+    n('--var'),
     props.customClass,
   ),
 )
@@ -171,64 +172,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/index.scss';
-
-.fui-modal {
-  position: relative;
-  max-width: 90%;
-  background: var(--fui-color-surface);
-  border-radius: 24rpx;
-  overflow: hidden;
-  box-shadow: 0 16rpx 48rpx rgba(0, 0, 0, 0.15);
-}
-
-.fui-modal__close {
-  position: absolute;
-  top: 24rpx;
-  right: 24rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 56rpx;
-  height: 56rpx;
-  cursor: pointer;
-  color: var(--fui-color-text-quaternary);
-  transition: color $fui-transition;
-  z-index: 1;
-
-  &:hover {
-    color: var(--fui-color-text-secondary);
-  }
-
-  &:active {
-    color: var(--fui-color-text-primary);
-  }
-}
-
-.fui-modal__header {
-  padding: 48rpx 32rpx 24rpx;
-  text-align: center;
-}
-
-.fui-modal__title {
-  font-size: 36rpx;
-  font-weight: 600;
-  color: var(--fui-color-text-primary);
-  line-height: 1.5;
-}
-
-.fui-modal__body {
-  padding: 0 32rpx 32rpx;
-  text-align: center;
-}
-
-.fui-modal__content {
-  font-size: 28rpx;
-  color: var(--fui-color-text-secondary);
-  line-height: 1.6;
-}
-
-.fui-modal__footer {
-  padding: 0 32rpx 32rpx;
-}
+@import './style.scss';
 </style>

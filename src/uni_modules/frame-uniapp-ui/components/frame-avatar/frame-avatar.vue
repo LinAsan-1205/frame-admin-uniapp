@@ -88,6 +88,7 @@ const textSize = computed(() => {
 const avatarClasses = computed(() =>
   classes(
     n(),
+    n('--var'),
     n(`--${props.shape}`),
     props.customClass,
   ),
@@ -177,38 +178,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/index.scss';
-
-.fui-avatar {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background-color: var(--fui-color-surface-muted);
-  color: var(--fui-color-text-tertiary);
-  flex-shrink: 0;
-  position: relative;
-
-  // 圆形
-  &--circle {
-    border-radius: 50%;
-  }
-
-  // 方形
-  &--square {
-    border-radius: 12rpx;
-  }
-}
-
-.fui-avatar__image {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.fui-avatar__text {
-  font-weight: 500;
-  line-height: 1;
-  user-select: none;
-}
+@import './style.scss';
 </style>

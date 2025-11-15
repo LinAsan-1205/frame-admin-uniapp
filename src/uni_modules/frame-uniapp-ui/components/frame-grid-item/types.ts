@@ -1,0 +1,93 @@
+import type { PropType } from 'vue'
+
+/**
+ * FrameGridItem 组件属性
+ */
+export interface FrameGridItemProps {
+  /**
+   * 图标
+   */
+  icon?: string
+
+  /**
+   * 图标颜色
+   */
+  iconColor?: string
+
+  /**
+   * 图标类名前缀
+   * @default 'wd-icon'
+   */
+  iconPrefix?: string
+
+  /**
+   * 文字
+   */
+  text?: string
+
+  /**
+   * 徽章内容
+   */
+  badge?: string | number
+
+  /**
+   * 是否显示徽章小红点
+   * @default false
+   */
+  dot?: boolean
+
+  /**
+   * 自定义样式
+   */
+  customStyle?: Record<string, any> | string
+
+  /**
+   * 自定义类名
+   */
+  customClass?: string
+}
+
+/**
+ * FrameGridItem 组件事件
+ */
+export interface FrameGridItemEmits {
+  /**
+   * 点击事件
+   */
+  (e: 'click', event: Event): void
+}
+
+export const frameGridItemProps = {
+  icon: {
+    type: String,
+    default: '',
+  },
+  iconColor: {
+    type: String,
+    default: '',
+  },
+  iconPrefix: {
+    type: String,
+    default: 'wd-icon',
+  },
+  text: {
+    type: String,
+    default: '',
+  },
+  badge: {
+    type: [String, Number],
+    default: '',
+  },
+  dot: {
+    type: Boolean,
+    default: false,
+  },
+  customStyle: {
+    type: [Object, String] as PropType<Record<string, any> | string>,
+    default: () => ({}),
+  },
+  customClass: {
+    type: String,
+    default: '',
+  },
+}

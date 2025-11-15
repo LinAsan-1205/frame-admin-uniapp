@@ -195,6 +195,7 @@ const showRightEllipsis = computed(() => {
 const paginationClasses = computed(() => {
   return bemClasses(
     n(),
+    n('--var'),
     n(`--size-${props.size}` as any),
     [props.simple, n('--simple')],
     props.customClass,
@@ -246,69 +247,5 @@ function changePage(page: number) {
 </script>
 
 <style scoped lang="scss">
-.fui-pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 20rpx 0;
-}
-
-/* 简单模式 */
-.fui-pagination__simple {
-  display: flex;
-  align-items: center;
-  gap: 20rpx;
-}
-
-.fui-pagination__simple-info {
-  display: flex;
-  align-items: center;
-  gap: 8rpx;
-  padding: 0 20rpx;
-  font-size: 28rpx;
-  color: var(--fui-color-text-primary, #333);
-}
-
-.fui-pagination__simple-current {
-  font-weight: 600;
-  color: var(--fui-color-primary, #1890ff);
-}
-
-.fui-pagination__simple-separator {
-  margin: 0 4rpx;
-  color: var(--fui-color-text-secondary, #666);
-}
-
-.fui-pagination__simple-total {
-  color: var(--fui-color-text-secondary, #666);
-}
-
-/* 完整模式 */
-.fui-pagination__full {
-  display: flex;
-  align-items: center;
-  gap: 8rpx;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.fui-pagination__pages {
-  display: flex;
-  align-items: center;
-  gap: 6rpx;
-}
-
-/* 尺寸变体 */
-.fui-pagination--size-small {
-  .fui-pagination__simple-info {
-    font-size: 24rpx;
-  }
-}
-
-.fui-pagination--size-large {
-  .fui-pagination__simple-info {
-    font-size: 32rpx;
-  }
-}
+@import './style.scss';
 </style>

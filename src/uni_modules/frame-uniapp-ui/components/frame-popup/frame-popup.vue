@@ -1,6 +1,6 @@
 <template>
   <view v-if="popupState.showWrapper" :class="popupClasses" :style="popupStyles">
-    <!-- 遮罩层 -->
+    <!-- 驕ｮ鄂ｩ螻?-->
     <frame-overlay
       v-if="overlay"
       :show="popupState.showContent"
@@ -9,7 +9,7 @@
       @close="handleOverlayClick"
     />
 
-    <!-- 弹出内容：让过渡作用在内容节点本身（position: fixed） -->
+    <!-- 蠑ｹ蜃ｺ蜀�ｮｹ�夊ｮｩ霑�ｸ｡菴懃畑蝨ｨ蜀�ｮｹ闃らせ譛ｬ霄ｫ��osition: fixed�?-->
     <frame-transition
       :show="popupState.showContent"
       :mode="transitionMode"
@@ -41,13 +41,13 @@ const emit = defineEmits<FramePopupEmits>()
 
 const { n, classes } = createNamespace('popup')
 
-// 弹出层状态
+// 蠑ｹ蜃ｺ螻ら憾諤?
 const popupState = reactive({
-  showWrapper: false, // 是否显示包裹层
-  showContent: false, // 是否显示内容（控制动画）
+  showWrapper: false, // 譏ｯ蜷ｦ譏ｾ遉ｺ蛹�｣ｹ螻?
+  showContent: false, // 譏ｯ蜷ｦ譏ｾ遉ｺ蜀�ｮｹ�域而蛻ｶ蜉ｨ逕ｻ��
 })
 
-// 过渡动画模式映射
+// 霑�ｸ｡蜉ｨ逕ｻ讓｡蠑乗丐蟆�
 const transitionModeMap: Record<PopupPosition, string> = {
   top: 'slide-down',
   bottom: 'slide-up',
@@ -56,26 +56,27 @@ const transitionModeMap: Record<PopupPosition, string> = {
   center: 'zoom-in',
 }
 
-// 过渡动画模式
+// 霑�ｸ｡蜉ｨ逕ｻ讓｡蠑�
 const transitionMode = computed(() => transitionModeMap[props.position])
 
-// 弹出层类名
+// 蠑ｹ蜃ｺ螻らｱｻ蜷?
 const popupClasses = computed(() =>
   classes(
     n(),
+    n('--var'),
     n(`--${props.position}`),
     props.customClass,
   ),
 )
 
-// 弹出层样式
+// 蠑ｹ蜃ｺ螻よ�ｷ蠑?
 const popupStyles = computed(() => {
   return {
     zIndex: props.zIndex,
   }
 })
 
-// 内容类名（以字符串返回，避免传数组给 frame-transition 的 custom-class）
+// 蜀�ｮｹ邀ｻ蜷搾ｼ井ｻ･蟄礼ｬｦ荳ｲ霑泌屓�碁∩蜈堺ｼ�謨ｰ扈�ｻ� frame-transition 逧?custom-class�?
 const contentClasses = computed(() =>
   classes(
     n('content'),
@@ -86,15 +87,15 @@ const contentClasses = computed(() =>
   ).join(' '),
 )
 
-// 内容样式
+// 蜀�ｮｹ譬ｷ蠑�
 const contentStyles = computed(() => {
   const baseStyles: Record<string, any> = {
     backgroundColor: props.bgColor,
-    // 确保内容在遮罩之上：内容层级 = 遮罩层级 + 1
+    // 遑ｮ菫晏�螳ｹ蝨ｨ驕ｮ鄂ｩ荵倶ｸ奇ｼ壼�螳ｹ螻らｺｧ = 驕ｮ鄂ｩ螻らｺｧ + 1
     zIndex: (props.zIndex || 0) + 1,
   }
 
-  // 圆角
+  // 蝨�ｧ�
   if (props.round) {
     const radius = addUnit(props.radius)
     if (props.position === 'top') {
@@ -108,17 +109,17 @@ const contentStyles = computed(() => {
     }
   }
 
-  // 宽度（左右弹出时生效）
+  // 螳ｽ蠎ｦ�亥ｷｦ蜿ｳ蠑ｹ蜃ｺ譌ｶ逕滓譜�?
   if (props.width && (props.position === 'left' || props.position === 'right')) {
     baseStyles.width = addUnit(props.width)
   }
 
-  // 高度（上下弹出时生效）
+  // 鬮伜ｺｦ�井ｸ贋ｸ句ｼｹ蜃ｺ譌ｶ逕滓譜�?
   if (props.height && (props.position === 'top' || props.position === 'bottom')) {
     baseStyles.height = addUnit(props.height)
   }
 
-  // center 模式：提供居中定位与位移（与动画 transform 合并）
+  // center 讓｡蠑擾ｼ壽署萓帛ｱ�ｸｭ螳壻ｽ堺ｸ惹ｽ咲ｧｻ�井ｸ主勘逕ｻ transform 蜷亥ｹｶ�?
   if (props.position === 'center') {
     baseStyles.top = '50%'
     baseStyles.left = '50%'
@@ -126,7 +127,7 @@ const contentStyles = computed(() => {
     baseStyles.maxWidth = '90%'
   }
 
-  // 合并自定义样式
+  // 蜷亥ｹｶ閾ｪ螳壻ｹ画�ｷ蠑?
   if (typeof props.customStyle === 'string') {
     return `${styleToString(baseStyles)};${props.customStyle}`
   }
@@ -138,7 +139,7 @@ const contentStyles = computed(() => {
 })
 
 /**
- * 将样式对象转为字符串
+ * 蟆��ｷ蠑丞ｯｹ雎｡霓ｬ荳ｺ蟄礼ｬｦ荳ｲ
  */
 function styleToString(styles: Record<string, any>): string {
   return Object.entries(styles)
@@ -150,7 +151,7 @@ function styleToString(styles: Record<string, any>): string {
 }
 
 /**
- * 处理遮罩层点击
+ * 螟�炊驕ｮ鄂ｩ螻らせ蜃?
  */
 function handleOverlayClick() {
   emit('click-overlay')
@@ -160,21 +161,21 @@ function handleOverlayClick() {
 }
 
 /**
- * 动画开始前
+ * 蜉ｨ逕ｻ蠑蟋句燕
  */
 function handleBeforeEnter() {
-  // 可以在这里做一些准备工作
+  // 蜿ｯ莉･蝨ｨ霑咎㈹蛛壻ｸ莠帛㊥螟�ｷ･菴?
 }
 
 /**
- * 动画结束后（打开）
+ * 蜉ｨ逕ｻ扈捺據蜷趣ｼ域遠蠑�?
  */
 function handleAfterEnter() {
   emit('open')
 }
 
 /**
- * 动画结束后（关闭）
+ * 蜉ｨ逕ｻ扈捺據蜷趣ｼ亥�髣ｭ�?
  */
 function handleAfterLeave() {
   popupState.showWrapper = false
@@ -182,7 +183,7 @@ function handleAfterLeave() {
 }
 
 /**
- * 打开弹出层
+ * 謇灘ｼ蠑ｹ蜃ｺ螻?
  */
 function open() {
   popupState.showWrapper = true
@@ -192,13 +193,13 @@ function open() {
 }
 
 /**
- * 关闭弹出层
+ * 蜈ｳ髣ｭ蠑ｹ蜃ｺ螻?
  */
 function close() {
   popupState.showContent = false
 }
 
-// 监听 show 变化
+// 逶大成 show 蜿伜喧
 watch(
   () => props.show,
   (newVal) => {
@@ -211,7 +212,7 @@ watch(
   { immediate: true },
 )
 
-// 暴露方法
+// 證ｴ髴ｲ譁ｹ豕�
 defineExpose({
   open,
   close,
@@ -230,71 +231,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/index.scss';
-
-.fui-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-
-  &--top,
-  &--bottom,
-  &--left,
-  &--right,
-  &--center {
-    pointer-events: auto;
-  }
-}
-
-.fui-popup__content {
-  position: fixed;
-  background: var(--fui-color-surface);
-  box-sizing: border-box;
-  max-height: 100%;
-  overflow-y: auto;
-
-  &--top {
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-
-  &--bottom {
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-
-  &--left {
-    top: 0;
-    left: 0;
-    bottom: 0;
-  }
-
-  &--right {
-    top: 0;
-    right: 0;
-    bottom: 0;
-  }
-
-  &--center {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 90%;
-  }
-
-  &--safe-bottom {
-    padding-bottom: constant(safe-area-inset-bottom);
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  &--safe-top {
-    padding-top: constant(safe-area-inset-top);
-    padding-top: env(safe-area-inset-top);
-  }
-}
+@import './style.scss';
 </style>

@@ -77,6 +77,7 @@ const hoverClass = computed(() => {
 const itemClasses = computed(() =>
   classes(
     n(),
+    n('--var'),
     [gridConfig.border, n('--border')],
     [gridConfig.square, n('--square')],
     [gridConfig.center, n('--center')],
@@ -113,76 +114,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/index.scss';
-
-.fui-grid-item {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 32rpx 16rpx;
-  background-color: var(--fui-color-surface);
-  transition: background-color $fui-transition;
-  box-sizing: border-box;
-
-  // 带边框
-  &--border {
-    border-right: 1rpx solid var(--fui-color-border);
-    border-bottom: 1rpx solid var(--fui-color-border);
-  }
-
-  // 正方形
-  &--square {
-    &::before {
-      content: '';
-      display: block;
-      padding-top: 100%;
-    }
-
-    .fui-grid-item__content {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      transform: translateY(-50%);
-    }
-  }
-
-  // 居中
-  &--center {
-    text-align: center;
-  }
-
-  // 可点击
-  &--clickable {
-    cursor: pointer;
-  }
-
-  // hover 效果
-  &--hover {
-    background-color: var(--fui-color-surface-muted);
-  }
-}
-
-.fui-grid-item__content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.fui-grid-item__icon {
-  margin-bottom: 12rpx;
-  font-size: 56rpx;
-  line-height: 1;
-  color: var(--fui-color-text-secondary);
-}
-
-.fui-grid-item__text {
-  font-size: 24rpx;
-  color: var(--fui-color-text-secondary);
-  line-height: 1.5;
-}
+@import './style.scss';
 </style>

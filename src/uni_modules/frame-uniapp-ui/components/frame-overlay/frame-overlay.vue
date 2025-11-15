@@ -81,6 +81,7 @@ watch(() => props.show, (newVal) => {
 const overlayClasses = computed(() =>
   classes(
     n(),
+    n('--var'),
     props.customClass,
   ),
 )
@@ -156,22 +157,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/index.scss';
-
-.fui-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.fui-overlay__content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+@import './style.scss';
 </style>

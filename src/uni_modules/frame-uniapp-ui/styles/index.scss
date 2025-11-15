@@ -1,13 +1,8 @@
-/**
- * Frame UI 样式系统统一入口
- * 在组件中使用: @import '@/uni_modules/frame-uniapp-ui/styles/index.scss';
- */
+@use 'sass:map';
+@use './design' as *;
 
-// 导入全局变量（必须最先导入）
-@import './variables.scss';
-
-// 导入 mixins 和函数
-@import './mixins.scss';
-
-// 导入主题系统（CSS 变量定义）
-@import './theme.scss';
+page {
+  @each $type in join($types, $secondary) {
+    @include define-type-color($type);
+  }
+}

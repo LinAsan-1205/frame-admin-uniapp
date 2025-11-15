@@ -1,0 +1,13 @@
+@use 'sass:map';
+@use '../../styles/design' as *;
+
+$transition: () !default;
+$transition: map.merge((), $transition);
+
+.#{$namespace}-transition {
+  transition-property: transform, opacity;
+
+  &--var {
+    @include define-preset-values('transition', $transition);
+  }
+}

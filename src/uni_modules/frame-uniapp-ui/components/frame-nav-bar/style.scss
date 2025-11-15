@@ -1,0 +1,122 @@
+@use 'sass:map';
+@use '../../styles/design' as *;
+
+// NavBar 组件变量
+$nav-bar: () !default;
+$nav-bar: map.merge(
+  (
+    bg-color: get-css-var('color', 'surface', 'base'),
+    height: 88rpx,
+    padding: 0 32rpx,
+    title-size: 32rpx,
+    title-color: get-css-var('color', 'text', 'base'),
+    text-size: 28rpx,
+    text-color: get-css-var('color', 'text', 'secondary'),
+    icon-size: 40rpx,
+    border-color: get-css-var('color', 'border', 'base'),
+  ),
+  $nav-bar
+);
+
+.#{$namespace}-nav-bar {
+  position: relative;
+  background: get-css-var('nav-bar', 'bg-color');
+
+  &--var {
+    @include define-preset-values('nav-bar', $nav-bar);
+  }
+
+  &--fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+  }
+
+  &--border {
+    border-bottom: 1rpx solid get-css-var('nav-bar', 'border-color');
+  }
+}
+
+.#{$namespace}-nav-bar__status-bar {
+  width: 100%;
+}
+
+.#{$namespace}-nav-bar__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: get-css-var('nav-bar', 'padding');
+  height: get-css-var('nav-bar', 'height');
+}
+
+.#{$namespace}-nav-bar__left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: absolute;
+  left: 32rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  gap: 8rpx;
+
+  &-icon {
+    font-size: get-css-var('nav-bar', 'icon-size');
+    color: get-css-var('nav-bar', 'text-color');
+    line-height: 1;
+  }
+}
+
+.#{$namespace}-nav-bar__left-text {
+  font-size: get-css-var('nav-bar', 'text-size');
+  color: get-css-var('nav-bar', 'text-color');
+  line-height: 1;
+}
+
+.#{$namespace}-nav-bar__title {
+  flex: 1;
+  font-size: get-css-var('nav-bar', 'title-size');
+  font-weight: 600;
+  color: get-css-var('nav-bar', 'title-color');
+  text-align: center;
+  line-height: 1.5;
+
+  &--left {
+    text-align: left;
+  }
+
+  &--right {
+    text-align: right;
+  }
+}
+
+.#{$namespace}-nav-bar__title-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.#{$namespace}-nav-bar__right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: absolute;
+  right: 32rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  gap: 8rpx;
+
+  &-icon {
+    font-size: get-css-var('nav-bar', 'icon-size');
+    color: get-css-var('nav-bar', 'text-color');
+    line-height: 1;
+  }
+}
+
+.#{$namespace}-nav-bar__right-text {
+  font-size: get-css-var('nav-bar', 'text-size');
+  color: get-css-var('nav-bar', 'text-color');
+  line-height: 1;
+}

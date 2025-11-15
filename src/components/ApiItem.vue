@@ -36,7 +36,7 @@ defineProps<Props>();
 }
 
 .api-item__desc {
-  color: var(--fui-color-text-secondary);
+  color: var(--fui-text-secondary);
 }
 
 // 暗黑模式
@@ -56,7 +56,7 @@ defineProps<Props>();
   }
 
   .api-item__desc {
-    color: var(--fui-color-text-secondary);
+    color: var(--fui-text-secondary);
   }
 }
 </style>

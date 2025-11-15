@@ -100,6 +100,7 @@ const isFirstPage = computed(() => {
 const navBarClasses = computed(() =>
   classes(
     n(),
+    n('--var'),
     [props.fixed, n('--fixed')],
     [props.border, n('--border')],
     props.customClass,
@@ -248,89 +249,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/index.scss';
-
-.fui-nav-bar {
-  position: relative;
-  background: var(--fui-color-surface);
-
-  &--fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-
-  &--border {
-    border-bottom: 1rpx solid var(--fui-color-border);
-  }
-}
-
-.fui-nav-bar__status-bar {
-  width: 100%;
-}
-
-.fui-nav-bar__content {
-  @include flex-center;
-  position: relative;
-  padding: 0 32rpx;
-}
-
-.fui-nav-bar__left {
-  @include flex-center;
-  position: absolute;
-  left: 32rpx;
-  top: 50%;
-  transform: translateY(-50%);
-  gap: 8rpx;
-  cursor: pointer;
-  transition: opacity $fui-transition;
-
-  &:active {
-    opacity: 0.6;
-  }
-}
-
-.fui-nav-bar__left-text {
-  font-size: 28rpx;
-  line-height: 1;
-}
-
-.fui-nav-bar__title {
-  flex: 1;
-  font-size: 32rpx;
-  font-weight: 600;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-
-  &--center {
-    justify-content: center;
-  }
-}
-
-.fui-nav-bar__title-text {
-  @include text-ellipsis;
-}
-
-.fui-nav-bar__right {
-  @include flex-center;
-  position: absolute;
-  right: 32rpx;
-  top: 50%;
-  transform: translateY(-50%);
-  gap: 8rpx;
-  cursor: pointer;
-  transition: opacity $fui-transition;
-
-  &:active {
-    opacity: 0.6;
-  }
-}
-
-.fui-nav-bar__right-text {
-  font-size: 28rpx;
-  line-height: 1;
-}
+@import './style.scss';
 </style>

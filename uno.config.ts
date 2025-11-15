@@ -67,24 +67,31 @@ export default defineConfig({
   theme: {
     colors: {
       // 主题颜色
-      'primary': 'var(--fui-color-primary)',
-      'success': 'var(--fui-color-success)',
-      'warning': 'var(--fui-color-warning)',
-      'error': 'var(--fui-color-error)',
+      'primary': 'var(--fui-primary-base)',
+      'success': 'var(--fui-success-base)',
+      'warning': 'var(--fui-warning-base)',
+      'danger': 'var(--fui-danger-base)',
+      'error': 'var(--fui-danger-base)', // 别名
+      'info': 'var(--fui-info-base)',
       // 文字颜色
-      'text-main': 'var(--fui-color-text-primary)',
-      'text-secondary': 'var(--fui-color-text-secondary)',
-      'text-tips': 'var(--fui-color-text-tertiary)',
-      'text-quaternary': 'var(--fui-color-text-quaternary)',
-      'text-disabled': 'var(--fui-color-text-disabled)',
+      'text-main': 'var(--fui-text-base)',
+      'text-secondary': 'var(--fui-text-secondary)',
+      'text-tips': 'var(--fui-text-tertiary)',
+      'text-tertiary': 'var(--fui-text-tertiary)',
+      'text-disabled': 'var(--fui-text-disabled)',
       // 背景颜色
-      'main': 'var(--fui-color-bg-primary)',
-      'secondary': 'var(--fui-color-bg-secondary)',
-      'surface': 'var(--fui-color-surface)',
-      'surface-muted': 'var(--fui-color-surface-muted)',
+      'main': 'var(--fui-background-base)',
+      'secondary': 'var(--fui-background-secondary)',
+      'bg-tertiary': 'var(--fui-background-tertiary)',
+      // 表面颜色
+      'surface': 'var(--fui-surface-base)',
+      'surface-muted': 'var(--fui-surface-muted)',
       // 边框颜色
-      'border-main': 'var(--fui-color-border)',
-      'border-strong': 'var(--fui-color-border-strong)',
+      'border-main': 'var(--fui-border-base)',
+      'border-strong': 'var(--fui-border-strong)',
+      // 黑白
+      'black': 'var(--fui-black-base)',
+      'white': 'var(--fui-white-base)',
     },
   },
   transformers: [

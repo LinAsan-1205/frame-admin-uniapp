@@ -70,6 +70,7 @@ const activeIndex = computed(() => {
 const segmentedClasses = computed(() =>
   classes(
     n(),
+    n('--var'),
     n(`--${props.size}`),
     n(`--${props.shape}`),
     [props.block, n('--block')],
@@ -207,129 +208,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/index.scss';
-
-.fui-segmented {
-  position: relative;
-  display: flex;
-  background: $fui-bg-secondary;
-  border-radius: 12rpx;
-  padding: 6rpx 10rpx;
-  overflow: hidden;
-
-  &--block {
-    width: 100%;
-  }
-
-  &--disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-
-  // 尺寸
-  &--sm {
-    .fui-segmented__item {
-      padding: 8rpx 0;
-      font-size: 24rpx;
-    }
-  }
-
-  &--md {
-    .fui-segmented__item {
-      padding: 12rpx 0;
-      font-size: 28rpx;
-    }
-  }
-
-  &--lg {
-    .fui-segmented__item {
-      padding: 16rpx 0;
-      font-size: 32rpx;
-    }
-  }
-
-  // 形状
-  &--square {
-    border-radius: 8rpx;
-
-    .fui-segmented__item {
-      border-radius: 4rpx;
-    }
-
-    .fui-segmented__indicator {
-      border-radius: 4rpx;
-    }
-  }
-
-  &--round {
-    border-radius: 12rpx;
-
-    .fui-segmented__item {
-      border-radius: 8rpx;
-    }
-
-    .fui-segmented__indicator {
-      border-radius: 8rpx;
-    }
-  }
-
-  &--pill {
-    border-radius: 999rpx;
-
-    .fui-segmented__item {
-      border-radius: 999rpx;
-    }
-
-    .fui-segmented__indicator {
-      border-radius: 999rpx;
-    }
-  }
-}
-
-.fui-segmented__item {
-  position: relative;
-  z-index: 2;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8rpx;
-  color: var(--fui-color-text-secondary, #666666);
-  font-weight: 500;
-  cursor: pointer;
-  transition: color $fui-transition;
-  user-select: none;
-
-  &:active:not(&--disabled) {
-    opacity: 0.8;
-  }
-
-  &--active {
-    color: var(--fui-color-text-primary, #1a1a1a);
-  }
-
-  &--disabled {
-    color: var(--fui-color-text-disabled, #cccccc);
-    cursor: not-allowed;
-  }
-}
-
-.fui-segmented__item-icon {
-  flex-shrink: 0;
-}
-
-.fui-segmented__item-text {
-  line-height: 1;
-  white-space: nowrap;
-}
-
-.fui-segmented__indicator {
-  position: absolute;
-  z-index: 1;
-  top: 6rpx;
-  bottom: 6rpx;
-  background: #ffffff;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.08), 0 1rpx 2rpx rgba(0, 0, 0, 0.04);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+@import './style.scss';
 </style>

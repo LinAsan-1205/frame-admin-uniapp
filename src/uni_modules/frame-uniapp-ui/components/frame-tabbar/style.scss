@@ -1,0 +1,117 @@
+@use 'sass:map';
+@use '../../styles/design' as *;
+
+// Tabbar 组件变量
+$tabbar: () !default;
+$tabbar: map.merge(
+  (
+    height: 100rpx,
+    bg-color: get-base-color-var('background'),
+    border-color: get-css-var('color', 'border', 'base'),
+    shadow: 0 -1rpx 4rpx rgba(0, 0, 0, 0.05),
+    icon-size: 40rpx,
+    icon-margin: 6rpx,
+    text-size: 22rpx,
+    text-color: get-css-var('color', 'text', 'secondary'),
+    active-color: get-base-color-var('primary'),
+    capsule-height: 96rpx,
+    capsule-padding: 0 24rpx,
+    capsule-radius: 48rpx,
+    capsule-margin: 20rpx,
+  ),
+  $tabbar
+);
+
+.#{$namespace}-tabbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: get-css-var('tabbar', 'height');
+  background-color: get-css-var('tabbar', 'bg-color');
+  transition: all 0.3s;
+  z-index: 1000;
+  box-shadow: get-css-var('tabbar', 'shadow');
+
+  &--var {
+    @include define-preset-values('tabbar', $tabbar);
+  }
+
+  &--fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+
+  &--border {
+    border-top: 1rpx solid get-css-var('tabbar', 'border-color');
+  }
+
+  &--safe-area {
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  &--capsule {
+    width: auto;
+    max-width: 600rpx;
+    height: get-css-var('tabbar', 'capsule-height');
+    margin: 0 auto get-css-var('tabbar', 'capsule-margin');
+    padding: get-css-var('tabbar', 'capsule-padding');
+    border-radius: get-css-var('tabbar', 'capsule-radius');
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.12);
+    
+    &.#{$namespace}-tabbar--fixed {
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: get-css-var('tabbar', 'capsule-margin');
+    }
+  }
+}
+
+.#{$namespace}-tabbar__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  height: 100%;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+
+  &:active {
+    opacity: 0.7;
+  }
+}
+
+.#{$namespace}-tabbar__item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: get-css-var('tabbar', 'icon-margin');
+  line-height: 1;
+  transition: color 0.3s ease;
+  
+  // UnoCSS Iconify 图标默认颜色
+  > view {
+    font-size: get-css-var('tabbar', 'icon-size');
+    color: get-css-var('tabbar', 'text-color');
+  }
+  
+  .#{$namespace}-tabbar__item--active & > view {
+    color: get-css-var('tabbar', 'active-color');
+  }
+}
+
+.#{$namespace}-tabbar__item-text {
+  font-size: get-css-var('tabbar', 'text-size');
+  line-height: 1.2;
+  transition: color 0.3s;
+  font-weight: 400;
+  color: get-css-var('tabbar', 'text-color');
+  
+  &--active {
+    color: get-css-var('tabbar', 'active-color');
+  }
+}

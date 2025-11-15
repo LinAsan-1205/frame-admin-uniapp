@@ -1,0 +1,63 @@
+@use 'sass:map';
+@use '../../styles/design' as *;
+
+// Space 组件变量
+$space: () !default;
+$space: map.merge(
+  (
+    gap: 16rpx,
+  ),
+  $space
+);
+
+.#{$namespace}-space {
+  display: flex;
+  width: 100%;
+
+  &--var {
+    @include define-preset-values('space', $space);
+  }
+
+  // 水平方向
+  &--horizontal {
+    flex-direction: row;
+  }
+
+  // 垂直方向
+  &--vertical {
+    flex-direction: column;
+  }
+
+  // 自动换行
+  &--wrap {
+    flex-wrap: wrap;
+  }
+
+  // 对齐方式
+  &--align-start {
+    align-items: flex-start;
+  }
+
+  &--align-center {
+    align-items: center;
+  }
+
+  &--align-end {
+    align-items: flex-end;
+  }
+
+  &--align-baseline {
+    align-items: baseline;
+  }
+
+  &--align-stretch {
+    align-items: stretch;
+  }
+}
+
+.#{$namespace}-space__item {
+  // 填充模式
+  &--fill {
+    flex: 1;
+  }
+}

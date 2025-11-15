@@ -1,0 +1,150 @@
+@use 'sass:map';
+@use '../../styles/design' as *;
+
+// Cell 组件变量
+$cell: () !default;
+$cell: map.merge(
+  (
+    padding: 24rpx 32rpx,
+    bg-color: get-css-var('color', 'surface', 'base'),
+    border-color: get-css-var('color', 'border', 'base'),
+    hover-bg: get-css-var('color', 'surface', 'muted'),
+    // 小尺寸
+    padding-sm: 16rpx 24rpx,
+    // 大尺寸
+    padding-lg: 32rpx 40rpx,
+    // 图标
+    icon-size: 40rpx,
+    icon-margin: 16rpx,
+    icon-color: get-css-var('color', 'text', 'secondary'),
+    // 标题
+    title-size: 28rpx,
+    title-color: get-css-var('color', 'text', 'base'),
+    // 标签
+    label-size: 24rpx,
+    label-margin: 8rpx,
+    label-color: get-css-var('color', 'text', 'tertiary'),
+    // 值
+    value-size: 28rpx,
+    value-margin: 24rpx,
+    value-color: get-css-var('color', 'text', 'secondary'),
+    // 箭头
+    arrow-size: 32rpx,
+    arrow-margin: 8rpx,
+    arrow-color: get-css-var('color', 'text', 'quaternary'),
+    // 必填标记
+    required-size: 28rpx,
+    required-margin: 4rpx,
+    required-color: get-base-color-var('danger'),
+  ),
+  $cell
+);
+
+.#{$namespace}-cell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: get-css-var('cell', 'padding');
+  background-color: get-css-var('cell', 'bg-color');
+  transition: background-color 180ms cubic-bezier(0.2, 0, 0, 1);
+
+  &--var {
+    @include define-preset-values('cell', $cell);
+  }
+
+  // 尺寸
+  &--size-sm {
+    padding: get-css-var('cell', 'padding-sm');
+  }
+
+  &--size-lg {
+    padding: get-css-var('cell', 'padding-lg');
+  }
+
+  // 居中
+  &--center {
+    align-items: center;
+
+    .#{$namespace}-cell__label {
+      margin-top: 0;
+    }
+  }
+
+  // 边框
+  &--border {
+    &::after {
+      content: '';
+      position: absolute;
+      left: 32rpx;
+      right: 0;
+      bottom: 0;
+      height: 1rpx;
+      background-color: get-css-var('cell', 'border-color');
+      transform: scaleY(0.5);
+    }
+  }
+
+  // 可点击
+  &--clickable {
+    cursor: pointer;
+  }
+
+  // hover 效果
+  &--hover {
+    background-color: get-css-var('cell', 'hover-bg');
+  }
+}
+
+.#{$namespace}-cell__icon {
+  margin-right: get-css-var('cell', 'icon-margin');
+  font-size: get-css-var('cell', 'icon-size');
+  line-height: 1;
+  color: get-css-var('cell', 'icon-color');
+}
+
+.#{$namespace}-cell__main {
+  flex: 1;
+  min-width: 0;
+}
+
+.#{$namespace}-cell__title-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.#{$namespace}-cell__required {
+  margin-right: get-css-var('cell', 'required-margin');
+  font-size: get-css-var('cell', 'required-size');
+  color: get-css-var('cell', 'required-color');
+  line-height: 1;
+}
+
+.#{$namespace}-cell__title {
+  font-size: get-css-var('cell', 'title-size');
+  font-weight: 500;
+  color: get-css-var('cell', 'title-color');
+  line-height: 1.5;
+}
+
+.#{$namespace}-cell__label {
+  margin-top: get-css-var('cell', 'label-margin');
+  font-size: get-css-var('cell', 'label-size');
+  color: get-css-var('cell', 'label-color');
+  line-height: 1.5;
+}
+
+.#{$namespace}-cell__value {
+  margin-left: get-css-var('cell', 'value-margin');
+  font-size: get-css-var('cell', 'value-size');
+  color: get-css-var('cell', 'value-color');
+  text-align: right;
+  line-height: 1.5;
+}
+
+.#{$namespace}-cell__arrow {
+  margin-left: get-css-var('cell', 'arrow-margin');
+  font-size: get-css-var('cell', 'arrow-size');
+  color: get-css-var('cell', 'arrow-color');
+  line-height: 1;
+  transition: transform 180ms cubic-bezier(0.2, 0, 0, 1);
+}

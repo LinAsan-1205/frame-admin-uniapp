@@ -84,7 +84,9 @@ const rightIconComputed = computed(() => {
 const noticeBarClasses = computed(() =>
   classes(
     n(),
+    n('--var'),
     [props.wrapable && !props.scrollable, n('--wrapable')],
+    [props.scrollable, n('--scrollable')],
     props.customClass,
   ),
 )
@@ -221,65 +223,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/index.scss';
-
-.fui-notice-bar {
-  @include flex-center;
-  position: relative;
-  padding: 16rpx 32rpx;
-  min-height: 80rpx;
-  line-height: 1.5;
-
-  &--wrapable {
-    padding: 24rpx 32rpx;
-  }
-}
-
-.fui-notice-bar__left {
-  @include flex-center;
-  flex-shrink: 0;
-  margin-right: 16rpx;
-}
-
-.fui-notice-bar__content {
-  flex: 1;
-  overflow: hidden;
-}
-
-.fui-notice-bar__text {
-  &--single {
-    @include text-ellipsis;
-  }
-
-  &--wrapable {
-    white-space: normal;
-    word-break: break-all;
-  }
-
-  &--scrollable {
-    display: inline-block;
-    white-space: nowrap;
-    padding-left: 100%;
-    animation: fui-notice-bar-scroll linear infinite both;
-    animation-play-state: running;
-  }
-}
-
-@keyframes fui-notice-bar-scroll {
-  to {
-    transform: translate3d(-100%, 0, 0);
-  }
-}
-
-.fui-notice-bar__right {
-  @include flex-center;
-  flex-shrink: 0;
-  margin-left: 16rpx;
-  cursor: pointer;
-  transition: opacity $fui-transition;
-
-  &:active {
-    opacity: 0.6;
-  }
-}
+@import './style.scss';
 </style>

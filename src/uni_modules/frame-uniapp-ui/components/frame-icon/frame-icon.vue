@@ -61,6 +61,7 @@ const computedSize = computed(() => {
 const iconClasses = computed(() =>
   classes(
     n(),
+    n('--var'),
     [props.spin, n('--spin')],
     [props.bold, n('--bold')],
     props.customClass,
@@ -151,38 +152,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/index.scss';
-
-.fui-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  line-height: 1;
-
-  // 加粗
-  &--bold {
-    font-weight: bold;
-  }
-
-  // 旋转动画
-  &--spin {
-    animation: fui-icon-rotate linear infinite;
-  }
-}
-
-.fui-icon__image {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-@keyframes fui-icon-rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+@import './style.scss';
 </style>

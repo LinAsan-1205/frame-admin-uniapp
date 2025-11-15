@@ -178,6 +178,14 @@
             "navigationBarBackgroundColor": "#ffffff",
             "navigationBarTextStyle": "black"
           }
+        },
+        {
+          "path": "tabbar/index",
+          "style": {
+            "navigationBarTitleText": "Tabbar 标签栏",
+            "navigationBarBackgroundColor": "#ffffff",
+            "navigationBarTextStyle": "black"
+          }
         }
       ]
     }

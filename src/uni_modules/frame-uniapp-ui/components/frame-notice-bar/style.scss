@@ -1,0 +1,87 @@
+@use 'sass:map';
+@use '../../styles/design' as *;
+
+// NoticeBar 组件变量
+$notice-bar: () !default;
+$notice-bar: map.merge(
+  (
+    padding: 16rpx 32rpx,
+    bg-color: get-css-var('color', 'surface', 'muted'),
+    color: get-css-var('color', 'text', 'base'),
+    font-size: 28rpx,
+    icon-size: 32rpx,
+    gap: 16rpx,
+  ),
+  $notice-bar
+);
+
+.#{$namespace}-notice-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: get-css-var('notice-bar', 'padding');
+  background: get-css-var('notice-bar', 'bg-color');
+  color: get-css-var('notice-bar', 'color');
+  font-size: get-css-var('notice-bar', 'font-size');
+
+  &--var {
+    @include define-preset-values('notice-bar', $notice-bar);
+  }
+
+  &--scrollable {
+    padding-right: 0;
+  }
+}
+
+.#{$namespace}-notice-bar__left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: get-css-var('notice-bar', 'gap');
+  font-size: get-css-var('notice-bar', 'icon-size');
+}
+
+.#{$namespace}-notice-bar__content {
+  flex: 1;
+  overflow: hidden;
+}
+
+.#{$namespace}-notice-bar__text {
+  &--single {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &--wrap {
+    word-break: break-all;
+  }
+
+  &--scrollable {
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 100%;
+    animation: #{$namespace}-notice-scroll linear infinite;
+  }
+}
+
+@keyframes #{$namespace}-notice-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.#{$namespace}-notice-bar__right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-left: get-css-var('notice-bar', 'gap');
+  font-size: get-css-var('notice-bar', 'icon-size');
+  cursor: pointer;
+}

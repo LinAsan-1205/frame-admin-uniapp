@@ -12,7 +12,7 @@ defineProps<{
 
 <style scoped lang="scss">
 .demo-section {
-  background: var(--fui-color-surface, #ffffff);
+  background: var(--fui-surface-base, #ffffff);
   border-radius: 24rpx;
   padding: 32rpx;
   margin-bottom: 24rpx;

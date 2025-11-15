@@ -1,0 +1,85 @@
+@use 'sass:map';
+@use '../../styles/design' as *;
+
+// Pagination 组件变量
+$pagination: () !default;
+$pagination: map.merge(
+  (
+    gap: 8rpx,
+    font-size: 28rpx,
+    font-size-small: 24rpx,
+    font-size-large: 32rpx,
+    color: get-css-var('color', 'text', 'base'),
+    color-secondary: get-css-var('color', 'text', 'secondary'),
+    color-primary: get-base-color-var('primary'),
+  ),
+  $pagination
+);
+
+.#{$namespace}-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: get-css-var('pagination', 'gap');
+
+  &--var {
+    @include define-preset-values('pagination', $pagination);
+  }
+}
+
+// 简单模式
+.#{$namespace}-pagination__simple {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.#{$namespace}-pagination__simple-info {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  font-size: get-css-var('pagination', 'font-size');
+  color: get-css-var('pagination', 'color');
+}
+
+.#{$namespace}-pagination__simple-current {
+  font-weight: 600;
+  color: get-css-var('pagination', 'color-primary');
+}
+
+.#{$namespace}-pagination__simple-separator {
+  margin: 0 4rpx;
+  color: get-css-var('pagination', 'color-secondary');
+}
+
+.#{$namespace}-pagination__simple-total {
+  color: get-css-var('pagination', 'color-secondary');
+}
+
+// 完整模式
+.#{$namespace}-pagination__full {
+  display: flex;
+  align-items: center;
+  gap: get-css-var('pagination', 'gap');
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.#{$namespace}-pagination__pages {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+}
+
+// 尺寸变体
+.#{$namespace}-pagination--size-small {
+  .#{$namespace}-pagination__simple-info {
+    font-size: get-css-var('pagination', 'font-size-small');
+  }
+}
+
+.#{$namespace}-pagination--size-large {
+  .#{$namespace}-pagination__simple-info {
+    font-size: get-css-var('pagination', 'font-size-large');
+  }
+}

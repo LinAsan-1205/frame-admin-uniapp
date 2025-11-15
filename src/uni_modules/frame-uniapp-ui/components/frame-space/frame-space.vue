@@ -49,6 +49,7 @@ const computedGap = computed(() => {
 const spaceClasses = computed(() =>
   classes(
     n(),
+    n('--var'),
     n(`--${props.direction}`),
     n(`--align-${props.align}`),
     [props.wrap, n('--wrap')],
@@ -121,53 +122,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/index.scss';
-
-.fui-space {
-  display: flex;
-  width: 100%;
-
-  // 水平方向
-  &--horizontal {
-    flex-direction: row;
-  }
-
-  // 垂直方向
-  &--vertical {
-    flex-direction: column;
-  }
-
-  // 自动换行
-  &--wrap {
-    flex-wrap: wrap;
-  }
-
-  // 对齐方式
-  &--align-start {
-    align-items: flex-start;
-  }
-
-  &--align-center {
-    align-items: center;
-  }
-
-  &--align-end {
-    align-items: flex-end;
-  }
-
-  &--align-baseline {
-    align-items: baseline;
-  }
-
-  &--align-stretch {
-    align-items: stretch;
-  }
-}
-
-.fui-space__item {
-  // 填充模式
-  &--fill {
-    flex: 1;
-  }
-}
+@import './style.scss';
 </style>

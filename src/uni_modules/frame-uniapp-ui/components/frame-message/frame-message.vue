@@ -89,6 +89,7 @@ const transitionMode = computed((): TransitionMode => {
 const wrapperClasses = computed(() =>
   classes(
     n('wrapper'),
+    n('wrapper--var'),
     n(`wrapper--${props.position}`),
   ),
 )
@@ -213,87 +214,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/index.scss';
-
-// 外层容器 - 固定定位
-.fui-message__wrapper {
-  position: fixed;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  pointer-events: none;
-
-  // top 位置 - 适配刘海屏
-  &--top {
-    top: 100rpx;
-    top: calc(100rpx + constant(safe-area-inset-top));
-    top: calc(100rpx + env(safe-area-inset-top));
-  }
-
-  // center 位置
-  &--center {
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  // bottom 位置 - 适配底部横条
-  &--bottom {
-    bottom: 100rpx;
-    bottom: calc(100rpx + constant(safe-area-inset-bottom));
-    bottom: calc(100rpx + env(safe-area-inset-bottom));
-  }
-}
-
-// Message 内容样式
-.fui-message {
-  display: inline-flex;
-  align-items: center;
-  gap: 12rpx;
-  padding: 16rpx 24rpx;
-  background: var(--fui-color-surface);
-  border-radius: 16rpx;
-  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.12);
-  font-size: 28rpx;
-  color: var(--fui-color-text-primary);
-  pointer-events: auto;
-}
-
-.fui-message__icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.fui-message__content {
-  flex: 1;
-  min-width: 0;
-}
-
-.fui-message__text {
-  line-height: 1.5;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.fui-message__close {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 16rpx;
-  cursor: pointer;
-  color: var(--fui-color-text-tertiary);
-  transition: color $fui-transition;
-  flex-shrink: 0;
-
-  &:hover {
-    color: var(--fui-color-text-secondary);
-  }
-
-  &:active {
-    color: var(--fui-color-text-primary);
-  }
-}
+@import './style.scss';
 </style>

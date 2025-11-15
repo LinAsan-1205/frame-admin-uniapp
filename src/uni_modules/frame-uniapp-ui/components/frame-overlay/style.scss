@@ -1,0 +1,26 @@
+@use 'sass:map';
+@use '../../styles/design' as *;
+
+$overlay: () !default;
+$overlay: map.merge((), $overlay);
+
+.#{$namespace}-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &--var {
+    @include define-preset-values('overlay', $overlay);
+  }
+}
+
+.#{$namespace}-overlay__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

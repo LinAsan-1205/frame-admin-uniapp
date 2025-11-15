@@ -175,13 +175,13 @@ const apiItems = [
 .item-title {
   font-size: 28rpx;
   font-weight: 600;
-  color: var(--fui-color-text-primary, #1a1a1a);
+  color: var(--fui-text-base, #1a1a1a);
   margin-bottom: 8rpx;
 }
 
 .item-desc {
   font-size: 24rpx;
-  color: var(--fui-color-text-secondary, #666);
+  color: var(--fui-text-secondary, #666);
   line-height: 1.6;
 }
 

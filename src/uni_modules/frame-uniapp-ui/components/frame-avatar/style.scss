@@ -1,0 +1,50 @@
+@use 'sass:map';
+@use '../../styles/design' as *;
+
+// Avatar 组件变量
+$avatar: () !default;
+$avatar: map.merge(
+  (
+    bg-color: get-css-var('color', 'surface', 'muted'),
+    color: get-css-var('color', 'text', 'tertiary'),
+    border-radius-square: 12rpx,
+  ),
+  $avatar
+);
+
+.#{$namespace}-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: get-css-var('avatar', 'bg-color');
+  color: get-css-var('avatar', 'color');
+  flex-shrink: 0;
+  position: relative;
+
+  &--var {
+    @include define-preset-values('avatar', $avatar);
+  }
+
+  // 圆形
+  &--circle {
+    border-radius: 50%;
+  }
+
+  // 方形
+  &--square {
+    border-radius: get-css-var('avatar', 'border-radius-square');
+  }
+}
+
+.#{$namespace}-avatar__image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.#{$namespace}-avatar__text {
+  font-weight: 500;
+  line-height: 1;
+  user-select: none;
+}

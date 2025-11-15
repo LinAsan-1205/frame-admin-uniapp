@@ -82,6 +82,7 @@ const hoverClass = computed(() => {
 const cellClasses = computed(() =>
   classes(
     n(),
+    n('--var'),
     n(`--size-${props.size}`),
     [props.border, n('--border')],
     [props.center, n('--center')],
@@ -120,110 +121,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/index.scss';
-
-.fui-cell {
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding: 24rpx 32rpx;
-  background-color: var(--fui-color-surface);
-  transition: background-color $fui-transition;
-
-  // 尺寸
-  &--size-sm {
-    padding: 16rpx 24rpx;
-  }
-
-  &--size-lg {
-    padding: 32rpx 40rpx;
-  }
-
-  // 居中
-  &--center {
-    align-items: center;
-
-    .fui-cell__label {
-      margin-top: 0;
-    }
-  }
-
-  // 边框
-  &--border {
-    &::after {
-      content: '';
-      position: absolute;
-      left: 32rpx;
-      right: 0;
-      bottom: 0;
-      height: 1rpx;
-      background-color: var(--fui-color-border);
-      transform: scaleY(0.5);
-    }
-  }
-
-  // 可点击
-  &--clickable {
-    cursor: pointer;
-  }
-
-  // hover 效果
-  &--hover {
-    background-color: var(--fui-color-surface-muted);
-  }
-}
-
-.fui-cell__icon {
-  margin-right: 16rpx;
-  font-size: 40rpx;
-  line-height: 1;
-  color: var(--fui-color-text-secondary);
-}
-
-.fui-cell__main {
-  flex: 1;
-  min-width: 0;
-}
-
-.fui-cell__title-wrap {
-  display: flex;
-  align-items: center;
-}
-
-.fui-cell__required {
-  margin-right: 4rpx;
-  font-size: 28rpx;
-  color: var(--fui-color-error);
-  line-height: 1;
-}
-
-.fui-cell__title {
-  font-size: 28rpx;
-  font-weight: 500;
-  color: var(--fui-color-text-primary);
-  line-height: 1.5;
-}
-
-.fui-cell__label {
-  margin-top: 8rpx;
-  font-size: 24rpx;
-  color: var(--fui-color-text-tertiary);
-  line-height: 1.5;
-}
-
-.fui-cell__value {
-  margin-left: 24rpx;
-  font-size: 28rpx;
-  color: var(--fui-color-text-secondary);
-  text-align: right;
-  line-height: 1.5;
-}
-
-.fui-cell__arrow {
-  margin-left: 8rpx;
-  font-size: 32rpx;
-  color: var(--fui-color-text-quaternary);
-  line-height: 1;
-  transition: transform $fui-transition;
-}
+@import './style.scss';
 </style>

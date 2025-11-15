@@ -34,6 +34,7 @@ provide('frameGrid', {
 const gridClasses = computed(() =>
   classes(
     n(),
+    n('--var'),
     [props.border, n('--border')],
     props.customClass,
   ),
@@ -85,16 +86,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/index.scss';
-
-.fui-grid {
-  display: grid;
-  width: 100%;
-
-  // 带边框
-  &--border {
-    border-top: 1rpx solid var(--fui-color-border);
-    border-left: 1rpx solid var(--fui-color-border);
-  }
-}
+@import './style.scss';
 </style>
