@@ -6,17 +6,29 @@
         <view class="hero-logo">
           <view class="i-mdi-vuejs" />
         </view>
-        <text class="hero-title">Frame UI</text>
-        <text class="hero-subtitle">{{ t('home.library.description') }}</text>
+        <text class="hero-title">
+          Frame UI
+        </text>
+        <text class="hero-subtitle">
+          {{ t('home.library.description') }}
+        </text>
         <view class="hero-stats">
           <view class="stat-item">
-            <text class="stat-number">{{ allComponents.length }}</text>
-            <text class="stat-label">组件</text>
+            <text class="stat-number">
+              {{ allComponents.length }}
+            </text>
+            <text class="stat-label">
+              组件
+            </text>
           </view>
           <view class="stat-divider" />
           <view class="stat-item">
-            <text class="stat-number">4</text>
-            <text class="stat-label">分类</text>
+            <text class="stat-number">
+              4
+            </text>
+            <text class="stat-label">
+              分类
+            </text>
           </view>
         </view>
       </view>
@@ -37,14 +49,18 @@
           <view
             v-for="tab in categoryTabs"
             :key="tab.value"
-            :class="['tab-item', { 'tab-item--active': activeCategory === tab.value }]"
+            class="tab-item" :class="[{ 'tab-item--active': activeCategory === tab.value }]"
             @click="switchCategory(tab.value)"
           >
             <view class="tab-icon">
               <view :class="tab.icon" />
             </view>
-            <text class="tab-label">{{ tab.label }}</text>
-            <text class="tab-count">{{ tab.count }}</text>
+            <text class="tab-label">
+              {{ tab.label }}
+            </text>
+            <text class="tab-count">
+              {{ tab.count }}
+            </text>
           </view>
         </view>
       </scroll-view>
@@ -63,8 +79,12 @@
             <view :class="card.icon" />
           </view>
           <view class="component-content">
-            <text class="component-name">{{ card.name }}</text>
-            <text class="component-desc">{{ card.desc }}</text>
+            <text class="component-name">
+              {{ card.name }}
+            </text>
+            <text class="component-desc">
+              {{ card.desc }}
+            </text>
           </view>
         </view>
       </view>
@@ -84,26 +104,26 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { useI18n } from 'vue-i18n'
-import AgreePrivacy from '@/components/agree-privacy/index.vue'
-import { useTheme } from '@/hooks'
+import { computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import AgreePrivacy from '@/components/agree-privacy/index.vue';
+import { useTheme } from '@/hooks';
 
 interface ComponentCardItem {
-  key: string
-  name: string
-  desc: string
-  path: string
-  category: 'basic' | 'form' | 'feedback' | 'data'
-  icon?: string
+  key: string;
+  name: string;
+  desc: string;
+  path: string;
+  category: 'basic' | 'form' | 'feedback' | 'data';
+  icon?: string;
 }
 
-const showPrivacy = ref(false)
-const { t } = useI18n()
-const { isDark, toggleTheme } = useTheme()
+const showPrivacy = ref(false);
+const { t } = useI18n();
+const { isDark, toggleTheme } = useTheme();
 
 // 当前激活的分类
-const activeCategory = ref<'all' | 'basic' | 'feedback' | 'data'>('all')
+const activeCategory = ref<'all' | 'basic' | 'feedback' | 'data'>('all');
 
 // 所有组件配置
 const allComponents = computed<ComponentCardItem[]>(() => [
@@ -259,119 +279,115 @@ const allComponents = computed<ComponentCardItem[]>(() => [
     category: 'data',
     icon: 'i-mdi-grid',
   },
-])
+]);
 
 // 按分类筛选组件
 const basicComponents = computed(() =>
   allComponents.value.filter(c => c.category === 'basic'),
-)
+);
 
-const formComponents = computed(() =>
+const _formComponents = computed(() =>
   allComponents.value.filter(c => c.category === 'form'),
-)
+);
 
 const feedbackComponents = computed(() =>
   allComponents.value.filter(c => c.category === 'feedback'),
-)
+);
 
 const dataComponents = computed(() =>
   allComponents.value.filter(c => c.category === 'data'),
-)
+);
 
 // 分类标签配置
-const categoryTabs = computed(() => [
+const categoryTabs = computed<Array<{
+  value: 'all' | 'basic' | 'feedback' | 'data';
+  label: string;
+  count: number;
+  icon: string;
+}>>(() => [
   {
-    value: 'all',
+    value: 'all' as const,
     label: '全部',
     count: allComponents.value.length,
     icon: 'i-mdi-apps',
   },
   {
-    value: 'basic',
+    value: 'basic' as const,
     label: '基础',
     count: basicComponents.value.length,
     icon: 'i-mdi-cube-outline',
   },
   {
-    value: 'feedback',
+    value: 'feedback' as const,
     label: '反馈',
     count: feedbackComponents.value.length,
     icon: 'i-mdi-bell-outline',
   },
   {
-    value: 'data',
+    value: 'data' as const,
     label: '数据',
     count: dataComponents.value.length,
     icon: 'i-mdi-view-dashboard-outline',
   },
-])
+]);
 
 // 当前显示的组件列表
 const displayedComponents = computed(() => {
   switch (activeCategory.value) {
     case 'basic':
-      return basicComponents.value
+      return basicComponents.value;
     case 'feedback':
-      return feedbackComponents.value
+      return feedbackComponents.value;
     case 'data':
-      return dataComponents.value
+      return dataComponents.value;
     default:
-      return allComponents.value
+      return allComponents.value;
   }
-})
+});
 
-const privacyTitle = computed(() => t('home.privacy.title'))
-const privacySubTitle = computed(() => t('home.privacy.subtitle'))
+const privacyTitle = computed(() => t('home.privacy.title'));
+const privacySubTitle = computed(() => t('home.privacy.subtitle'));
 
 // 切换分类
 function switchCategory(category: 'all' | 'basic' | 'feedback' | 'data') {
-  activeCategory.value = category
+  activeCategory.value = category;
 }
 
 function goComponent(card: { path: string }) {
-  uni.navigateTo({ url: card.path })
+  uni.navigateTo({ url: card.path });
 }
 
 function handleAgree() {
   uni.showToast({
     title: t('home.privacy.agreeTip'),
     icon: 'none',
-  })
+  });
 }
 
 function handleDisagree() {
   uni.showToast({
     title: t('home.privacy.disagreeTip'),
     icon: 'none',
-  })
+  });
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .home-page {
-  min-height: 100vh;
-  background: var(--fui-color-bg-primary);
-  padding-bottom: 120rpx;
+  @apply min-h-100vh bg-main pb-120rpx;
 }
 
 /* 顶部区域 */
 .home-hero {
-  position: relative;
-  padding: 80rpx 32rpx 48rpx;
-  background: linear-gradient(135deg, #003dad 0%, #0052cc 100%);
-  margin-bottom: 32rpx;
+  @apply relative pt-80rpx px-32rpx pb-48rpx bg-gradient-to-br from-[#003dad] to-[#0052cc] mb-32rpx;
 }
 
 .hero-content {
-  text-align: center;
+  @apply text-center;
 }
 
 .hero-logo {
-  font-size: 96rpx;
-  color: rgba(255, 255, 255, 0.95);
-  margin-bottom: 24rpx;
-  display: flex;
-  justify-content: center;
+  @apply text-96rpx c-[rgba(255,255,255,0.95)] mb-24rpx flex justify-center;
   animation: float 3s ease-in-out infinite;
 }
 
@@ -385,258 +401,130 @@ function handleDisagree() {
 }
 
 .hero-title {
-  display: block;
-  font-size: 56rpx;
-  font-weight: 800;
-  color: #ffffff;
-  margin-bottom: 12rpx;
-  letter-spacing: 2rpx;
+  @apply block text-56rpx fw-800 c-white mb-12rpx tracking-2rpx;
 }
 
 .hero-subtitle {
-  display: block;
-  font-size: 28rpx;
-  color: rgba(255, 255, 255, 0.85);
-  margin-bottom: 32rpx;
-  line-height: 1.6;
+  @apply block text-28rpx c-[rgba(255,255,255,0.85)] mb-32rpx;
 }
 
 .hero-stats {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 32rpx;
-  padding: 24rpx;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 20rpx;
-  backdrop-filter: blur(10px);
+  @apply flex items-center justify-center gap-32rpx p-24rpx bg-[rgba(255,255,255,0.15)] rd-20rpx backdrop-blur-10rpx;
 }
 
 .stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8rpx;
+  @apply flex flex-col items-center gap-8rpx;
 }
 
 .stat-number {
-  font-size: 48rpx;
-  font-weight: 700;
-  color: #ffffff;
-  line-height: 1;
+  @apply text-48rpx fw-700 c-white;
 }
 
 .stat-label {
-  font-size: 24rpx;
-  color: rgba(255, 255, 255, 0.8);
+  @apply text-24rpx c-[rgba(255,255,255,0.8)];
 }
 
 .stat-divider {
-  width: 2rpx;
-  height: 60rpx;
-  background: rgba(255, 255, 255, 0.3);
+  @apply w-2rpx h-60rpx bg-[rgba(255,255,255,0.3)];
 }
 
 .theme-toggle {
-  position: absolute;
-  top: 32rpx;
-  right: 32rpx;
-  width: 80rpx;
-  height: 80rpx;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 40rpx;
-  color: #ffffff;
-  transition: all 0.3s;
-  cursor: pointer;
+  @apply absolute top-32rpx right-32rpx w-80rpx h-80rpx rd-50% bg-[rgba(255,255,255,0.2)] backdrop-blur-10rpx flex items-center justify-center text-40rpx c-white transition-all duration-300;
 }
 
 .theme-toggle:active {
-  transform: scale(0.9);
-  background: rgba(255, 255, 255, 0.3);
+  @apply scale-90 bg-[rgba(255,255,255,0.3)];
 }
 
 /* 分类切换器 */
 .category-tabs {
-  background: var(--fui-color-bg-primary);
-  margin-bottom: 24rpx;
+  @apply bg-main mb-24rpx;
 }
 
 .tabs-scroll {
-  width: 100%;
-  white-space: nowrap;
+  @apply w-full whitespace-nowrap;
 }
 
 .tabs-container {
-  display: inline-flex;
-  gap: 16rpx;
-  padding: 24rpx 32rpx;
+  @apply inline-flex gap-16rpx px-32rpx py-24rpx;
 }
 
 .tab-item {
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 12rpx;
-  padding: 20rpx 28rpx;
-  background: var(--fui-color-surface);
-  border-radius: 20rpx;
-  border: 2rpx solid transparent;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
-  position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
-  white-space: nowrap;
+  @apply inline-flex flex-row items-center gap-12rpx px-28rpx py-20rpx bg-surface rd-20rpx border-2rpx border-solid border-transparent transition-all duration-300 shadow-[0_2rpx_8rpx_rgba(0,0,0,0.04)] relative overflow-hidden flex-shrink-0 whitespace-nowrap;
 }
 
 .tab-item::before {
   content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(0, 61, 173, 0.05) 0%, rgba(0, 82, 204, 0.02) 100%);
-  opacity: 0;
-  transition: opacity 0.3s;
+  @apply absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-br from-[rgba(0,61,173,0.05)] to-[rgba(0,82,204,0.02)] op-0 transition-opacity duration-300;
 }
 
 .tab-item:active {
-  transform: scale(0.96);
+  @apply scale-96;
 }
 
 .tab-item--active {
-  background: linear-gradient(135deg, #003dad 0%, #0052cc 100%);
-  border-color: #003dad;
-  box-shadow: 0 8rpx 24rpx rgba(0, 61, 173, 0.25);
+  @apply bg-gradient-to-br from-[#003dad] to-[#0052cc] border-[#003dad] shadow-[0_8rpx_24rpx_rgba(0,61,173,0.25)];
 }
 
 .tab-item--active::before {
-  opacity: 1;
+  @apply op-100;
 }
 
 .tab-item--active .tab-icon {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  transform: scale(1.05);
+  @apply bg-[rgba(255,255,255,0.2)] c-white scale-105;
 }
 
 .tab-item--active .tab-label {
-  color: #ffffff;
-  font-weight: 700;
+  @apply c-white fw-700;
 }
 
 .tab-item--active .tab-count {
-  background: rgba(255, 255, 255, 0.25);
-  color: #ffffff;
+  @apply bg-[rgba(255,255,255,0.25)] c-white;
 }
 
 .tab-icon {
-  width: 56rpx;
-  height: 56rpx;
-  border-radius: 16rpx;
-  background: rgba(0, 61, 173, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 32rpx;
-  color: #003dad;
-  transition: all 0.3s;
-  flex-shrink: 0;
+  @apply w-56rpx h-56rpx rd-16rpx bg-[rgba(0,61,173,0.08)] flex items-center justify-center text-32rpx c-[#003dad] transition-all duration-300 flex-shrink-0;
 }
 
 .tab-label {
-  font-size: 26rpx;
-  font-weight: 600;
-  color: var(--fui-color-text-primary);
-  transition: all 0.3s;
-  line-height: 1.2;
+  @apply text-26rpx fw-600 c-text-main transition-all duration-300;
 }
 
 .tab-count {
-  font-size: 22rpx;
-  color: #003dad;
-  background: rgba(0, 61, 173, 0.1);
-  padding: 4rpx 12rpx;
-  border-radius: 12rpx;
-  font-weight: 600;
-  min-width: 44rpx;
-  text-align: center;
-  transition: all 0.3s;
+  @apply text-22rpx c-[#003dad] bg-[rgba(0,61,173,0.1)] px-12rpx py-4rpx rd-12rpx fw-600 min-w-44rpx text-center transition-all duration-300;
 }
 
 /* 组件容器 */
 .components-container {
-  padding: 0 32rpx;
+  @apply px-32rpx;
 }
 
 /* 组件列表 */
 .component-list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16rpx;
+  @apply grid grid-cols-2 gap-16rpx;
 }
 
 .component-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16rpx;
-  padding: 32rpx 20rpx;
-  background: var(--fui-color-surface);
-  border-radius: 20rpx;
-  transition: all 0.2s;
-  cursor: pointer;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.02);
-  text-align: center;
+  @apply flex flex-col items-center gap-16rpx px-20rpx py-32rpx bg-surface rd-20rpx transition-all duration-200 shadow-[0_2rpx_8rpx_rgba(0,0,0,0.02)] text-center;
 }
 
 .component-item:active {
-  transform: scale(0.96);
-  box-shadow: 0 4rpx 16rpx rgba(0, 61, 173, 0.12);
+  @apply scale-96 shadow-[0_4rpx_16rpx_rgba(0,61,173,0.12)];
 }
 
 .component-icon {
-  width: 80rpx;
-  height: 80rpx;
-  border-radius: 20rpx;
-  background: rgba(0, 61, 173, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 44rpx;
-  color: #003dad;
-  flex-shrink: 0;
+  @apply w-80rpx h-80rpx rd-20rpx bg-[rgba(0,61,173,0.08)] flex items-center justify-center text-44rpx c-[#003dad] flex-shrink-0;
 }
 
 .component-content {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 8rpx;
+  @apply w-full flex flex-col gap-8rpx;
 }
 
 .component-name {
-  font-size: 28rpx;
-  font-weight: 600;
-  color: var(--fui-color-text-primary);
-  line-height: 1.3;
+  @apply text-28rpx fw-600 c-text-main;
 }
 
 .component-desc {
-  font-size: 22rpx;
-  color: var(--fui-color-text-tertiary);
-  line-height: 1.5;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  @apply text-22rpx c-text-tips overflow-hidden text-ellipsis line-clamp-2;
 }
 </style>

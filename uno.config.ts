@@ -59,8 +59,6 @@ export default defineConfig({
    * @see https://github.com/unocss/unocss#shortcuts
    */
   shortcuts: {
-    'border-base': 'border border-gray-500_10',
-    'center': 'flex justify-center items-center',
     // Demo 组件暗黑模式快捷类
     'demo-card-base': 'p-28rpx rd-28rpx border-2rpx border-solid flex flex-col gap-20rpx items-center transition-all duration-300',
     'demo-card-light': 'border-[rgba(0,61,173,0.15)] bg-gradient-to-br from-[rgba(0,61,173,0.05)] to-[rgba(255,255,255,0.9)] shadow-[0_4rpx_12rpx_rgba(0,61,173,0.06)]',
@@ -69,21 +67,24 @@ export default defineConfig({
   theme: {
     colors: {
       // 主题颜色
-      'primary': 'var(--theme-primary)',
-      'success': 'var(--theme-success)',
-      'warning': 'var(--theme-warning)',
-      'error': 'var(--theme-error)',
+      'primary': 'var(--fui-color-primary)',
+      'success': 'var(--fui-color-success)',
+      'warning': 'var(--fui-color-warning)',
+      'error': 'var(--fui-color-error)',
       // 文字颜色
-      'text-main': 'var(--theme-main-color)',
-      'text-content': 'var(--theme-content-color)',
-      'text-tips': 'var(--theme-tips-color)',
-      'text-light': 'var(--theme-light-color)',
-      'text-disabled': 'var(--theme-disabled-color)',
+      'text-main': 'var(--fui-color-text-primary)',
+      'text-secondary': 'var(--fui-color-text-secondary)',
+      'text-tips': 'var(--fui-color-text-tertiary)',
+      'text-quaternary': 'var(--fui-color-text-quaternary)',
+      'text-disabled': 'var(--fui-color-text-disabled)',
       // 背景颜色
-      'bg-main': 'var(--theme-bg-color)',
-      'bg-secondary': 'var(--theme-bg-color-secondary)',
+      'main': 'var(--fui-color-bg-primary)',
+      'secondary': 'var(--fui-color-bg-secondary)',
+      'surface': 'var(--fui-color-surface)',
+      'surface-muted': 'var(--fui-color-surface-muted)',
       // 边框颜色
-      'border-main': 'var(--theme-border-color)',
+      'border-main': 'var(--fui-color-border)',
+      'border-strong': 'var(--fui-color-border-strong)',
     },
   },
   transformers: [
