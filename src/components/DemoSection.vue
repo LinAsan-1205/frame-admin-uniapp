@@ -3,7 +3,11 @@
     <text class="demo-section__title mb-8rpx block border-b-3rpx border-b-[#003dad] border-b-solid pb-16rpx text-36rpx font-bold dark:border-b-blue-400 dark:text-[#60a5fa]">
       {{ title }}
     </text>
-    <view class="mt-24rpx" :class="grid ? 'grid grid-cols-2 gap-24rpx' : ''">
+    <view
+      class="mt-24rpx"
+      :class="grid ? 'grid grid-cols-2' : 'flex flex-col'"
+      :style="{ gap: `${gap}rpx` }"
+    >
       <slot />
     </view>
   </view>
@@ -13,9 +17,12 @@
 interface Props {
   title: string;
   grid?: boolean; // 是否使用两列网格布局
+  gap?: number; // 卡片之间的间距，默认 24rpx
 }
 
-defineProps<Props>();
+withDefaults(defineProps<Props>(), {
+  gap: 24,
+});
 </script>
 
 <style scoped lang="scss">

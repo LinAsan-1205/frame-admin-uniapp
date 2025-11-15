@@ -19,8 +19,12 @@ export type FrameButtonTheme = 'default' | 'primary' | 'success' | 'warning' | '
 
 /**
  * 按钮尺寸
+ * mini: 28px
+ * small: 32px
+ * medium: 40px
+ * large: 48px
  */
-export type FrameButtonSize = 'small' | 'medium' | 'large';
+export type FrameButtonSize = 'mini' | 'small' | 'medium' | 'large';
 
 /**
  * 按钮形状
@@ -126,6 +130,21 @@ export interface FrameButtonProps {
    * @default 'wd-icon'
    */
   classPrefix?: string;
+
+  /**
+   * 自定义背景色
+   */
+  backgroundColor?: string;
+
+  /**
+   * 自定义文字颜色
+   */
+  textColor?: string;
+
+  /**
+   * 自定义边框颜色
+   */
+  borderColor?: string;
 
   /**
    * 按钮的唯一标识，可用于设置隐私同意授权按钮的 id

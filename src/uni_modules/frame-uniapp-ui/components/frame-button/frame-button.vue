@@ -134,6 +134,18 @@ const buttonStyle = computed(() => {
   if (props.customFontSize)
     style.fontSize = props.customFontSize
 
+  // 自定义背景色
+  if (props.backgroundColor)
+    style.backgroundColor = props.backgroundColor
+
+  // 自定义文字颜色
+  if (props.textColor)
+    style.color = props.textColor
+
+  // 自定义边框颜色
+  if (props.borderColor)
+    style.borderColor = props.borderColor
+
   // 合并自定义样式
   if (props.customStyle) {
     if (typeof props.customStyle === 'string')
@@ -210,7 +222,7 @@ function handleAgreePrivacyAuthorization(event: any) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 80rpx;
+  min-height: 80rpx; /* 40px */
   padding: 0 30rpx;
   border-radius: 999rpx;
   border-width: 2rpx;
@@ -253,8 +265,16 @@ function handleAgreePrivacyAuthorization(event: any) {
   }
 
   /* 尺寸 */
+  &--size-mini {
+    min-height: 56rpx; /* 28px */
+    padding: 0 16rpx;
+    font-size: 22rpx;
+    line-height: 1.4;
+    border-width: 1rpx;
+  }
+
   &--size-small {
-    min-height: 60rpx;
+    min-height: 64rpx; /* 32px */
     padding: 0 20rpx;
     font-size: 24rpx;
     line-height: 1.4;
@@ -262,7 +282,7 @@ function handleAgreePrivacyAuthorization(event: any) {
   }
 
   &--size-large {
-    min-height: 96rpx;
+    min-height: 96rpx; /* 48px */
     padding: 0 40rpx;
     font-size: 32rpx;
     line-height: 1.4;
@@ -272,6 +292,10 @@ function handleAgreePrivacyAuthorization(event: any) {
   /* 形状 */
   &--shape-rounded {
     border-radius: 16rpx;
+
+    &.fui-button--size-mini {
+      border-radius: 10rpx;
+    }
 
     &.fui-button--size-small {
       border-radius: 12rpx;
@@ -288,6 +312,10 @@ function handleAgreePrivacyAuthorization(event: any) {
 
   &--shape-square {
     border-radius: 8rpx;
+
+    &.fui-button--size-mini {
+      border-radius: 4rpx;
+    }
 
     &.fui-button--size-small {
       border-radius: 6rpx;

@@ -279,6 +279,14 @@ const allComponents = computed<ComponentCardItem[]>(() => [
     category: 'data',
     icon: 'i-mdi-grid',
   },
+  {
+    key: 'pagination',
+    name: 'Pagination 分页',
+    desc: '功能丰富的分页组件，支持简单模式和完整模式',
+    path: '/pages/components/pagination/index',
+    category: 'data',
+    icon: 'i-mdi-page-next-outline',
+  },
 ]);
 
 // 按分类筛选组件

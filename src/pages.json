@@ -170,6 +170,14 @@
             "navigationBarBackgroundColor": "#ffffff",
             "navigationBarTextStyle": "black"
           }
+        },
+        {
+          "path": "pagination/index",
+          "style": {
+            "navigationBarTitleText": "Pagination 分页",
+            "navigationBarBackgroundColor": "#ffffff",
+            "navigationBarTextStyle": "black"
+          }
         }
       ]
     }
